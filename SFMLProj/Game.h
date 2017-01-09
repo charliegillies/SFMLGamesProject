@@ -1,5 +1,7 @@
 #pragma once
 
+class Scene;
+
 /*
 	Holds the scenes that are running in the game,
 	helps handle the transitions, co-ordinates with the
@@ -11,12 +13,19 @@ public:
 	Game();
 	~Game();
 
-	// Called at the start of the game
+	// called at the start of the game
 	void onStart();
 
-	// Called every frame of the game
+	// called every frame of the game
 	void onUpdate();
 
-	// Called when the game has complete
+	// called when the game has complete
 	void onExit();
+
+	// changes the current scene to the provided scene
+	void changeScene(Scene* scene);
+
+private:
+	Scene* _currentScene;
+	
 };
