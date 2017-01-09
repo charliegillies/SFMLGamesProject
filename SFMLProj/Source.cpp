@@ -19,7 +19,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(width, height), title);
 	
 	// create the game instance
-	Game* game = new Game(new TestScene());
+	Game* game = new Game(new TestScene(), &window);
 	// inform game that we're starting initialization
 	game->onStart();
 

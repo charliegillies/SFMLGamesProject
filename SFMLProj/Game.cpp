@@ -1,9 +1,10 @@
 #include "Game.h"
 #include "Scene.h"
 
-Game::Game(Scene* startScene)
+Game::Game(Scene* scene, sf::RenderWindow* window)
 {
-	_currentScene = startScene;
+	changeScene(scene);
+	this->_window = window;
 }
 
 Game::~Game() {}
@@ -29,4 +30,19 @@ void Game::onExit()
 void Game::changeScene(Scene* scene)
 {
 	scene->setGame(this);
+	_currentScene = scene;
+}
+
+void Game::drawSprite(sf::Sprite sprite)
+{
+	_window->draw(sprite);
+}
+
+sf::Texture Game::loadTexture(std::string fp)
+{
+	sf::Texture texture;
+	//todo fix asap
+	static const std::string prefix = "Content\\";
+	texture.loadFromFile(prefix + fp);
+	return texture;
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <SFML/Graphics.hpp>
 class Scene;
 
 /*
@@ -10,7 +11,7 @@ class Scene;
 class Game
 {
 public:
-	Game(Scene* scene);
+	Game(Scene* scene, sf::RenderWindow* window);
 	~Game();
 
 	// called at the start of the game
@@ -25,7 +26,11 @@ public:
 	// changes the current scene to the provided scene
 	void changeScene(Scene* scene);
 
+	void drawSprite(sf::Sprite sprite);
+
+	sf::Texture loadTexture(std::string);
+
 private:
 	Scene* _currentScene;
-	
+	sf::RenderWindow* _window;
 };

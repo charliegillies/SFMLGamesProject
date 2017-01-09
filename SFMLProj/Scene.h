@@ -27,8 +27,10 @@ public:
 protected:
 	// changes the current displayed scene
 	void changeScene(Scene* scene);
+	// todo move to private after scene testing is complete
+	Game* _game;
+
 
 private:
-	Game* _game;
 
 };
