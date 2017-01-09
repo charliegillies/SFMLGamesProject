@@ -5,6 +5,7 @@
 */
 
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 
 int main()
 {
@@ -15,6 +16,11 @@ int main()
 
 	// create the window with the appropiate settings
 	sf::RenderWindow window(sf::VideoMode(width, height), title);
+	
+	// create the game instance
+	Game game;
+	// inform game that we're starting initialization
+	game.OnStart();
 
 	while (window.isOpen())
 	{
@@ -23,14 +29,19 @@ int main()
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
+				// inform the game that we're exiting
+				game.OnExit();
+				// inform the window that we're exiting
 				window.close();
+			}
 		}
 
 		// clear everything in the window
 		window.clear();
 
-		// draw & update here..
-
+		// update the game
+		game.OnUpdate();
 
 		// display everything in the window
 		window.display();
