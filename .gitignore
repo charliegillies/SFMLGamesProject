@@ -282,3 +282,16 @@ __pycache__/
 build/
 
 # End of https://www.gitignore.io/api/visualstudio
+SFMLProj/openal32.dll
+SFMLProj/sfml-audio-2.dll
+SFMLProj/sfml-audio-d-2.dll
+SFMLProj/sfml-graphics-2.dll
+SFMLProj/sfml-graphics-d-2.dll
+SFMLProj/sfml-network-2.dll
+SFMLProj/sfml-network-d-2.dll
+SFMLProj/sfml-system-2.dll
+SFMLProj/sfml-system-d-2.dll
+SFMLProj/sfml-window-2.dll
+SFMLProj/sfml-window-d-2.dll
+SFMLProj.sln
+SFMLProj/SFMLProj.vcxproj
