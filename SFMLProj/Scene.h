@@ -7,15 +7,32 @@
 class Scene
 {
 public:
-	Scene();
-	virtual ~Scene();
+	Scene() {}
+	virtual ~Scene() {}
 
 	// called at the beginning of the scene, only once
 	virtual void onStart() = 0;
 
 	// called when the scene has been changed and this scene has stopped
-	virtual void onStop() = 0;
+	virtual void onExit() = 0;
 
 	// called every frame during the scenes lifetime
 	virtual void onUpdate() = 0;
+
+	// called by the Game itself when the scene becomes the current scene
+	void setGame(Game* game)
+	{
+		_game = game;
+	}
+
+protected:
+	// changes the current displayed scene
+	void changeScene(Scene* scene)
+	{
+		_game->changeScene(scene);
+	}
+
+private:
+	Game* _game;
+
 };

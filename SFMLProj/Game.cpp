@@ -22,4 +22,5 @@ void Game::onExit()
 
 void Game::changeScene(Scene* scene)
 {
+	scene->setGame(this);
 }
