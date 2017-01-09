@@ -1,5 +1,7 @@
 #pragma once
 
+class Game;
+
 /*
 	An object that describes the 'scene', which is the current
 	state of the game that is running on the screen.
@@ -20,17 +22,11 @@ public:
 	virtual void onUpdate() = 0;
 
 	// called by the Game itself when the scene becomes the current scene
-	void setGame(Game* game)
-	{
-		_game = game;
-	}
+	void setGame(Game* game);
 
 protected:
 	// changes the current displayed scene
-	void changeScene(Scene* scene)
-	{
-		_game->changeScene(scene);
-	}
+	void changeScene(Scene* scene);
 
 private:
 	Game* _game;

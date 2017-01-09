@@ -6,6 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
+#include "TestScene.h"
 
 int main()
 {
@@ -18,7 +19,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(width, height), title);
 	
 	// create the game instance
-	Game* game = new Game(nullptr);
+	Game* game = new Game(new TestScene());
 	// inform game that we're starting initialization
 	game->onStart();
 
