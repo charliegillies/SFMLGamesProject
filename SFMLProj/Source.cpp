@@ -20,7 +20,7 @@ int main()
 	// create the game instance
 	Game game;
 	// inform game that we're starting initialization
-	game.OnStart();
+	game.onStart();
 
 	while (window.isOpen())
 	{
@@ -31,7 +31,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 			{
 				// inform the game that we're exiting
-				game.OnExit();
+				game.onExit();
 				// inform the window that we're exiting
 				window.close();
 			}
@@ -41,7 +41,7 @@ int main()
 		window.clear();
 
 		// update the game
-		game.OnUpdate();
+		game.onUpdate();
 
 		// display everything in the window
 		window.display();

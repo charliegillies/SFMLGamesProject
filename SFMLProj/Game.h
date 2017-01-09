@@ -1,5 +1,10 @@
 #pragma once
 
+/*
+	Holds the scenes that are running in the game,
+	helps handle the transitions, co-ordinates with the
+	game loop that is running in the back end.
+*/
 class Game
 {
 public:
@@ -7,11 +12,11 @@ public:
 	~Game();
 
 	// Called at the start of the game
-	void OnStart();
+	void onStart();
 
 	// Called every frame of the game
-	void OnUpdate();
+	void onUpdate();
 
 	// Called when the game has complete
-	void OnExit();
+	void onExit();
 };

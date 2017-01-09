@@ -10,14 +10,14 @@ Game::~Game()
 {
 }
 
-void Game::OnStart()
+void Game::onStart()
 {
 }
 
-void Game::OnUpdate()
+void Game::onUpdate()
 {
 }
 
-void Game::OnExit()
+void Game::onExit()
 {
 }
