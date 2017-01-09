@@ -10,7 +10,7 @@ class Scene;
 class Game
 {
 public:
-	Game();
+	Game(Scene* scene);
 	~Game();
 
 	// called at the start of the game

@@ -18,9 +18,9 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(width, height), title);
 	
 	// create the game instance
-	Game game;
+	Game* game = new Game(nullptr);
 	// inform game that we're starting initialization
-	game.onStart();
+	game->onStart();
 
 	while (window.isOpen())
 	{
@@ -31,7 +31,7 @@ int main()
 			if (event.type == sf::Event::Closed)
 			{
 				// inform the game that we're exiting
-				game.onExit();
+				game->onExit();
 				// inform the window that we're exiting
 				window.close();
 			}
@@ -41,7 +41,7 @@ int main()
 		window.clear();
 
 		// update the game
-		game.onUpdate();
+		game->onUpdate();
 
 		// display everything in the window
 		window.display();
