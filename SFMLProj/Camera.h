@@ -12,10 +12,13 @@ class Camera
 public:
 	Camera(sf::RenderWindow* window);
 
+	// set the center position of the cameera
 	void setCenter(float x, float y);
 
+	// get the size of the camera's viewport
 	sf::Vector2<float> getSize();
 
+	// get the world mouse position, converted co-ordinates
 	sf::Vector2<float> getWorldMouse();
 
 private:

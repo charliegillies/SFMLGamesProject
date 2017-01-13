@@ -36,6 +36,7 @@ void SpriteNode::update()
 	_sprite.setPosition(_transform->position);
 	_sprite.setScale(_transform->scale);
 	_sprite.setRotation(_transform->rotation);
+	_sprite.setOrigin(_transform->origin);
 }
 
 string SpriteNode::getNodeTag()
