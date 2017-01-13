@@ -13,6 +13,7 @@ public:
 	void start() override;
 
 private:
+	void rotateToMouse();
 	ControlScheme* _controlScheme;
 	TransformNode* _transform;
 };

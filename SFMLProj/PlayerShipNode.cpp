@@ -4,14 +4,8 @@
 
 void PlayerShipNode::update()
 {
-	// get mouse and ship position
-	auto mousePos = getGame()->getCamera()->getWorldMouse();
-	auto pos = _transform->position;
-	// rotate towards mouse
-	auto angle = atan2(mousePos.y - pos.y, mousePos.x - pos.x);
-	angle = angle * (180 / 3.14159265358979323846);
-	angle += 90; // sprite doesn't face right, quick fix
-	_transform->rotation = angle;
+	// rotate towards the mouse
+	rotateToMouse();
 
 	if (_controlScheme->forwards())
 	{
@@ -40,4 +34,16 @@ void PlayerShipNode::start()
 
 	// ensure that _transform is not null
 	assert(_transform != nullptr);
+}
+
+void PlayerShipNode::rotateToMouse()
+{
+	// get mouse and ship position
+	auto mousePos = getGame()->getCamera()->getWorldMouse();
+	auto pos = _transform->position;
+	// rotate towards mouse
+	auto angle = atan2(mousePos.y - pos.y, mousePos.x - pos.x);
+	angle = angle * (180 / 3.14159265358979323846);
+	angle += 90; // sprite doesn't face right, quick fix
+	_transform->rotation = angle;
 }
