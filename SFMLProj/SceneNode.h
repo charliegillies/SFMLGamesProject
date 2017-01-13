@@ -20,7 +20,7 @@ public:
 	virtual void update();
 
 	// allows the scene node to render
-	virtual void render(Game* game);
+	virtual void render();
 
 	// gets the parent of this scene node
 	SceneNode* getParent();
@@ -29,8 +29,15 @@ public:
 	// this should happen automatically on addChild(*node)
 	void setParent(SceneNode* parent);
 
+	// sets the game object inside of the scene node
+	void setGame(Game* game);
+
+protected:
+	Game* getGame();
+
 private:
 	std::vector<SceneNode*> _childNodes;
 	SceneNode* _parent;
+	Game* _game;
 };
 

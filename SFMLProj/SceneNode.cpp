@@ -3,6 +3,7 @@
 SceneNode::SceneNode() : _childNodes()
 {
 	_parent = nullptr;
+	_game = nullptr;
 }
 
 SceneNode::~SceneNode() {}
@@ -21,11 +22,11 @@ void SceneNode::update()
 		(*i)->update();
 }
 
-void SceneNode::render(Game* game)
+void SceneNode::render()
 {
 	// render all child nodes
 	for (auto i = _childNodes.begin(); i != _childNodes.end(); ++i)
-		(*i)->render(game);
+		(*i)->render();
 }
 
 SceneNode* SceneNode::getParent()
@@ -36,4 +37,15 @@ SceneNode* SceneNode::getParent()
 void SceneNode::setParent(SceneNode* parent)
 {
 	_parent = parent;
+}
+
+void SceneNode::setGame(Game* game)
+{
+	_game = game;
+}
+
+Game* SceneNode::getGame()
+{
+	// only the top most node will have a reference to the game
+	return (_game == nullptr) ? _parent->getGame() : _game;
 }
