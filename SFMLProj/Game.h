@@ -16,7 +16,7 @@ class Scene;
 class Game
 {
 public:
-	Game(Scene* scene, sf::RenderWindow* window);
+	Game(Scene* scene, sf::RenderWindow& window);
 	~Game();
 
 	// called at the start of the game
@@ -50,7 +50,7 @@ public:
 
 private:
 	Scene* _currentScene;
-	sf::RenderWindow* _window;
+	sf::RenderWindow& _window;
 	ControlScheme* _controlScheme;
 	Camera* _camera;
 	TextureLoader* textureLoader;

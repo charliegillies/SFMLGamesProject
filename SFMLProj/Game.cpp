@@ -1,10 +1,9 @@
 #include "Game.h"
 #include "Scene.h"
 
-Game::Game(Scene* scene, sf::RenderWindow* window)
+Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 {
 	changeScene(scene);
-	this->_window = window;
 	this->textureLoader = new TextureLoader();
 	this->_controlScheme = new ControlScheme();
 	this->_camera = new Camera(window);
@@ -67,5 +66,5 @@ Camera* Game::getCamera()
 
 void Game::drawSprite(sf::Sprite sprite)
 {
-	_window->draw(sprite);
+	_window.draw(sprite);
 }

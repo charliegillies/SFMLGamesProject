@@ -12,11 +12,11 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new SpriteNode(fp));
 
 	TransformNode* transform_node = new TransformNode();
-	transform_node->origin = sf::Vector2<float>(0.5, 0.5);
+	transform_node->origin = sf::Vector2<float>(50, 37);
 	base_node->addChild(transform_node);
 
 	base_node->addChild(new PlayerShipNode());
-	base_node->addChild(new CameraTrackingNode(50, 37));
+	base_node->addChild(new CameraTrackingNode(0, 0));
 
 	return base_node;
 }

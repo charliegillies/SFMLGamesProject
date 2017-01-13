@@ -8,7 +8,9 @@ SpriteNode::~SpriteNode()
 
 void SpriteNode::start()
 {
-	_sprite.setTexture(getGame()->getTexture(_path));
+	sf::Texture& txr = getGame()->getTexture(_path);
+	_sprite.setTexture(txr);
+	txr.setSmooth(true);
 
 	// try and get a transform node
 	SceneNode* node;

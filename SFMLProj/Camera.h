@@ -10,7 +10,7 @@
 class Camera
 {
 public:
-	Camera(sf::RenderWindow* window);
+	Camera(sf::RenderWindow& window);
 
 	// set the center position of the cameera
 	void setCenter(float x, float y);
@@ -22,6 +22,6 @@ public:
 	sf::Vector2<float> getWorldMouse();
 
 private:
-	sf::RenderWindow* _window;
+	sf::RenderWindow& _window;
 	sf::View view;
 };

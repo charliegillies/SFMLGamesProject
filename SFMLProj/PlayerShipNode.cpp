@@ -1,17 +1,17 @@
 #include "PlayerShipNode.h"
 #include "Game.h"
 #include "math.h"
-#include <iostream>
 
 void PlayerShipNode::update()
 {
-	// look towards mouse
+	// get mouse and ship position
 	auto mousePos = getGame()->getCamera()->getWorldMouse();
 	auto pos = _transform->position;
-
-	_transform->rotation += 0.2;
-
-	cout << mousePos.x << " " << mousePos.y << " " << _transform->rotation << endl;
+	// rotate towards mouse
+	auto angle = atan2(mousePos.y - pos.y, mousePos.x - pos.x);
+	angle = angle * (180 / 3.14159265358979323846);
+	angle += 90; // sprite doesn't face right, quick fix
+	_transform->rotation = angle;
 
 	if (_controlScheme->forwards())
 	{
