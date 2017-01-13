@@ -6,7 +6,7 @@ BackgroundNode::~BackgroundNode() {}
 
 void BackgroundNode::start()
 {
-	sf::Texture& txr = getGame()->getTexture("blue.png");
+	sf::Texture& txr = getGame()->getTexture("purple.png");
 	_sprite.setTexture(txr);
 	txr.setSmooth(true);
 	txr.setRepeated(true);

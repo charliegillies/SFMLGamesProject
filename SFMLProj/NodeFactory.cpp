@@ -4,6 +4,7 @@
 #include "PlayerShipNode.h"
 #include "CameraTrackingNode.h"
 #include "BackgroundNode.h"
+#include "RotationNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -36,8 +37,10 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	base_node->addChild(new SpriteNode("meteor_brown.png"));
 
 	TransformNode* node = new TransformNode();
+	node->origin = sf::Vector2f(49, 48);
 	node->position = sf::Vector2f(x, y);
 
+	base_node->addChild(new RotationNode(60));
 	base_node->addChild(node);
 	return base_node;
 }
