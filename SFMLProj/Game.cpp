@@ -35,12 +35,12 @@ void Game::changeScene(Scene* scene)
 	_currentScene = scene;
 }
 
+sf::Texture& Game::getTexture(const std::string fp)
+{
+	return textureLoader->get(fp);
+}
+
 void Game::drawSprite(sf::Sprite sprite)
 {
 	_window->draw(sprite);
-}
-
-void Game::getTexture(std::string fp, sf::Texture& texture)
-{
-	textureLoader->get(fp, texture);
 }

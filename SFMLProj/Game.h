@@ -32,7 +32,7 @@ public:
 	void drawSprite(sf::Sprite sprite);
 
 	// loads a texture with a given filepath with the prefix 'Content/'
-	void getTexture(std::string fp, sf::Texture& texture);
+	sf::Texture& getTexture(const std::string fp);
 
 private:
 	Scene* _currentScene;

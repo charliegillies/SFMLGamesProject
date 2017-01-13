@@ -10,17 +10,17 @@ private:
 	// map holds the string (filepath) and the loaded item
 	std::map<std::string, sf::Texture> fileMap;
 	// checks if an item has been loaded into the map
-	bool loaded(std::string fp, sf::Texture& value);
+	bool loaded(std::string fp);
 
 protected:
-	virtual void loadAsset(const std::string fp, sf::Texture& value);
+	sf::Texture& loadAsset(const std::string fp);
 
-	virtual void put(const std::string fp, sf::Texture value);
+	sf::Texture& put(const std::string fp, sf::Texture value);
 
 public:
 	TextureLoader() {}
 	~TextureLoader();
 
 	// gets the asset from the specific filepath
-	void get(const std::string fp, sf::Texture& value);
+	sf::Texture& get(const std::string fp);
 };
