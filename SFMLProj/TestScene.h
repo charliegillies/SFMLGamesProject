@@ -12,8 +12,6 @@ public:
 	~TestScene();
 
 	void onStart() override;
-	void onExit() override;
-	void onUpdate() override;
 	void onRender() override;
 
 private:

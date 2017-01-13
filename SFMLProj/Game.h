@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextureLoader.h"
 
+class SceneNode;
 class Scene;
 
 /*
@@ -36,6 +37,9 @@ public:
 
 	// loads a texture with a given filepath with the prefix 'Content/'
 	sf::Texture& getTexture(const std::string fp);
+
+	// adds a scene node to the current scene
+	void addSceneNode(SceneNode* node);
 
 private:
 	Scene* _currentScene;

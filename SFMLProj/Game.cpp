@@ -45,6 +45,14 @@ sf::Texture& Game::getTexture(const std::string fp)
 	return textureLoader->get(fp);
 }
 
+void Game::addSceneNode(SceneNode* node)
+{
+	if (_currentScene == nullptr) return;
+
+	_currentScene->addSceneNode(node);
+	_currentScene->setGame(this);
+}
+
 void Game::drawSprite(sf::Sprite sprite)
 {
 	_window->draw(sprite);

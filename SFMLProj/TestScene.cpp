@@ -12,14 +12,6 @@ void TestScene::onStart()
 	sprite.setPosition(0, 0);
 }
 
-void TestScene::onExit()
-{
-}
-
-void TestScene::onUpdate()
-{
-}
-
 void TestScene::onRender()
 {
 	_game->drawSprite(sprite);

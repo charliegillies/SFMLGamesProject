@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+#include "SceneNode.h"
 
 class Game;
 
@@ -9,23 +11,26 @@ class Game;
 class Scene
 {
 public:
-	Scene() {}
+	Scene() : _sceneNodes() {}
 	virtual ~Scene() {}
 
 	// called at the beginning of the scene, only once
-	virtual void onStart() = 0;
+	virtual void onStart();
 
 	// called when the scene has been changed and this scene has stopped
-	virtual void onExit() = 0;
+	virtual void onExit();
 
 	// logic update, called every frame during the scenes lifetime
-	virtual void onUpdate() = 0;
+	virtual void onUpdate();
 
 	// render update, called every frame during the scenes lifetime
-	virtual void onRender() = 0;
+	virtual void onRender();
 
 	// called by the Game itself when the scene becomes the current scene
 	void setGame(Game* game);
+
+	// adds a scene node to the current scene
+	void addSceneNode(SceneNode* node);
 
 protected:
 	// changes the current displayed scene
@@ -33,7 +38,6 @@ protected:
 	// todo move to private after scene testing is complete
 	Game* _game;
 
-
 private:
-
+	std::vector<SceneNode*> _sceneNodes;
 };
