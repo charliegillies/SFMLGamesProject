@@ -14,4 +14,9 @@ public:
 	sf::Vector2<float> scale;
 	// rotation of the node
 	float rotation;
+
+	virtual string getNodeTag() override
+	{
+		return NodeTag::transform_node;
+	};
 };

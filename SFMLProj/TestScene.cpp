@@ -9,11 +9,10 @@ void TestScene::onStart()
 {
 	std::string fp = "playerShip1_blue.png";
 
-	// create a basic empty node, with a sprite node child
+	// create a basic empty node, with a sprite node and transform child
 	SceneNode* base_node = new SceneNode();
-	SceneNode* sprite_node = new SpriteNode(fp);
-	base_node->addChild(sprite_node);
-
+	base_node->addChild(new SpriteNode(fp));
+	base_node->addChild(new TransformNode());
 	_game->addSceneNode(base_node);
 
 	Scene::onStart();

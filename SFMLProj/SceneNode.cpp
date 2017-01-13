@@ -52,6 +52,25 @@ void SceneNode::setGame(Game* game)
 	_game = game;
 }
 
+string SceneNode::getNodeTag()
+{
+	return NodeTag::empty_node;
+}
+
+SceneNode* SceneNode::getNode(string tag)
+{
+	// navigate through all the nodes to find the matching tag
+	for (auto i = _childNodes.begin(); i != _childNodes.end(); ++i)
+	{
+		string nodeTag = (*i)->getNodeTag();
+		
+		if (tag == nodeTag)
+			return (*i);
+	}
+	
+	return nullptr;
+}
+
 Game* SceneNode::getGame()
 {
 	// only the top most node will have a reference to the game

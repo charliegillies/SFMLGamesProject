@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include "NodeTag.h"
+#include "assert.h"
 
 class Game;
 
@@ -34,6 +36,14 @@ public:
 
 	// sets the game object inside of the scene node
 	void setGame(Game* game);
+
+	// gets the node tag that is specific to the node type
+	// you can see these node tags in the NodeTag class.
+	virtual string getNodeTag();
+
+	// gets a child node by the given tag parameter
+	// view the set parameters in the NodeTag class.
+	SceneNode* getNode(string tag);
 
 protected:
 	Game* getGame();
