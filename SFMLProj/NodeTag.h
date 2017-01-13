@@ -8,4 +8,5 @@ public:
 	static const string empty_node;
 	static const string transform_node;
 	static const string sprite_node;
+	static const string collision_node;
 };
