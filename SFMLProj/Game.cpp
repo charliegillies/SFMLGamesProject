@@ -6,6 +6,7 @@ Game::Game(Scene* scene, sf::RenderWindow* window)
 	changeScene(scene);
 	this->_window = window;
 	this->textureLoader = new TextureLoader();
+	this->_controlScheme = new ControlScheme();
 }
 
 Game::~Game() {}
@@ -51,6 +52,11 @@ void Game::addSceneNode(SceneNode* node)
 
 	_currentScene->addSceneNode(node);
 	node->setGame(this);
+}
+
+ControlScheme* Game::getControlScheme()
+{
+	return _controlScheme;
 }
 
 void Game::drawSprite(sf::Sprite sprite)

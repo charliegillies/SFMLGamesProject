@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "TextureLoader.h"
+#include "ControlScheme.h"
 
 class SceneNode;
 class Scene;
@@ -41,9 +42,12 @@ public:
 	// adds a scene node to the current scene
 	void addSceneNode(SceneNode* node);
 
+	// gets the control scheme
+	ControlScheme* getControlScheme();
+
 private:
 	Scene* _currentScene;
 	sf::RenderWindow* _window;
-	
+	ControlScheme* _controlScheme;
 	TextureLoader* textureLoader;
 };
