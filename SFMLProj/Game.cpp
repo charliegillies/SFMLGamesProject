@@ -28,6 +28,12 @@ void Game::onExit()
 		_currentScene->onExit();
 }
 
+void Game::onRender()
+{
+	if (_currentScene != nullptr)
+		_currentScene->onRender();
+}
+
 void Game::changeScene(Scene* scene)
 {
 	scene->setGame(this);

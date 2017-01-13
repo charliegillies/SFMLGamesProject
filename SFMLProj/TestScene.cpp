@@ -18,5 +18,9 @@ void TestScene::onExit()
 
 void TestScene::onUpdate()
 {
+}
+
+void TestScene::onRender()
+{
 	_game->drawSprite(sprite);
 }

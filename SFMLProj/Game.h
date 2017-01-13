@@ -25,6 +25,9 @@ public:
 	// called when the game has complete
 	void onExit();
 
+	// called when the game needs to render
+	void onRender();
+
 	// changes the current scene to the provided scene
 	void changeScene(Scene* scene);
 

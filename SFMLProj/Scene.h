@@ -18,8 +18,11 @@ public:
 	// called when the scene has been changed and this scene has stopped
 	virtual void onExit() = 0;
 
-	// called every frame during the scenes lifetime
+	// logic update, called every frame during the scenes lifetime
 	virtual void onUpdate() = 0;
+
+	// render update, called every frame during the scenes lifetime
+	virtual void onRender() = 0;
 
 	// called by the Game itself when the scene becomes the current scene
 	void setGame(Game* game);

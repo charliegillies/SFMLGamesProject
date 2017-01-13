@@ -44,6 +44,9 @@ int main()
 		// update the game
 		game->onUpdate();
 
+		// render the game
+		game->onRender();
+
 		// display everything in the window
 		window.display();
 	}
