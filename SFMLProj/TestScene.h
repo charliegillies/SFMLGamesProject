@@ -1,6 +1,5 @@
 #pragma once
 #include "Scene.h"
-#include <SFML/Graphics/Sprite.hpp>
 
 /*
 	Scene for testing mechanics.
@@ -12,8 +11,4 @@ public:
 	~TestScene();
 
 	void onStart() override;
-	void onRender() override;
-
-private:
-	sf::Sprite sprite;
 };

@@ -1,8 +1,7 @@
 #pragma once
 #include <vector>
 #include "SceneNode.h"
-
-class Game;
+#include "Game.h"
 
 /*
 	An object that describes the 'scene', which is the current
@@ -35,9 +34,11 @@ public:
 protected:
 	// changes the current displayed scene
 	void changeScene(Scene* scene);
+
 	// todo move to private after scene testing is complete
 	Game* _game;
 
 private:
 	std::vector<SceneNode*> _sceneNodes;
+
 };

@@ -1,7 +1,12 @@
 #include "Scene.h"
 #include "Game.h"
 
-void Scene::onStart() {}
+void Scene::onStart()
+{
+	// update all child nodes
+	for (auto i = _sceneNodes.begin(); i != _sceneNodes.end(); ++i)
+		(*i)->start();
+}
 
 void Scene::onExit() {}
 

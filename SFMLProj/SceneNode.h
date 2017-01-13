@@ -14,7 +14,10 @@ public:
 	virtual ~SceneNode();
 
 	// adds a child to the internal list of child nodes
-	void addChild(SceneNode* node);
+	SceneNode* addChild(SceneNode* node);
+
+	// this is where the initialization behaviour of the scene node starts
+	virtual void start();
 
 	// updates the scene node, can be overriden 
 	virtual void update();

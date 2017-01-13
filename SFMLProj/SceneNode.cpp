@@ -8,11 +8,19 @@ SceneNode::SceneNode() : _childNodes()
 
 SceneNode::~SceneNode() {}
 
-void SceneNode::addChild(SceneNode* node)
+SceneNode* SceneNode::addChild(SceneNode* node)
 {
 	// add the child & set the parent
 	_childNodes.push_back(node);
 	node->setParent(this);
+	return this;
+}
+
+void SceneNode::start()
+{
+	// start all child nodes
+	for (auto i = _childNodes.begin(); i != _childNodes.end(); ++i)
+		(*i)->start();
 }
 
 void SceneNode::update()
