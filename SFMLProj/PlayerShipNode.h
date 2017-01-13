@@ -13,7 +13,7 @@ public:
 	void start() override;
 
 private:
-	void rotateToMouse();
+	sf::Vector2f rotateToMouse();
 	ControlScheme* _controlScheme;
 	TransformNode* _transform;
 };

@@ -5,16 +5,19 @@
 void PlayerShipNode::update()
 {
 	// rotate towards the mouse
-	rotateToMouse();
+	sf::Vector2f direction = rotateToMouse();
+	const float speed = 0.0400f;
+	sf::Vector2f velocity(0, 0);
 
 	if (_controlScheme->forwards())
 	{
-		_transform->position += sf::Vector2<float>(0, -0.5);
+		velocity = direction*speed;
+		velocity = -velocity;
 	}
 	else if (_controlScheme->backwards())
-	{
-		_transform->position += sf::Vector2<float>(0, 0.5);
-	}
+		velocity = direction*speed;
+
+	_transform->position += velocity;
 }
 
 void PlayerShipNode::start()
@@ -36,7 +39,7 @@ void PlayerShipNode::start()
 	assert(_transform != nullptr);
 }
 
-void PlayerShipNode::rotateToMouse()
+sf::Vector2f PlayerShipNode::rotateToMouse()
 {
 	// get mouse and ship position
 	auto mousePos = getGame()->getCamera()->getWorldMouse();
@@ -46,4 +49,6 @@ void PlayerShipNode::rotateToMouse()
 	angle = angle * (180 / 3.14159265358979323846);
 	angle += 90; // sprite doesn't face right, quick fix
 	_transform->rotation = angle;
+
+	return mousePos - pos;
 }
