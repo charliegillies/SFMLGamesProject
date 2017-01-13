@@ -29,3 +29,15 @@ SceneNode* NodeFactory::createBackgroundNode()
 	base_node->addChild(new TransformNode());
 	return base_node;
 }
+
+SceneNode* NodeFactory::createAsteroid(int x, int y)
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("meteor_brown.png"));
+
+	TransformNode* node = new TransformNode();
+	node->position = sf::Vector2f(x, y);
+
+	base_node->addChild(node);
+	return base_node;
+}

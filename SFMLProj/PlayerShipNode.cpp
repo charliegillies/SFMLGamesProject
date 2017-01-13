@@ -4,7 +4,7 @@
 
 void PlayerShipNode::update()
 {
-	const float speed = 8.0f;
+	const float speed = 240.0f;
 
 	// rotate towards the mouse
 	sf::Vector2f direction = rotateToMouse();

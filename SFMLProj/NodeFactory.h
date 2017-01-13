@@ -10,5 +10,6 @@ public:
 	static SceneNode* createPlayerNode();
 
 	static SceneNode* createBackgroundNode();
-};
 
+	static SceneNode* createAsteroid(int x, int y);
+};
