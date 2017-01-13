@@ -46,9 +46,17 @@ public:
 	// gets the control scheme
 	ControlScheme* getControlScheme();
 
+	// gets the camera
 	Camera* getCamera();
 
+	// set deltaTime
+	void setDt(float dt);
+
+	// get deltaTime
+	float deltaTime();
+
 private:
+	float _deltaTime;
 	Scene* _currentScene;
 	sf::RenderWindow& _window;
 	ControlScheme* _controlScheme;

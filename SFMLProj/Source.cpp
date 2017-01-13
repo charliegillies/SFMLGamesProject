@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "TestScene.h"
+#include <iostream>
 
 int main()
 {
@@ -23,6 +24,10 @@ int main()
 	// inform game that we're starting initialization
 	game->onStart();
 
+	sf::Clock clock;
+	float fps = 60;
+	float time = 1 / fps;
+
 	while (window.isOpen())
 	{
 		// poll events to see if the window has been closed		
@@ -38,17 +43,28 @@ int main()
 			}
 		}
 
-		// clear everything in the window
-		window.clear();
+		float dt = clock.getElapsedTime().asSeconds();
 
-		// update the game
-		game->onUpdate();
+		if (dt >= time)
+		{
+			// set deltaTime
+			game->setDt(dt);
 
-		// render the game
-		game->onRender();
+			// clear everything in the window
+			window.clear();
 
-		// display everything in the window
-		window.display();
+			// update the game
+			game->onUpdate();
+
+			// render the game
+			game->onRender();
+
+			// display everything in the window
+			window.display();
+
+			// restart the clock
+			clock.restart();
+		}
 	}
 
 	return 0;

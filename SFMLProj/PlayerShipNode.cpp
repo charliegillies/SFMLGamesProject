@@ -4,9 +4,10 @@
 
 void PlayerShipNode::update()
 {
+	const float speed = 8.0f;
+
 	// rotate towards the mouse
 	sf::Vector2f direction = rotateToMouse();
-	const float speed = 0.0400f;
 	sf::Vector2f velocity(0, 0);
 
 	if (_controlScheme->forwards())
@@ -16,6 +17,8 @@ void PlayerShipNode::update()
 	}
 	else if (_controlScheme->backwards())
 		velocity = direction*speed;
+
+	velocity *= getGame()->deltaTime();
 
 	_transform->position += velocity;
 }

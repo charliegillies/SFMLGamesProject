@@ -7,6 +7,7 @@ Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 	this->textureLoader = new TextureLoader();
 	this->_controlScheme = new ControlScheme();
 	this->_camera = new Camera(window);
+	this->_deltaTime = 0;
 }
 
 Game::~Game() {}
@@ -62,6 +63,16 @@ ControlScheme* Game::getControlScheme()
 Camera* Game::getCamera()
 {
 	return _camera;
+}
+
+void Game::setDt(float dt)
+{
+	_deltaTime = dt;
+}
+
+float Game::deltaTime()
+{
+	return _deltaTime;
 }
 
 void Game::drawSprite(sf::Sprite sprite)
