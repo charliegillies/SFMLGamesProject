@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextureLoader.h"
 #include "ControlScheme.h"
+#include "Camera.h"
 
 class SceneNode;
 class Scene;
@@ -45,9 +46,12 @@ public:
 	// gets the control scheme
 	ControlScheme* getControlScheme();
 
+	Camera* getCamera();
+
 private:
 	Scene* _currentScene;
 	sf::RenderWindow* _window;
 	ControlScheme* _controlScheme;
+	Camera* _camera;
 	TextureLoader* textureLoader;
 };

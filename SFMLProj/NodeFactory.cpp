@@ -2,6 +2,7 @@
 #include "TransformNode.h"
 #include "SpriteNode.h"
 #include "PlayerShipNode.h"
+#include "CameraTrackingNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -11,6 +12,7 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new SpriteNode(fp));
 	base_node->addChild(new TransformNode());
 	base_node->addChild(new PlayerShipNode());
+	base_node->addChild(new CameraTrackingNode(50, 37));
 
 	return base_node;
 }

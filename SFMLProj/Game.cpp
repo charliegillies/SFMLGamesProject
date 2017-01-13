@@ -7,6 +7,7 @@ Game::Game(Scene* scene, sf::RenderWindow* window)
 	this->_window = window;
 	this->textureLoader = new TextureLoader();
 	this->_controlScheme = new ControlScheme();
+	this->_camera = new Camera(window);
 }
 
 Game::~Game() {}
@@ -57,6 +58,11 @@ void Game::addSceneNode(SceneNode* node)
 ControlScheme* Game::getControlScheme()
 {
 	return _controlScheme;
+}
+
+Camera* Game::getCamera()
+{
+	return _camera;
 }
 
 void Game::drawSprite(sf::Sprite sprite)
