@@ -50,7 +50,7 @@ void Game::addSceneNode(SceneNode* node)
 	if (_currentScene == nullptr) return;
 
 	_currentScene->addSceneNode(node);
-	_currentScene->setGame(this);
+	node->setGame(this);
 }
 
 void Game::drawSprite(sf::Sprite sprite)
