@@ -32,7 +32,10 @@ void SpriteNode::render()
 
 void SpriteNode::update()
 {
+	// use the transform data to set the sprite information
 	_sprite.setPosition(_transform->position);
+	_sprite.setScale(_transform->scale);
+	_sprite.setRotation(_transform->rotation);
 }
 
 string SpriteNode::getNodeTag()
