@@ -1,10 +1,12 @@
 #include "Game.h"
 #include "Scene.h"
+#include "TextureLoader.h"
 
 Game::Game(Scene* scene, sf::RenderWindow* window)
 {
 	changeScene(scene);
 	this->_window = window;
+	this->textureLoader = new TextureLoader();
 }
 
 Game::~Game() {}
@@ -38,11 +40,7 @@ void Game::drawSprite(sf::Sprite sprite)
 	_window->draw(sprite);
 }
 
-sf::Texture Game::loadTexture(std::string fp)
+void Game::getTexture(std::string fp, sf::Texture& texture)
 {
-	sf::Texture texture;
-	//todo fix asap
-	static const std::string prefix = "Content\\";
-	texture.loadFromFile(prefix + fp);
-	return texture;
+	textureLoader->get(fp, texture);
 }

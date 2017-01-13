@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include "TextureLoader.h"
+
 class Scene;
 
 /*
@@ -26,11 +28,15 @@ public:
 	// changes the current scene to the provided scene
 	void changeScene(Scene* scene);
 
+	// draws a sprite
 	void drawSprite(sf::Sprite sprite);
 
-	sf::Texture loadTexture(std::string);
+	// loads a texture with a given filepath with the prefix 'Content/'
+	void getTexture(std::string fp, sf::Texture& texture);
 
 private:
 	Scene* _currentScene;
 	sf::RenderWindow* _window;
+	
+	TextureLoader* textureLoader;
 };

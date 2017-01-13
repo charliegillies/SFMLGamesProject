@@ -13,11 +13,11 @@ template <class T>
 bool AssetLoader<T>::loaded(std::string fp, T& value)
 {
 	// attempt to find an item with this key
-	auto iterator = _fileMap.find(fp);
+	auto iterator = fileMap.find(fp);
 
 	// compare to end to see if the iterator succeeded
 	// if it did, assign value to the found item
-	if (iterator != _fileMap.end())
+	if (iterator != fileMap.end())
 	{
 		value = iterator->second;
 		return true;

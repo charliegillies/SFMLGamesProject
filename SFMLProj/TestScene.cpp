@@ -7,7 +7,11 @@ TestScene::~TestScene() {}
 
 void TestScene::onStart()
 {
-	sprite.setTexture(_game->loadTexture("playerShip1_blue.png"));
+	sf::Texture txr;
+	_game->getTexture("playerShip1_blue.png", txr);
+	_game->getTexture("playerShip1_blue.png", txr);
+	sprite.setTexture(txr);
+
 	sprite.setColor(sf::Color(255, 255, 255, 255));
 	sprite.setPosition(0, 0);
 }

@@ -6,7 +6,7 @@ template<class T>
 class AssetLoader
 {
 public:
-	AssetLoader() : _fileMap() { }
+	AssetLoader() : fileMap() { }
 	virtual ~AssetLoader() { }
 
 	// gets the asset from the specific filepath
@@ -16,9 +16,10 @@ protected:
 	// called internally by the AssetLoader for asset specific loading
 	virtual void loadAsset(std::string fp, T& value) = 0;
 
-private:
 	// map holds the string (filepath) and the loaded item
-	std::map<std::string, T> _fileMap;
+	std::map<std::string, T> fileMap;
+
+private:
 	// checks if an item has been loaded into the map
 	bool loaded(std::string fp, T& value);
 };
