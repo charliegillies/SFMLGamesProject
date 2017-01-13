@@ -1,5 +1,4 @@
 #include "TextureLoader.h"
-#include <assert.h>
 
 TextureLoader::~TextureLoader() {}
 
@@ -22,9 +21,7 @@ bool TextureLoader::loaded(const std::string fp, sf::Texture& value)
 void TextureLoader::loadAsset(const std::string fp, sf::Texture& value)
 {
 	sf::Texture txr;
-	bool loaded = txr.loadFromFile("Content//" + fp);
-	// handle loading failure here..
-
+	txr.loadFromFile("Content//" + fp);
 	put(fp, txr);
 }
 
