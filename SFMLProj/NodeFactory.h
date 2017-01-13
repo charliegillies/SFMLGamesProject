@@ -8,5 +8,7 @@ class NodeFactory
 {
 public:
 	static SceneNode* createPlayerNode();
+
+	static SceneNode* createBackgroundNode();
 };
 

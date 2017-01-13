@@ -21,6 +21,8 @@ public:
 	// get the world mouse position, converted co-ordinates
 	sf::Vector2<float> getWorldMouse();
 
+	sf::Vector2<float> getCameraPos();
+
 private:
 	sf::RenderWindow& _window;
 	sf::View view;

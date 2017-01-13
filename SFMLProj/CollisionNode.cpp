@@ -17,5 +17,5 @@ string CircleColliderNode::getNodeTag()
 
 bool CircleColliderNode::collides(CircleColliderNode* testNode)
 {
-
+	return false; // template
 }

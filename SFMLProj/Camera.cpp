@@ -29,3 +29,8 @@ sf::Vector2<float> Camera::getWorldMouse()
 
 	return worldPos;
 }
+
+sf::Vector2<float> Camera::getCameraPos()
+{
+	return view.getCenter();
+}

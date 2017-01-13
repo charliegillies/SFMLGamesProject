@@ -3,6 +3,7 @@
 #include "SpriteNode.h"
 #include "PlayerShipNode.h"
 #include "CameraTrackingNode.h"
+#include "BackgroundNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -18,5 +19,13 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new PlayerShipNode());
 	base_node->addChild(new CameraTrackingNode(0, 0));
 
+	return base_node;
+}
+
+SceneNode* NodeFactory::createBackgroundNode()
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new BackgroundNode());
+	base_node->addChild(new TransformNode());
 	return base_node;
 }

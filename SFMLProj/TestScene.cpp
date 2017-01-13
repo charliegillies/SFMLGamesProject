@@ -7,6 +7,8 @@ TestScene::~TestScene() {}
 
 void TestScene::onStart()
 {
+	_game->addSceneNode(NodeFactory::createBackgroundNode());
+
 	_game->addSceneNode(NodeFactory::createPlayerNode());
 
 	Scene::onStart();
