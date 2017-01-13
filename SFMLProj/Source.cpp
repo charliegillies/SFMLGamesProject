@@ -13,7 +13,7 @@ int main()
 	// window settings
 	const int width = 1280;
 	const int height = 720;
-	const char* title = "SFML Games Project";
+	const char* title = "Sailor";
 
 	// create the window with the appropiate settings
 	sf::RenderWindow window(sf::VideoMode(width, height), title);
