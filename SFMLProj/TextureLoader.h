@@ -1,9 +1,8 @@
 #pragma once
-#include "AssetLoader.h"
 
 #include <SFML/Graphics.hpp>
 
-// Texture loader utility that derives from AssetLoader<sf::Texture>
+// Texture loading & caching utility
 class TextureLoader
 {
 private:

@@ -1,6 +1,5 @@
 #include "Game.h"
 #include "Scene.h"
-#include "TextureLoader.h"
 
 Game::Game(Scene* scene, sf::RenderWindow* window)
 {
