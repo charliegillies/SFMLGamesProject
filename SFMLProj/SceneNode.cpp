@@ -1,4 +1,5 @@
 #include "SceneNode.h"
+#include "Game.h"
 
 SceneNode::SceneNode() : _childNodes()
 {
@@ -69,6 +70,16 @@ SceneNode* SceneNode::getNode(string tag)
 	}
 	
 	return nullptr;
+}
+
+EventReceiver* SceneNode::addGlobalEventReceiver(const string id, void(* receiver)(BaseEvent*))
+{
+	return getGame()->getEventSystem()->addReceiver(id, receiver);
+}
+
+void SceneNode::invokeGlobalEvent(const string id, BaseEvent* param)
+{
+	getGame()->getEventSystem()->invokeEvent(id, param);
 }
 
 Game* SceneNode::getGame()

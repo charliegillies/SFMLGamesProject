@@ -2,6 +2,7 @@
 #include <vector>
 #include "SceneNode.h"
 #include "Game.h"
+#include "EventSystem.h"
 
 /*
 	An object that describes the 'scene', which is the current
@@ -10,7 +11,12 @@
 class Scene
 {
 public:
-	Scene() : _sceneNodes() {}
+	Scene() : _sceneNodes()
+	{
+		_eventSystem = new EventSystem();
+	}
+
+	//todo cleanup
 	virtual ~Scene() {}
 
 	// called at the beginning of the scene, only once
@@ -31,6 +37,9 @@ public:
 	// adds a scene node to the current scene
 	void addSceneNode(SceneNode* node);
 
+	// gets the event system which is specific to the scene
+	EventSystem* getEventSystem();
+
 protected:
 	// changes the current displayed scene
 	void changeScene(Scene* scene);
@@ -39,6 +48,6 @@ protected:
 	Game* _game;
 
 private:
-	std::vector<SceneNode*> _sceneNodes;
-
+	vector<SceneNode*> _sceneNodes;
+	EventSystem* _eventSystem;
 };

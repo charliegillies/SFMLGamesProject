@@ -37,6 +37,7 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	base_node->addChild(new SpriteNode("meteor_brown.png"));
 
 	TransformNode* node = new TransformNode();
+	// lazy hard coding, but origin is sprite size / 2
 	node->origin = sf::Vector2f(49, 48);
 	node->position = sf::Vector2f(x, y);
 

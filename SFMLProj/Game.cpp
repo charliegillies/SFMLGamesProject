@@ -38,7 +38,13 @@ void Game::onRender()
 
 void Game::changeScene(Scene* scene)
 {
+	// exit the current scene 
+	if (_currentScene != nullptr)
+		_currentScene->onExit();
+
+	// give scene a reference to game
 	scene->setGame(this);
+	// store a local reference to the current scene
 	_currentScene = scene;
 }
 
@@ -73,6 +79,11 @@ void Game::setDt(float dt)
 float Game::deltaTime()
 {
 	return _deltaTime;
+}
+
+EventSystem* Game::getEventSystem()
+{
+	return _currentScene != nullptr ? _currentScene->getEventSystem() : nullptr;
 }
 
 void Game::drawSprite(sf::Sprite sprite)

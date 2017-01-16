@@ -2,7 +2,9 @@
 #include <vector>
 #include "NodeTag.h"
 #include "assert.h"
+#include "BaseEvent.h"
 
+class EventReceiver;
 class Game;
 
 /*
@@ -44,6 +46,12 @@ public:
 	// gets a child node by the given tag parameter
 	// view the set parameters in the NodeTag class.
 	SceneNode* getNode(string tag);
+
+	// creates an event receiver that is unique to the scene
+	EventReceiver* addGlobalEventReceiver(const string id, void(*receiver) (BaseEvent*));
+
+	// invokes a global event for all listening receivers
+	void invokeGlobalEvent(const string id, BaseEvent* param);
 
 protected:
 	Game* getGame();

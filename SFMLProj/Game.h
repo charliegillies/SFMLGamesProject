@@ -4,6 +4,7 @@
 #include "TextureLoader.h"
 #include "ControlScheme.h"
 #include "Camera.h"
+#include "EventSystem.h"
 
 class SceneNode;
 class Scene;
@@ -54,6 +55,9 @@ public:
 
 	// get deltaTime
 	float deltaTime();
+
+	// gets the global event system that is specific to the scene
+	EventSystem* getEventSystem();
 
 private:
 	float _deltaTime;

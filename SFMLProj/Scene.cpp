@@ -34,6 +34,11 @@ void Scene::addSceneNode(SceneNode* node)
 	_sceneNodes.push_back(node);
 }
 
+EventSystem* Scene::getEventSystem()
+{
+	return _eventSystem;
+}
+
 void Scene::changeScene(Scene* scene)
 {
 	_game->changeScene(scene);
