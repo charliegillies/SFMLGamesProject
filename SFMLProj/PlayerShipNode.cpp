@@ -3,26 +3,19 @@
 #include "math.h"
 #include "EventTags.h"
 #include "PlayerLostLifeEvent.h"
+#include "NodeFactory.h"
 
 void PlayerShipNode::update()
 {
-	const float speed = 240.0f;
+	// also handles rotation
+	sf::Vector2f dir = handleMovement();
 
-	// rotate towards the mouse
-	sf::Vector2f direction = rotateToMouse();
-	sf::Vector2f velocity(0, 0);
-
-	if (_controlScheme->forwards())
-		velocity = direction*speed;
-	else if (_controlScheme->backwards())
+	// create a projectile
+	if (_controlScheme->fired())
 	{
-		velocity = direction*(speed/2);
-		velocity = -velocity;
+		getGame()->addSceneNode(NodeFactory::createBasicProjectile(
+			_transform->position, dir, 480.0f));
 	}
-
-	velocity *= getGame()->deltaTime();
-
-	_transform->position += velocity;
 }
 
 void PlayerShipNode::start()
@@ -61,6 +54,28 @@ sf::Vector2f PlayerShipNode::rotateToMouse()
 
 	sf::Vector2f s = mousePos - pos;
 	return normalize(s);
+}
+
+sf::Vector2f PlayerShipNode::handleMovement()
+{
+	const float speed = 240.0f;
+
+	// rotate towards the mouse
+	sf::Vector2f direction = rotateToMouse();
+	sf::Vector2f velocity(0, 0);
+
+	if (_controlScheme->forwards())
+		velocity = direction*speed;
+	else if (_controlScheme->backwards())
+	{
+		velocity = direction*(speed / 2);
+		velocity = -velocity;
+	}
+
+	velocity *= getGame()->deltaTime();
+	_transform->position += velocity;
+
+	return direction;
 }
 
 sf::Vector2f PlayerShipNode::normalize(sf::Vector2f source)

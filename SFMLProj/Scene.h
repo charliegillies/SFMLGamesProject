@@ -3,6 +3,7 @@
 #include "SceneNode.h"
 #include "Game.h"
 #include "EventSystem.h"
+#include <queue>
 
 /*
 	An object that describes the 'scene', which is the current
@@ -11,7 +12,7 @@
 class Scene
 {
 public:
-	Scene() : _sceneNodes(), _started(false)
+	Scene() : _sceneNodes(), _started(false), _waitingNodes()
 	{
 		_eventSystem = new EventSystem();
 	}
@@ -48,7 +49,12 @@ protected:
 	Game* _game;
 
 private:
+	// these are nodes that were added during a scenes runtime
+	queue<SceneNode*> _waitingNodes;
+	// the scene nodes that are active in the current scene
 	vector<SceneNode*> _sceneNodes;
-	EventSystem* _eventSystem;
+	// determines if the scene has already been started or not
 	bool _started;
+
+	EventSystem* _eventSystem;
 };

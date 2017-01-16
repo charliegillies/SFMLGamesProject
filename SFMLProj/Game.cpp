@@ -57,8 +57,8 @@ void Game::addSceneNode(SceneNode* node)
 {
 	if (_currentScene == nullptr) return;
 
-	_currentScene->addSceneNode(node);
 	node->setGame(this);
+	_currentScene->addSceneNode(node);
 }
 
 ControlScheme* Game::getControlScheme()

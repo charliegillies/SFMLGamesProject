@@ -5,6 +5,7 @@
 #include "CameraTrackingNode.h"
 #include "BackgroundNode.h"
 #include "RotationNode.h"
+#include "VelocityNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -36,12 +37,26 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode("meteor_brown.png"));
 
-	TransformNode* node = new TransformNode();
+	TransformNode* transform_node = new TransformNode();
 	// lazy hard coding, but origin is sprite size / 2
-	node->origin = sf::Vector2f(49, 48);
-	node->position = sf::Vector2f(x, y);
+	transform_node->origin = sf::Vector2f(49, 48);
+	transform_node->position = sf::Vector2f(x, y);
 
 	base_node->addChild(new RotationNode(60));
-	base_node->addChild(node);
+	base_node->addChild(transform_node);
+	return base_node;
+}
+
+SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed)
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("meteor_brown.png"));
+
+	TransformNode* transform_node = new TransformNode();
+	transform_node->position = position;
+	// calculate & apply rot
+
+	base_node->addChild(transform_node);
+	base_node->addChild(new VelocityNode(speed, direction));
 	return base_node;
 }

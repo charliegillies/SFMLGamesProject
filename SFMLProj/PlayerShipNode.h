@@ -14,6 +14,8 @@ public:
 
 private:
 	sf::Vector2f rotateToMouse();
+	sf::Vector2f handleMovement();
+
 	ControlScheme* _controlScheme;
 	TransformNode* _transform;
 
