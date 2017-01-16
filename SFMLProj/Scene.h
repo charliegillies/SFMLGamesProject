@@ -11,7 +11,7 @@
 class Scene
 {
 public:
-	Scene() : _sceneNodes()
+	Scene() : _sceneNodes(), _started(false)
 	{
 		_eventSystem = new EventSystem();
 	}
@@ -50,4 +50,5 @@ protected:
 private:
 	vector<SceneNode*> _sceneNodes;
 	EventSystem* _eventSystem;
+	bool _started;
 };

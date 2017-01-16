@@ -3,9 +3,15 @@
 
 void Scene::onStart()
 {
-	// update all child nodes
+	// allow all child nodes to set up their events
+	for (auto i = _sceneNodes.begin(); i != _sceneNodes.end(); ++i)
+		(*i)->subscribeEvents();
+
+	// start all child nodes
 	for (auto i = _sceneNodes.begin(); i != _sceneNodes.end(); ++i)
 		(*i)->start();
+
+	_started = true;
 }
 
 void Scene::onExit() {}
@@ -32,6 +38,12 @@ void Scene::setGame(Game* game)
 void Scene::addSceneNode(SceneNode* node)
 {
 	_sceneNodes.push_back(node);
+
+	if (_started)
+	{
+		node->subscribeEvents();
+		node->start();
+	}
 }
 
 EventSystem* Scene::getEventSystem()

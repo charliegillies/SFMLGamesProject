@@ -20,6 +20,11 @@ public:
 	// adds a child to the internal list of child nodes
 	SceneNode* addChild(SceneNode* node);
 
+	// this is where the node will subscribe to events if 
+	// that is in the nodes specific behaviour.
+	// this method is invoked before start()
+	virtual void subscribeEvents();
+
 	// this is where the initialization behaviour of the scene node starts
 	virtual void start();
 

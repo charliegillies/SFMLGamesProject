@@ -17,6 +17,13 @@ SceneNode* SceneNode::addChild(SceneNode* node)
 	return this;
 }
 
+void SceneNode::subscribeEvents()
+{
+	// subscribe for all child nodes
+	for (auto i = _childNodes.begin(); i != _childNodes.end(); ++i)
+		(*i)->subscribeEvents();
+}
+
 void SceneNode::start()
 {
 	// start all child nodes
