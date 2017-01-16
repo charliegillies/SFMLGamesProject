@@ -13,6 +13,5 @@ void TestScene::onStart()
 
 	_game->addSceneNode(NodeFactory::createPlayerNode());
 
-
 	Scene::onStart();
 }

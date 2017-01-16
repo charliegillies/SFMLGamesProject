@@ -1,6 +1,8 @@
 #include "PlayerShipNode.h"
 #include "Game.h"
 #include "math.h"
+#include "EventTags.h"
+#include "PlayerLostLifeEvent.h"
 
 void PlayerShipNode::update()
 {
@@ -40,6 +42,10 @@ void PlayerShipNode::start()
 
 	// ensure that _transform is not null
 	assert(_transform != nullptr);
+
+
+	// Send out 'player lost life' event
+	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(3));
 }
 
 sf::Vector2f PlayerShipNode::rotateToMouse()

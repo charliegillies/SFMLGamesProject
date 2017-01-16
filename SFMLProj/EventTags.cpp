@@ -1,10 +1,9 @@
+#include "EventTags.h"
 #include <string>
 using namespace std;
 
-/* 
-	Begin tags implementation
+/*
+	List event tags!
 */
 
-static const string PlayerLostLife = "plostlife";
-
-
+const string EventTags::playerLostLife = "plostlife";
