@@ -52,17 +52,17 @@ public:
 	// view the set parameters in the NodeTag class.
 	SceneNode* getNode(string tag);
 
+protected:
+	Game* getGame();
+
 	// creates an event receiver that is unique to the scene
 	EventReceiver* addGlobalEventReceiver(const string id, void(*receiver) (BaseEvent*));
 
 	// invokes a global event for all listening receivers
 	void invokeGlobalEvent(const string id, BaseEvent* param);
 
-protected:
-	Game* getGame();
-
 private:
-	std::vector<SceneNode*> _childNodes;
+	vector<SceneNode*> _childNodes;
 	SceneNode* _parent;
 	Game* _game;
 };
