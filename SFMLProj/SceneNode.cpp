@@ -79,9 +79,9 @@ SceneNode* SceneNode::getNode(string tag)
 	return nullptr;
 }
 
-EventReceiver* SceneNode::addGlobalEventReceiver(const string id, void(* receiver)(BaseEvent*))
+EventReceiver* SceneNode::addGlobalEventReceiver(const string id, Gallant::Delegate1<BaseEvent*> del)
 {
-	return getGame()->getEventSystem()->addReceiver(id, receiver);
+	return getGame()->getEventSystem()->addReceiver(id, del);
 }
 
 void SceneNode::invokeGlobalEvent(const string id, BaseEvent* param)

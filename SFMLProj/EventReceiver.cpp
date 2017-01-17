@@ -1,14 +1,14 @@
 #include "EventReceiver.h"
 
-EventReceiver::EventReceiver(void(*receiver)(BaseEvent*))
+EventReceiver::EventReceiver(Delegate1<BaseEvent*> e)
 {
-	this->receiver = receiver;
+	this->signal.Connect(e);
 }
 
 EventReceiver::~EventReceiver() {}
 
 void EventReceiver::invoke(BaseEvent* e)
 {
-	// invoke function pointer
-	receiver(e);
+	// invoke signal
+	signal(e);
 }

@@ -4,10 +4,10 @@
 EventSystem::EventSystem() : _eventMap() {}
 EventSystem::~EventSystem() {}
 
-EventReceiver* EventSystem::addReceiver(const std::string id, void(* f)(BaseEvent*))
+EventReceiver* EventSystem::addReceiver(const std::string id, Delegate1<BaseEvent*> del)
 {
 	// create a new receiver
-	EventReceiver* rec = new EventReceiver(f);
+	EventReceiver* rec = new EventReceiver(del);
 	// try and get the vector of receivers
 	std::vector<EventReceiver*>& all_rec = _eventMap[id];
 	// add this receiver in

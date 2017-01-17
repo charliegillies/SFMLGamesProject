@@ -12,12 +12,12 @@ public:
 	PlayerLivesUINode();
 	~PlayerLivesUINode();
 
-	void update() override;
 	void start() override;
 	void subscribeEvents() override;
 
 	// function that is passed in for the player lost life event
 	void onPlayerLostLife(BaseEvent* e);
+
 private:
 	TextNode* _lifeCounterText;
 };

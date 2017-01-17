@@ -26,3 +26,9 @@ void TextNode::positionToBounds(int ix, int iy, int width, int height)
 	auto y = iy + ((height / 2) - (bounds.height / 2));
 	text.setPosition(x, y);
 }
+
+void TextNode::setText(string txt)
+{
+	msg = txt;
+	text.setString(txt);
+}

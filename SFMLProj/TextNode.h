@@ -15,6 +15,8 @@ public:
 
 	void positionToBounds(int x, int y, int width, int height);
 
+	void setText(string txt);
+
 private:
 	int size;
 	int x;

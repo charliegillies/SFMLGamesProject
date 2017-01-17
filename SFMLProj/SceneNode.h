@@ -3,6 +3,7 @@
 #include "NodeTag.h"
 #include "assert.h"
 #include "BaseEvent.h"
+#include "Delegate.h"
 
 class EventReceiver;
 class Game;
@@ -56,7 +57,7 @@ protected:
 	Game* getGame();
 
 	// creates an event receiver that is unique to the scene
-	EventReceiver* addGlobalEventReceiver(const string id, void(*receiver) (BaseEvent*));
+	EventReceiver* addGlobalEventReceiver(const string id, Gallant::Delegate1<BaseEvent*> del);
 
 	// invokes a global event for all listening receivers
 	void invokeGlobalEvent(const string id, BaseEvent* param);
