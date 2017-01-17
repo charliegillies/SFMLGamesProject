@@ -23,7 +23,12 @@ public:
 
 	sf::Vector2<float> getCameraPos();
 
+	void switchToUIView();
+
+	void switchToGameView();
+
 private:
 	sf::RenderWindow& _window;
-	sf::View view;
+	sf::View _view;
+	sf::View _uiView;
 };

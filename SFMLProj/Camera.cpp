@@ -3,19 +3,20 @@
 
 Camera::Camera(sf::RenderWindow& window) : _window(window)
 {
-	view = _window.getDefaultView();
-	_window.setView(view);
+	_view = _window.getDefaultView();
+	_uiView = _window.getDefaultView();
+	_window.setView(_view);
 }
 
 void Camera::setCenter(float x, float y)
 {
-	view.setCenter(x, y);
-	_window.setView(view);
+	_view.setCenter(x, y);
+	_window.setView(_view);
 }
 
 sf::Vector2<float> Camera::getSize()
 {
-	auto size = view.getSize();
+	auto size = _view.getSize();
 	return sf::Vector2<float>(size.x, size.y);
 }
 
@@ -32,5 +33,15 @@ sf::Vector2<float> Camera::getWorldMouse()
 
 sf::Vector2<float> Camera::getCameraPos()
 {
-	return view.getCenter();
+	return _view.getCenter();
+}
+
+void Camera::switchToUIView()
+{
+	_window.setView(_uiView);
+}
+
+void Camera::switchToGameView()
+{
+	_window.setView(_view);
 }

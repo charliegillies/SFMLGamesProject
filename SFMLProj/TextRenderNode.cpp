@@ -15,5 +15,7 @@ void TextRenderNode::start()
 
 void TextRenderNode::render()
 {
+	getGame()->getCamera()->switchToUIView();
 	getGame()->draw(_textRenderer);
+	getGame()->getCamera()->switchToGameView();
 }
