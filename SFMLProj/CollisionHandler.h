@@ -3,6 +3,7 @@
 
 #include "SceneNode.h"
 #include "CollisionNode.h"
+#include "CollisionMap.h"
 
 /*
 	Handles collision inside of the world space for entities
@@ -21,4 +22,5 @@ public:
 
 private:
 	std::vector<CollisionNode*> _allColliders;
+	CollisionMap _collisionMap;
 };

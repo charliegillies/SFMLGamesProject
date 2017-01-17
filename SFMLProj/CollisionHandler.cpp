@@ -2,7 +2,9 @@
 #include "RegisterColliderEvent.h"
 #include "EventTags.h"
 
-CollisionHandler::CollisionHandler() {}
+CollisionHandler::CollisionHandler() 
+	: _allColliders(), _collisionMap(50, 50, 40, _allColliders) {}
+
 CollisionHandler::~CollisionHandler() {}
 
 void CollisionHandler::subscribeEvents()
