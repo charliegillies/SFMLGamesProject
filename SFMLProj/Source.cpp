@@ -8,6 +8,7 @@
 #include "Game.h"
 #include "TestScene.h"
 #include <iostream>
+#include "MenuScene.h"
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(width, height), title);
 	
 	// create the game instance
-	Game* game = new Game(new TestScene(), window);
+	Game* game = new Game(new MenuScene(), window);
 	// inform game that we're starting initialization
 	game->onStart();
 

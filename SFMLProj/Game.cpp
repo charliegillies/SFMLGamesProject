@@ -43,12 +43,16 @@ void Game::onRender()
 
 void Game::changeScene(Scene* scene)
 {
-	// exit the current scene 
-	if (_currentScene != nullptr)
-		_currentScene->onExit();
-
 	// give scene a reference to game
 	scene->setGame(this);
+
+	// exit the current scene 
+	if (_currentScene != nullptr)
+	{
+		_currentScene->onExit();
+		scene->onStart();
+	}
+
 	// store a local reference to the current scene
 	_currentScene = scene;
 }
@@ -99,6 +103,14 @@ EventSystem* Game::getEventSystem()
 Input* Game::getInput()
 {
 	return _input;
+}
+
+void Game::exitGame()
+{
+	if (_currentScene != nullptr)
+		_currentScene->onExit();
+
+	_window.close();
 }
 
 void Game::draw(sf::Drawable& sprite)

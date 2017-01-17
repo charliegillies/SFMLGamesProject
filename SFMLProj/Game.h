@@ -67,6 +67,9 @@ public:
 	// gets the instance of the input
 	Input* getInput();
 
+	// closes the window
+	void exitGame();
+
 private:
 	float _deltaTime;
 	Scene* _currentScene;
