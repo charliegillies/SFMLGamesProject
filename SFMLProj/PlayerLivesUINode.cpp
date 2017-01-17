@@ -1,13 +1,15 @@
 #include "PlayerLivesUINode.h"
 #include "EventTags.h"
 #include "BaseEvent.h"
-#include "Game.h"
 #include "PlayerLostLifeEvent.h"
+#include "Game.h"
 
 PlayerLivesUINode::PlayerLivesUINode()
 {
+	// instantiating this here instead of start() means that we won't have
+	// issues with the execution order with events.
 	_lifeCounterText = new TextNode(10, 5, "Fonts//kenvector_future.ttf",
-		"DEBUG TEXT", sf::Color::White, 36);
+		"0", sf::Color::White, 30);
 }
 
 PlayerLivesUINode::~PlayerLivesUINode() {}
@@ -23,9 +25,12 @@ void PlayerLivesUINode::start()
 
 void PlayerLivesUINode::subscribeEvents()
 {
-	Delegate1<BaseEvent*> del;
-	del.Bind(this, &PlayerLivesUINode::onPlayerLostLife);
-	addGlobalEventReceiver(EventTags::playerLostLife, del);
+	// create a delegate, bind this object to the onPlayerLostLife method call
+	Delegate1<BaseEvent*> life_lost_event;
+	life_lost_event.Bind(this, &PlayerLivesUINode::onPlayerLostLife);
+
+	// subscribe to the global event
+	addGlobalEventReceiver(EventTags::playerLostLife, life_lost_event);
 }
 
 void PlayerLivesUINode::onPlayerLostLife(BaseEvent* e)
@@ -35,5 +40,5 @@ void PlayerLivesUINode::onPlayerLostLife(BaseEvent* e)
 	assert(lost_life_event != nullptr);
 
 	// we do this to avoid issues with execution order
-	_lifeCounterText->setText(std::to_string(lost_life_event->remainingLives));
+	_lifeCounterText->setText(to_string(lost_life_event->remainingLives));
 }
