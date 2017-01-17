@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseEvent.h"
+#include "Delegate.h"
 
 class EventReceiver
 {
