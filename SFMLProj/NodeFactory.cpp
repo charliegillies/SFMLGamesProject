@@ -22,6 +22,9 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new PlayerShipNode());
 	base_node->addChild(new CameraTrackingNode(0, 0));
 
+	// collider will be static
+	base_node->addChild(new CollisionNode(true, 48));
+
 	return base_node;
 }
 

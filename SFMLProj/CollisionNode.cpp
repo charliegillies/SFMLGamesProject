@@ -31,7 +31,9 @@ void CollisionNode::start()
 void CollisionNode::render()
 {
 	// draw debug circle
-	circle.setPosition(transform->position.x - transform->origin.x, 
+	circle.setPosition(
+		transform->position.x - transform->origin.x, 
 		transform->position.y - transform->origin.y);
+
 	getGame()->draw(circle);
 }

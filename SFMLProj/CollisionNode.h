@@ -3,6 +3,9 @@
 #include <SFML/Graphics/CircleShape.hpp>
 #include "TransformNode.h"
 
+/*
+	Basic scene node that contains data about collision.
+*/
 class CollisionNode : public SceneNode
 {
 public:
