@@ -10,13 +10,12 @@ BattleScene::~BattleScene() {}
 void BattleScene::onStart()
 {
 	_game->addSceneNode(NodeFactory::createBackgroundNode("Sprites//purple.png"));
-	_game->addSceneNode(NodeFactory::createAsteroid(10, 10));
+	_game->addSceneNode(NodeFactory::createAsteroid(100, 100));
 	_game->addSceneNode(NodeFactory::createPlayerNode());
 
 	/* UI */
 	CanvasNode* canvas = new CanvasNode();
-	PlayerLivesUINode* playerLivesNode = new PlayerLivesUINode();
-	canvas->addChild(playerLivesNode);
+	canvas->addChild(new PlayerLivesUINode());
 	_game->addSceneNode(canvas);
 
 	Scene::onStart();
