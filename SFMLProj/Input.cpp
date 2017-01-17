@@ -2,16 +2,22 @@
 
 void Input::setKeyboardState(KeyboardState state)
 {
-	_lastFrameState = _frameState;
-	_frameState = state;
+	_kbLastFrameState = _kbFrameState;
+	_kbFrameState = state;
+}
+
+void Input::setMouseState(MouseState state)
+{
+	_mLastFrameState = _mFrameState;
+	_mFrameState = state;
 }
 
 bool Input::isKeyDown(sf::Keyboard::Key key)
 {
-	return !_lastFrameState.keys[key] && _frameState.keys[key];
+	return !_kbLastFrameState.keys[key] && _kbFrameState.keys[key];
 }
 
 bool Input::keyPressed(sf::Keyboard::Key key)
 {
-	return _frameState.keys[key];
+	return _kbFrameState.keys[key];
 }

@@ -11,6 +11,18 @@ struct KeyboardState
 };
 
 /*
+	Simple struct that holds data about the mouse state
+	during a single frame in the game.
+*/
+struct MouseState
+{
+	bool leftClicked;
+	bool rightClicked;
+	int screenX;
+	int screenY;
+};
+
+/*
 	Input management class.
 */
 class Input
@@ -23,6 +35,10 @@ public:
 	// only as much as once a frame - at most.
 	void setKeyboardState(KeyboardState state);
 
+	// set the current mouse state, this should happen
+	// only as much as once a frame - at most.
+	void setMouseState(MouseState state);
+
 	// checks if the key has been pressed and is still held down
 	bool isKeyDown(sf::Keyboard::Key key);
 
@@ -31,6 +47,9 @@ public:
 
 private:
 	// this frame & last frames keyboard state
-	KeyboardState _frameState;
-	KeyboardState _lastFrameState;
+	KeyboardState _kbFrameState;
+	KeyboardState _kbLastFrameState;
+
+	MouseState _mFrameState;
+	MouseState _mLastFrameState;
 };

@@ -30,6 +30,7 @@ int main()
 
 	Input* input = game->getInput();
 	KeyboardState kb_state{};
+	MouseState m_state{};
 
 	while (window.isOpen())
 	{
@@ -47,7 +48,7 @@ int main()
 				// inform the window that we're exiting
 				window.close();
 			}
-				break;
+			break;
 
 				// on a key being pressed
 			case sf::Event::KeyPressed:
@@ -55,7 +56,7 @@ int main()
 				sf::Keyboard::Key p_code = event.key.code;
 				kb_state.keys[p_code] = true;
 			}
-				break;
+			break;
 
 				// on a key being released
 			case sf::Event::KeyReleased:
@@ -63,7 +64,35 @@ int main()
 				sf::Keyboard::Key r_code = event.key.code;
 				kb_state.keys[r_code] = false;
 			}
-				break;
+			break;
+
+
+			case sf::Event::MouseButtonPressed:
+			{
+				if (event.mouseButton.button == sf::Mouse::Left)
+					m_state.leftClicked = true;
+
+				if (event.mouseButton.button == sf::Mouse::Right)
+					m_state.rightClicked = true;
+			}
+			break;
+
+			case sf::Event::MouseButtonReleased:
+			{
+				if (event.mouseButton.button == sf::Mouse::Left)
+					m_state.leftClicked = false;
+
+				if (event.mouseButton.button == sf::Mouse::Right)
+					m_state.rightClicked = false;
+			}
+			break;
+
+			case sf::Event::MouseMoved:
+			{
+				m_state.screenX = event.mouseMove.x;
+				m_state.screenY = event.mouseMove.y;
+			}
+			break;
 
 				//switch end
 			}
@@ -81,6 +110,8 @@ int main()
 
 			// set the keyboard state from the event info
 			input->setKeyboardState(kb_state);
+			// set the mouse state from the event info
+			input->setMouseState(m_state);
 
 			// update the game
 			game->onUpdate();
