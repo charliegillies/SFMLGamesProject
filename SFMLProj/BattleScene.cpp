@@ -15,7 +15,8 @@ void BattleScene::onStart()
 
 	_game->addSceneNode(NodeFactory::createEnemyUfo(250, 250));
 
-	/* UI */
+
+	/* PLAYER UI */
 	CanvasNode* canvas = new CanvasNode();
 	canvas->addChild(new PlayerLivesUINode());
 	_game->addSceneNode(canvas);
