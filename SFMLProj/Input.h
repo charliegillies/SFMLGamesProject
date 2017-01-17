@@ -23,7 +23,7 @@ struct MouseState
 };
 
 /*
-	Input management class.
+	Input management utility.
 */
 class Input
 {
@@ -45,11 +45,30 @@ public:
 	// checks if the key has been pressed at all
 	bool keyPressed(sf::Keyboard::Key key);
 
+	// checks if the left click has been pressed and is still held down
+	bool leftClickDown();
+
+	// checks if there has been a left click
+	bool leftClicked();
+
+	// checks if the left click has been pressed and is still down
+	bool rightClickDown();
+
+	// checks if there has been a right click
+	bool rightClick();
+
+	// get the screen X value
+	int getX();
+
+	// get the screen Y value
+	int getY();
+
 private:
 	// this frame & last frames keyboard state
 	KeyboardState _kbFrameState;
 	KeyboardState _kbLastFrameState;
 
+	// this frame & last frames mouse state
 	MouseState _mFrameState;
 	MouseState _mLastFrameState;
 };

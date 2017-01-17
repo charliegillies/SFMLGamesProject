@@ -21,3 +21,33 @@ bool Input::keyPressed(sf::Keyboard::Key key)
 {
 	return _kbFrameState.keys[key];
 }
+
+bool Input::leftClickDown()
+{
+	return _mLastFrameState.leftClicked && _mFrameState.leftClicked;
+}
+
+bool Input::leftClicked()
+{
+	return !_mLastFrameState.leftClicked && _mFrameState.leftClicked;
+}
+
+bool Input::rightClickDown()
+{
+	return _mLastFrameState.rightClicked && _mFrameState.rightClicked;
+}
+
+bool Input::rightClick()
+{
+	return !_mLastFrameState.rightClicked && _mFrameState.rightClicked;
+}
+
+int Input::getX()
+{
+	return _mFrameState.screenX;
+}
+
+int Input::getY()
+{
+	return _mFrameState.screenY;
+}
