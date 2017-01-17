@@ -14,5 +14,5 @@ public:
 
 	static SceneNode* createAsteroid(int x, int y);
 
-	static SceneNode* createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed);
+	static SceneNode* createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot);
 };

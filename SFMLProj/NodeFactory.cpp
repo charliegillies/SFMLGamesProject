@@ -47,14 +47,15 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	return base_node;
 }
 
-SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed)
+SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot)
 {
 	SceneNode* base_node = new SceneNode();
-	base_node->addChild(new SpriteNode("meteor_brown.png"));
+	base_node->addChild(new SpriteNode("laserBlue03.png"));
 
 	TransformNode* transform_node = new TransformNode();
 	transform_node->position = position;
-	// calculate & apply rot
+	transform_node->origin = sf::Vector2f(4, 18);
+	transform_node->rotation = rot;
 
 	base_node->addChild(transform_node);
 	base_node->addChild(new VelocityNode(speed, direction));

@@ -15,7 +15,7 @@ void PlayerShipNode::update()
 	if (_controlScheme->fired())
 	{
 		getGame()->addSceneNode(NodeFactory::createBasicProjectile(
-			_transform->position, dir, 480.0f));
+			_transform->position, dir, 100.0f, _transform->rotation));
 
 		std::cout << "player shot!" << endl;
 	}
