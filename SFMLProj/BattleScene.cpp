@@ -13,6 +13,8 @@ void BattleScene::onStart()
 	_game->addSceneNode(NodeFactory::createAsteroid(100, 100));
 	_game->addSceneNode(NodeFactory::createPlayerNode());
 
+	_game->addSceneNode(NodeFactory::createEnemyUfo(250, 250));
+
 	/* UI */
 	CanvasNode* canvas = new CanvasNode();
 	canvas->addChild(new PlayerLivesUINode());

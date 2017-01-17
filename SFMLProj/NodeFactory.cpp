@@ -47,6 +47,18 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	return base_node;
 }
 
+SceneNode* NodeFactory::createEnemyUfo(int x, int y)
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("Sprites//enemies//ufoRed.png"));
+
+	TransformNode* transform = new TransformNode;
+	transform->position = sf::Vector2f(x, y);
+	base_node->addChild(transform);
+
+	return base_node;
+}
+
 SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot)
 {
 	SceneNode* base_node = new SceneNode();
