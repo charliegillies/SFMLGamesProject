@@ -1,14 +1,20 @@
 #pragma once
 #include "SceneNode.h"
 
-class CircleColliderNode : public SceneNode
+class CollisionNode : public SceneNode
 {
 public:
-	CircleColliderNode();
-	~CircleColliderNode();
+	explicit CollisionNode(bool isStatic) : isStatic(isStatic) {}
+	~CollisionNode() {}
 
 	virtual string getNodeTag() override;
 
 	// tests if the two circles collide or not
-	bool collides(CircleColliderNode* test_node);
+	bool collides(CollisionNode* test_node);
+
+	void start() override;
+
+	// defines if this object will or will not move (not including rotation!)
+	// this makes it easier to perform basic collision tests.
+	const bool isStatic;
 };

@@ -7,3 +7,4 @@ using namespace std;
 */
 
 const string EventTags::playerLostLife = "plostlife";
+const string EventTags::registerCollider = "rcollider";
