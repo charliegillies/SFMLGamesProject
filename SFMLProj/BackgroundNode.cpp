@@ -29,7 +29,7 @@ void BackgroundNode::start()
 
 void BackgroundNode::render()
 {
-	getGame()->drawSprite(_sprite);
+	getGame()->draw(_sprite);
 }
 
 void BackgroundNode::update()

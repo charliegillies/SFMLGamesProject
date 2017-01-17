@@ -6,6 +6,7 @@
 #include "Camera.h"
 #include "EventSystem.h"
 #include "Input.h"
+#include "FontLoader.h"
 
 class SceneNode;
 class Scene;
@@ -37,10 +38,13 @@ public:
 	void changeScene(Scene* scene);
 
 	// draws a sprite
-	void drawSprite(sf::Sprite sprite);
+	void draw(sf::Drawable& sprite);
 
 	// loads a texture with a given filepath with the prefix 'Content/'
 	sf::Texture& getTexture(const std::string fp);
+
+	// loads a font with a given filepath with the prefix 'Content/'
+	sf::Font& getFont(const std::string fp);
 
 	// adds a scene node to the current scene
 	void addSceneNode(SceneNode* node);
@@ -69,6 +73,8 @@ private:
 	sf::RenderWindow& _window;
 	ControlScheme* _controlScheme;
 	Camera* _camera;
-	TextureLoader* _textureLoader;
 	Input* _input;
+
+	FontLoader* _fontLoader;
+	TextureLoader* _textureLoader;
 };

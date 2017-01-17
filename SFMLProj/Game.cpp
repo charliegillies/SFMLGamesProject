@@ -5,7 +5,11 @@ Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 {
 	changeScene(scene);
 	this->_input = new Input();
+
+	// create asset loaders..
 	this->_textureLoader = new TextureLoader();
+	this->_fontLoader = new FontLoader();
+	
 	this->_controlScheme = new ControlScheme(_input);
 	this->_camera = new Camera(window);
 	this->_deltaTime = 0;
@@ -54,6 +58,11 @@ sf::Texture& Game::getTexture(const std::string fp)
 	return _textureLoader->get(fp);
 }
 
+sf::Font& Game::getFont(const std::string fp)
+{
+	return _fontLoader->get(fp);
+}
+
 void Game::addSceneNode(SceneNode* node)
 {
 	if (_currentScene == nullptr) return;
@@ -92,7 +101,7 @@ Input* Game::getInput()
 	return _input;
 }
 
-void Game::drawSprite(sf::Sprite sprite)
+void Game::draw(sf::Drawable& sprite)
 {
 	_window.draw(sprite);
 }

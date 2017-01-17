@@ -29,7 +29,7 @@ void SpriteNode::start()
 
 void SpriteNode::render()
 {
-	getGame()->drawSprite(_sprite);
+	getGame()->draw(_sprite);
 }
 
 void SpriteNode::update()
