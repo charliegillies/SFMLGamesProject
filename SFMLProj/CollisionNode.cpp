@@ -25,7 +25,7 @@ void CollisionNode::start()
 
 	circle.setFillColor(sf::Color(255, 255, 255, 80));
 	circle.setOutlineColor(sf::Color(0, 128, 0, 124));
-	circle.setOutlineThickness(4);
+	circle.setOutlineThickness(3);
 }
 
 void CollisionNode::render()
