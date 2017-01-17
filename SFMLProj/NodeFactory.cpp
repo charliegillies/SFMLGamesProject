@@ -9,7 +9,7 @@
 
 SceneNode* NodeFactory::createPlayerNode()
 {
-	string fp = "playerShip1_blue.png";
+	string fp = "Sprites//playerShip1_blue.png";
 
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode(fp));
@@ -35,7 +35,7 @@ SceneNode* NodeFactory::createBackgroundNode()
 SceneNode* NodeFactory::createAsteroid(int x, int y)
 {
 	SceneNode* base_node = new SceneNode();
-	base_node->addChild(new SpriteNode("meteor_brown.png"));
+	base_node->addChild(new SpriteNode("Sprites//meteor_brown.png"));
 
 	TransformNode* transform_node = new TransformNode();
 	// lazy hard coding, but origin is sprite size / 2
@@ -50,7 +50,7 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot)
 {
 	SceneNode* base_node = new SceneNode();
-	base_node->addChild(new SpriteNode("laserBlue03.png"));
+	base_node->addChild(new SpriteNode("Sprites//laserBlue03.png"));
 
 	TransformNode* transform_node = new TransformNode();
 	transform_node->position = position;

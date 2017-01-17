@@ -16,8 +16,6 @@ void PlayerShipNode::update()
 	{
 		getGame()->addSceneNode(NodeFactory::createBasicProjectile(
 			_transform->position, dir, 100.0f, _transform->rotation));
-
-		std::cout << "player shot!" << endl;
 	}
 }
 
@@ -38,7 +36,6 @@ void PlayerShipNode::start()
 
 	// ensure that _transform is not null
 	assert(_transform != nullptr);
-
 
 	// Send out 'player lost life' event
 	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(3));
