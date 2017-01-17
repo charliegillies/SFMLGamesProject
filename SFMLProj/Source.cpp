@@ -6,7 +6,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include "TestScene.h"
+#include "BattleScene.h"
 #include <iostream>
 #include "MenuScene.h"
 

@@ -1,7 +1,7 @@
 #include "MenuScene.h"
 #include "CanvasNode.h"
 #include "Button.h"
-#include "TestScene.h"
+#include "BattleScene.h"
 #include "TextNode.h"
 #include "NodeFactory.h"
 
