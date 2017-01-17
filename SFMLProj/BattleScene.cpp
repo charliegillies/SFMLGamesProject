@@ -17,10 +17,6 @@ void BattleScene::onStart()
 	CanvasNode* canvas = new CanvasNode();
 	PlayerLivesUINode* playerLivesNode = new PlayerLivesUINode();
 	canvas->addChild(playerLivesNode);
-
-	Delegate1<BaseEvent*> e;
-	//e.Bind(playerLivesNode)
-
 	_game->addSceneNode(canvas);
 
 	Scene::onStart();
