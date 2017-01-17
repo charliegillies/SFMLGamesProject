@@ -10,7 +10,7 @@
 class Camera
 {
 public:
-	Camera(sf::RenderWindow& window);
+	explicit Camera(sf::RenderWindow& window);
 
 	// set the center position of the cameera
 	void setCenter(float x, float y);
@@ -21,10 +21,13 @@ public:
 	// get the world mouse position, converted co-ordinates
 	sf::Vector2<float> getWorldMouse();
 
+	// gets the position of the camera in the world.
 	sf::Vector2<float> getCameraPos();
 
+	// switches to the ui view for UI rendering.
 	void switchToUIView();
 
+	// switches back to game view for actor rendering.
 	void switchToGameView();
 
 private:
