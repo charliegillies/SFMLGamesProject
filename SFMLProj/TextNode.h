@@ -6,7 +6,7 @@ class TextNode : public SceneNode
 {
 public:
 	TextNode(int x, int y, string font, string msg, sf::Color color, int size)
-		: x(x), y(y), font(font), msg(msg), color(color), size(size) {}
+		: size(size), x(x), y(y), font(font), msg(msg), color(color) {}
 	~TextNode();
 
 	void start() override;
