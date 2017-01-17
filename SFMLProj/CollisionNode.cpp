@@ -13,6 +13,26 @@ bool CollisionNode::collides(CollisionNode* testNode)
 	return false; // template
 }
 
+int CollisionNode::getX()
+{
+	return transform->position.x + offset.x;
+}
+
+int CollisionNode::getY()
+{
+	return transform->position.y + offset.y;
+}
+
+int CollisionNode::getWidth()
+{
+	return radius * 2;
+}
+
+int CollisionNode::getHeight()
+{
+	return radius * 2;
+}
+
 void CollisionNode::start()
 {
 	//todo cleanup required
@@ -31,8 +51,8 @@ void CollisionNode::start()
 void CollisionNode::render()
 {
 	// draw debug circle
-	circle.setPosition(transform->position.x, transform->position.y);
+	circle.setPosition(getX(), getY());
 	circle.setOrigin(transform->origin);
-
+	
 	getGame()->draw(circle);
 }
