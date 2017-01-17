@@ -8,16 +8,20 @@ PlayerLivesUINode::PlayerLivesUINode()
 {
 	// instantiating this here instead of start() means that we won't have
 	// issues with the execution order with events.
-	_lifeCounterText = new TextNode(10, 5, "Fonts//kenvector_future.ttf",
+	_lifeCounterText = new TextNode(65, 6, "Fonts//kenvector_future.ttf",
 		"0", sf::Color::White, 30);
+
+	_shipIcon = new ImageNode(8, 8, "Sprites//ui//playerLife1_blue.png");
+	_shipIcon->setScale(1.5, 1.5);
 }
 
 PlayerLivesUINode::~PlayerLivesUINode() {}
 
 void PlayerLivesUINode::start()
 {
-	// create a text node 
+	// add the text & ship icon
 	addChild(_lifeCounterText);
+	addChild(_shipIcon);
 
 	//initialise all child nodes
 	SceneNode::start();
@@ -39,6 +43,5 @@ void PlayerLivesUINode::onPlayerLostLife(BaseEvent* e)
 	PlayerLostLifeEvent* lost_life_event = static_cast<PlayerLostLifeEvent*>(e);
 	assert(lost_life_event != nullptr);
 
-	// we do this to avoid issues with execution order
 	_lifeCounterText->setText(to_string(lost_life_event->remainingLives));
 }

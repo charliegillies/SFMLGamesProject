@@ -1,6 +1,7 @@
 #pragma once
 #include "SceneNode.h"
 #include "TextNode.h"
+#include "ImageNode.h"
 
 /*
 	Scene node that is responsible for keeping the 
@@ -20,5 +21,6 @@ public:
 
 private:
 	TextNode* _lifeCounterText;
+	ImageNode* _shipIcon;
 };
 
