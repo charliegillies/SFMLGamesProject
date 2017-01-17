@@ -3,7 +3,7 @@
 
 bool ControlScheme::fired()
 {
-	return _input->isKeyDown(sf::Keyboard::Space);
+	return _input->isKeyDown(sf::Keyboard::Space) || _input->leftClicked();
 }
 
 bool ControlScheme::forwards()
