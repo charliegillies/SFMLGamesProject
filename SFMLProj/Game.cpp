@@ -4,8 +4,9 @@
 Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 {
 	changeScene(scene);
-	this->textureLoader = new TextureLoader();
-	this->_controlScheme = new ControlScheme();
+	this->_input = new Input();
+	this->_textureLoader = new TextureLoader();
+	this->_controlScheme = new ControlScheme(_input);
 	this->_camera = new Camera(window);
 	this->_deltaTime = 0;
 }
@@ -50,7 +51,7 @@ void Game::changeScene(Scene* scene)
 
 sf::Texture& Game::getTexture(const std::string fp)
 {
-	return textureLoader->get(fp);
+	return _textureLoader->get(fp);
 }
 
 void Game::addSceneNode(SceneNode* node)
@@ -84,6 +85,11 @@ float Game::deltaTime()
 EventSystem* Game::getEventSystem()
 {
 	return _currentScene != nullptr ? _currentScene->getEventSystem() : nullptr;
+}
+
+Input* Game::getInput()
+{
+	return _input;
 }
 
 void Game::drawSprite(sf::Sprite sprite)

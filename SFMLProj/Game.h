@@ -5,6 +5,7 @@
 #include "ControlScheme.h"
 #include "Camera.h"
 #include "EventSystem.h"
+#include "Input.h"
 
 class SceneNode;
 class Scene;
@@ -59,11 +60,15 @@ public:
 	// gets the global event system that is specific to the scene
 	EventSystem* getEventSystem();
 
+	// gets the instance of the input
+	Input* getInput();
+
 private:
 	float _deltaTime;
 	Scene* _currentScene;
 	sf::RenderWindow& _window;
 	ControlScheme* _controlScheme;
 	Camera* _camera;
-	TextureLoader* textureLoader;
+	TextureLoader* _textureLoader;
+	Input* _input;
 };

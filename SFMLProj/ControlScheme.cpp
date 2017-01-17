@@ -3,15 +3,15 @@
 
 bool ControlScheme::fired()
 {
-	return sf::Keyboard::isKeyPressed(sf::Keyboard::Space);
+	return _input->isKeyDown(sf::Keyboard::Space);
 }
 
 bool ControlScheme::forwards()
 {
-	return sf::Keyboard::isKeyPressed(sf::Keyboard::W);
+	return _input->keyPressed(sf::Keyboard::W);
 }
 
 bool ControlScheme::backwards()
 {
-	return sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+	return _input->keyPressed(sf::Keyboard::S);
 }

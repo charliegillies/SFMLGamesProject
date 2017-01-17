@@ -28,18 +28,44 @@ int main()
 	float fps = 60;
 	float time = 1 / fps;
 
+	Input* input = game->getInput();
+	KeyboardState kb_state{};
+
 	while (window.isOpen())
 	{
 		// poll events to see if the window has been closed		
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
-			if (event.type == sf::Event::Closed)
+			switch (event.type)
+			{
+				// on the window being closed
+			case sf::Event::Closed:
 			{
 				// inform the game that we're exiting
 				game->onExit();
 				// inform the window that we're exiting
 				window.close();
+			}
+				break;
+
+				// on a key being pressed
+			case sf::Event::KeyPressed:
+			{
+				sf::Keyboard::Key p_code = event.key.code;
+				kb_state.keys[p_code] = true;
+			}
+				break;
+
+				// on a key being released
+			case sf::Event::KeyReleased:
+			{
+				sf::Keyboard::Key r_code = event.key.code;
+				kb_state.keys[r_code] = false;
+			}
+				break;
+
+				//switch end
 			}
 		}
 
@@ -52,6 +78,9 @@ int main()
 
 			// clear everything in the window
 			window.clear();
+
+			// set the keyboard state from the event info
+			input->setKeyboardState(kb_state);
 
 			// update the game
 			game->onUpdate();

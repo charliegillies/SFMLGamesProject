@@ -4,6 +4,7 @@
 #include "EventTags.h"
 #include "PlayerLostLifeEvent.h"
 #include "NodeFactory.h"
+#include <iostream>
 
 void PlayerShipNode::update()
 {
@@ -15,6 +16,8 @@ void PlayerShipNode::update()
 	{
 		getGame()->addSceneNode(NodeFactory::createBasicProjectile(
 			_transform->position, dir, 480.0f));
+
+		std::cout << "player shot!" << endl;
 	}
 }
 
