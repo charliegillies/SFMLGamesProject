@@ -14,9 +14,13 @@ public:
 	
 	~CollisionMap() {}
 
+	// builds a map of colliding nodes 
+	void buildMap();
+
 private:
 	int width;
 	int height;
 	int cellsize;
+
 	std::vector<CollisionNode*>& _colliders;
 };

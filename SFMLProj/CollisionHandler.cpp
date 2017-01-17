@@ -2,10 +2,14 @@
 #include "RegisterColliderEvent.h"
 #include "EventTags.h"
 
-CollisionHandler::CollisionHandler() 
-	: _allColliders(), _collisionMap(50, 50, 40, _allColliders) {}
-
+CollisionHandler::CollisionHandler() : _allColliders(), 
+	_collisionMap(NUM_CELLS_X, NUM_CELLS_Y, CELL_SIZE, _allColliders) {}
 CollisionHandler::~CollisionHandler() {}
+
+void CollisionHandler::update()
+{
+	
+}
 
 void CollisionHandler::subscribeEvents()
 {
@@ -23,9 +27,4 @@ void CollisionHandler::onColliderRegister(BaseEvent* e)
 	assert(register_collider->collider != nullptr);
 
 	_allColliders.push_back(register_collider->collider);
-}
-
-void CollisionHandler::update()
-{
-
 }
