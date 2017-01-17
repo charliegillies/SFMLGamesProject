@@ -17,7 +17,8 @@ bool Button::pressed()
 void Button::render()
 {
 	getGame()->draw(spriteGraphic);
-	getGame()->draw(textGraphic);
+
+	SceneNode::render();
 }
 
 void Button::start()
@@ -27,17 +28,13 @@ void Button::start()
 	spriteGraphic.setPosition(rect.x, rect.y);
 	rect.width = tex.getSize().x;
 	rect.height = tex.getSize().y;
-
-	textGraphic.setFont(getGame()->getFont("Fonts//kenvector_future.ttf"));
-	textGraphic.setString(text);
-	textGraphic.setCharacterSize(textSize);
-	textGraphic.setPosition(rect.x, rect.y);
-
-	sf::Rect<float> bounds = textGraphic.getGlobalBounds();
-	textGraphic.setOrigin(0, bounds.height / 2);
-	auto x = rect.x + ((rect.width/2) - (bounds.width/2));
-	auto y = rect.y + ((rect.height/2) - (bounds.height/2));
-	textGraphic.setPosition(x, y);
+	
+	if (childTextNode != nullptr)
+	{
+		addChild(childTextNode);
+		childTextNode->start();
+		childTextNode->positionToBounds(rect.x, rect.y, rect.width, rect.height);
+	}
 }
 
 void Button::update()
@@ -45,8 +42,7 @@ void Button::update()
 
 }
 
-Button* Button::setTextColor(sf::Color color)
+TextNode* Button::getTextNode()
 {
-	textGraphic.setFillColor(color);
-	return this;
+	return childTextNode;
 }

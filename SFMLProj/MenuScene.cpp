@@ -15,15 +15,15 @@ void MenuScene::onStart()
 	SceneNode* canvasNode = new CanvasNode();
 
 	// game start button
-	_gameStartBtn = new Button(400, 400, "Start Game",
-		"Sprites//ui//buttonBlue.png", 20);
-	_gameStartBtn->setTextColor(sf::Color::Black);
+	_gameStartBtn = new Button(400, 400, 
+		"Sprites//ui//buttonBlue.png", new TextNode(0, 0, 
+		"Fonts//kenvector_future.ttf", "Start Game", sf::Color::Black, 20));
 	canvasNode->addChild(_gameStartBtn);
 
 	// game exit button
-	_exitBtn = new Button(650, 400, "Quit Game",
-		"Sprites//ui//buttonRed.png", 20);
-	_exitBtn->setTextColor(sf::Color::Black);
+	_exitBtn = new Button(650, 400,
+		"Sprites//ui//buttonRed.png", new TextNode(0, 0,
+		"Fonts//kenvector_future.ttf", "Quit Game", sf::Color::Black, 20));
 	canvasNode->addChild(_exitBtn);
 
 	// sailor text

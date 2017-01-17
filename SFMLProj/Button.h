@@ -1,8 +1,8 @@
 #pragma once
 #include "SceneNode.h"
 #include "Rectangle.h"
-#include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Sprite.hpp>
+#include "TextNode.h"
 
 /*
 	Basic button graphic
@@ -10,8 +10,12 @@
 class Button : public SceneNode
 {
 public:
-	Button(int x, int y, string txt, string img, int textSize) 
-		: rect(x, y, 0, 0), text(txt), img(img), textSize(textSize) {}
+	Button(int x, int y, string img, TextNode* potentialChild) 
+		: rect(x, y, 0, 0), img(img)
+	{
+		childTextNode = potentialChild;
+	}
+
 	~Button();
 
 	bool hovered();
@@ -21,15 +25,11 @@ public:
 	void start() override;
 	void update() override;
 
-	Button* setTextColor(sf::Color color);
+	TextNode* getTextNode();
 
 private:
+	TextNode* childTextNode;
 	Rectangle rect;
-	string text;
 	string img;
-
-	int textSize;
-
-	sf::Text textGraphic;
 	sf::Sprite spriteGraphic;
 };
