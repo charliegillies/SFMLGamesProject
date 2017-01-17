@@ -2,12 +2,12 @@
 #include "Game.h"
 #include "NodeFactory.h"
 
-TestScene::TestScene() {}
-TestScene::~TestScene() {}
+BattleScene::BattleScene() {}
+BattleScene::~BattleScene() {}
 
-void TestScene::onStart()
+void BattleScene::onStart()
 {
-	_game->addSceneNode(NodeFactory::createBackgroundNode());
+	_game->addSceneNode(NodeFactory::createBackgroundNode("Sprites//purple.png"));
 
 	_game->addSceneNode(NodeFactory::createAsteroid(10, 10));
 

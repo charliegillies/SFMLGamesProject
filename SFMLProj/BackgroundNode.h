@@ -6,16 +6,14 @@
 class BackgroundNode : public SceneNode
 {
 public:
-	BackgroundNode();
-	~BackgroundNode();
+	BackgroundNode(std::string filepath) : filepath(filepath) {};
+	~BackgroundNode() {}
 
 	void start() override;
 
 	void render() override;
 
-	void update() override;
-
 private:
-	TransformNode* _transform;
 	sf::Sprite _sprite;
+	std::string filepath;
 };

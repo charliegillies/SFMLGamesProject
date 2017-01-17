@@ -12,6 +12,8 @@ public:
 	void start() override;
 	void render() override;
 
+	void positionToBounds(int x, int y, int width, int height);
+
 private:
 	int size;
 	int x;

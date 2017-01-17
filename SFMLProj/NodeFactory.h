@@ -10,7 +10,7 @@ class NodeFactory
 public:
 	static SceneNode* createPlayerNode();
 
-	static SceneNode* createBackgroundNode();
+	static SceneNode* createBackgroundNode(string filepath);
 
 	static SceneNode* createAsteroid(int x, int y);
 

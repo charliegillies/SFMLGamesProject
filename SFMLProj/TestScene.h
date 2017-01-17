@@ -4,11 +4,11 @@
 /*
 	Scene for testing mechanics.
 */
-class TestScene : public Scene
+class BattleScene : public Scene
 {
 public:
-	TestScene();
-	~TestScene();
+	BattleScene();
+	~BattleScene();
 
 	void onStart() override;
 };

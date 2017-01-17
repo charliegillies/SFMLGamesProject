@@ -50,11 +50,11 @@ void Game::changeScene(Scene* scene)
 	if (_currentScene != nullptr)
 	{
 		_currentScene->onExit();
+		_currentScene = scene;
 		scene->onStart();
 	}
-
-	// store a local reference to the current scene
-	_currentScene = scene;
+	else
+		_currentScene = scene;
 }
 
 sf::Texture& Game::getTexture(const std::string fp)

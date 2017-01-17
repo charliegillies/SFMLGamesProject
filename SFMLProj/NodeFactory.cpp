@@ -24,10 +24,10 @@ SceneNode* NodeFactory::createPlayerNode()
 	return base_node;
 }
 
-SceneNode* NodeFactory::createBackgroundNode()
+SceneNode* NodeFactory::createBackgroundNode(string filepath)
 {
 	SceneNode* base_node = new SceneNode();
-	base_node->addChild(new BackgroundNode());
+	base_node->addChild(new BackgroundNode(filepath));
 	base_node->addChild(new TransformNode());
 	return base_node;
 }
