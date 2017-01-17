@@ -11,6 +11,7 @@ public:
 	{
 		this->_input = input;
 	}
+
 	~ControlScheme() {}
 
 	// if the player has fired
