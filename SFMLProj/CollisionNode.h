@@ -10,7 +10,12 @@ class CollisionNode : public SceneNode
 {
 public:
 	explicit CollisionNode(bool isStatic, float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
-		: isStatic(isStatic), radius(radius), circle(radius) {}
+		: isStatic(isStatic), radius(radius), circle(radius)
+	{
+		// ensures generation of unique num for every collider
+		static int gId = 0;
+		_id = ++gId;
+	}
 	
 	~CollisionNode() {}
 
@@ -25,14 +30,16 @@ public:
 	// this makes it easier to perform basic collision tests.
 	const bool isStatic;
 
+	// gets the x co-ordinate of the top left hand side of the collider
+	int getTopX();
+
+	// gets the y co-ordinate of the top left hand side of the collider
+	int getTopY();
+
 	// gets the x co-ordinate of the collider with the offset (if any) applied
-	// as well as the origin of the transform subtracted from the position
-	// so x represents the top left hand corner of the entity regardless.
 	int getX();
 
 	// gets the y co-ordinate of the collider with the offset (if any) applied
-	// as well as the origin of the transform subtracted from the position
-	// so x represents the top left hand corner of the entity regardless.
 	int getY();
 
 	// gets the width of the collider
@@ -43,7 +50,12 @@ public:
 	// for a circle, this is just radius*2
 	int getHeight();
 
+	// gets the unique id of this collider, which should
+	// be used for generating hashes or fast obj comparison
+	int getID() const;
+
 private:
+	int _id;
 	float radius;
 	
 	// offset position of the collider, if any

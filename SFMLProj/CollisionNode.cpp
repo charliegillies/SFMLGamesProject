@@ -10,17 +10,34 @@ string CollisionNode::getNodeTag()
 
 bool CollisionNode::collides(CollisionNode* testNode)
 {
-	return false; // template
+	// temporary: if we choose to move away from just circle colliders
+	// then this will need to be virtual and overriden.
+	// for now, we will just do the circle collision check here.
+
+	int dx = testNode->getX() - getX();
+	int dy = testNode->getY() - getY();
+	int comb_radius = testNode->radius + radius;
+	return (dx*dx) + (dy*dy) < (comb_radius*comb_radius);
 }
 
-int CollisionNode::getX()
+int CollisionNode::getTopX()
 {
 	return transform->position.x + offset.x - transform->origin.x;
 }
 
-int CollisionNode::getY()
+int CollisionNode::getTopY()
 {
 	return transform->position.y + offset.y - transform->origin.y;
+}
+
+int CollisionNode::getX()
+{
+	return transform->position.x + offset.x;
+}
+
+int CollisionNode::getY()
+{
+	return transform->position.y + offset.y;
 }
 
 int CollisionNode::getWidth()
@@ -31,6 +48,11 @@ int CollisionNode::getWidth()
 int CollisionNode::getHeight()
 {
 	return radius * 2;
+}
+
+int CollisionNode::getID() const
+{
+	return _id;
 }
 
 void CollisionNode::start()
@@ -52,7 +74,7 @@ void CollisionNode::render()
 {
 	// draw debug circle
 	circle.setPosition(getX(), getY());
-	//circle.setOrigin(transform->origin);
+	circle.setOrigin(transform->origin);
 	
 	getGame()->draw(circle);
 }

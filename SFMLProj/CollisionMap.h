@@ -12,8 +12,10 @@ public:
 	static const int width = 40;
 	static const int height = 40;
 	static const int cellSize = 50;
+
+	std::vector<CollisionNode*>& getCollidersInCell(int x, int y);
 	
-	CollisionMap(std::vector<CollisionNode*>& colliders) 
+	CollisionMap(std::vector<CollisionNode*>* colliders) 
 		: _colliders(colliders) {}
 	
 	~CollisionMap() {}
@@ -21,8 +23,10 @@ public:
 	// builds a map of colliding nodes 
 	void buildMap();
 
+	void clearGrid();
+
 private:
 	std::vector<CollisionNode*> _grid[height][width];
 
-	std::vector<CollisionNode*>& _colliders;
+	std::vector<CollisionNode*>* _colliders;
 };

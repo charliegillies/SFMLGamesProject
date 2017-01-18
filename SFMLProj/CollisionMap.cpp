@@ -2,15 +2,22 @@
 #include <math.h>
 #include <iostream>
 
+vector<CollisionNode*>& CollisionMap::getCollidersInCell(int x, int y)
+{
+	return _grid[y][x];
+}
+
 void CollisionMap::buildMap()
 {
-	for (auto i = _colliders.begin(); i != _colliders.end(); ++i)
+	clearGrid();
+
+	for (auto i = _colliders->begin(); i != _colliders->end(); ++i)
 	{
 		// get the iterator value
 		CollisionNode* entity = (*i);
 
-		int min_x = entity->getX() / cellSize;
-		int min_y = entity->getY() / cellSize;
+		int min_x = entity->getTopX() / cellSize;
+		int min_y = entity->getTopY() / cellSize;
 
 		// the entity has gone out of collision bounds
 		if (min_x < 0 || min_y < 0)
@@ -19,8 +26,8 @@ void CollisionMap::buildMap()
 			return;
 		}
 
-		int max_x = (entity->getX() + entity->getWidth()) / cellSize;
-		int max_y = (entity->getY() + entity->getHeight()) / cellSize;
+		int max_x = (entity->getTopX() + entity->getWidth()) / cellSize;
+		int max_y = (entity->getTopY() + entity->getHeight()) / cellSize;
 
 		for (int x = min_x; x <= max_x; x++)
 		{
@@ -31,4 +38,11 @@ void CollisionMap::buildMap()
 			}
 		}
 	}
+}
+
+void CollisionMap::clearGrid()
+{
+	for (int x = 0; x < width; x++)
+		for (int y = 0; y < height; y++)
+			getCollidersInCell(x, y).clear();
 }

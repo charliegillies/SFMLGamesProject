@@ -1,15 +1,46 @@
 #include "CollisionHandler.h"
 #include "RegisterColliderEvent.h"
 #include "EventTags.h"
+#include <iostream>
 
 CollisionHandler::CollisionHandler() 
-	: _allColliders(), _collisionMap(_allColliders) {}
+	: _allColliders(), _collisionMap(&_allColliders) { }
 
-CollisionHandler::~CollisionHandler() {}
+CollisionHandler::~CollisionHandler() { }
 
 void CollisionHandler::update()
 {
 	_collisionMap.buildMap();
+
+	// test all possible collisions
+	for (int x = 0; x < CollisionMap::width; x++)
+	{
+		for (int y = 0; y < CollisionMap::height; y++)
+		{
+			// get the test nodes in this cell
+			vector<CollisionNode*> cell_nodes = _collisionMap.getCollidersInCell(x, y);
+
+			// without even 2 elements, don't bother testing..
+			if (cell_nodes.size() < 2) continue;
+
+			// we have more than 2 potential colliders, let's find out..
+			for (auto i = cell_nodes.begin(); i != cell_nodes.end(); ++i)
+			{
+				CollisionNode* a = (*i);
+
+				for (auto j = (i + 1); j != cell_nodes.end(); ++j)
+				{
+					CollisionNode* b = (*j);
+
+					if (a->collides(b))
+					{
+						std::cout << "SOMETHING COLLIDES!" << endl;
+					}
+				}
+			}
+
+		}
+	}
 }
 
 void CollisionHandler::subscribeEvents()

@@ -16,11 +16,11 @@ public:
 	~CollisionHandler();
 
 	void subscribeEvents() override;
-	void onColliderRegister(BaseEvent* e);
-
 	void update() override;
 
 private:
-	std::vector<CollisionNode*> _allColliders;
+	void onColliderRegister(BaseEvent* e);
+
 	CollisionMap _collisionMap;
+	std::vector<CollisionNode*> _allColliders;
 };
