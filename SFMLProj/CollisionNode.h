@@ -10,7 +10,7 @@ class CollisionNode : public SceneNode
 {
 public:
 	explicit CollisionNode(float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
-		: radius(radius), circle(radius)
+		: radius(radius), offset(offset), circle(radius)
 	{
 		// ensures generation of unique num for every collider
 		static int gId = 0;

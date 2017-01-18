@@ -16,15 +16,15 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new SpriteNode(fp));
 
 	TransformNode* transform_node = new TransformNode();
-	transform_node->position = sf::Vector2<float>(100, 100);
-	transform_node->origin = sf::Vector2<float>(50, 37);
+	transform_node->position = sf::Vector2<float>(250, 100);
+	transform_node->origin = sf::Vector2<float>(49.5f, 37.5f);
 	base_node->addChild(transform_node);
 
 	base_node->addChild(new PlayerShipNode());
 	base_node->addChild(new CameraTrackingNode(0, 0));
 
 	// collider will be static
-	base_node->addChild(new CollisionNode(48));
+	base_node->addChild(new CollisionNode(40, sf::Vector2f(9, -6)));
 
 	return base_node;
 }
