@@ -19,14 +19,18 @@ void CameraTrackingNode::start()
 	// align the camera
 	sf::Vector2f target = getTargetPosition();
 	_camera->setCenter(target.x, target.y);
+	lerp_position = target;
+	lerp_time = 0;
 }
 
 void CameraTrackingNode::update()
 {
 	sf::Vector2f target = getTargetPosition();
 
+	lerp_position = Utils::lerpVector(target, lerp_position,
+		Utils::easeSmoothStep(0.5f, 1.0f));
 
-	_camera->setCenter(target.x, target.y);
+	_camera->setCenter(lerp_position.x, lerp_position.y);
 }
 
 sf::Vector2f CameraTrackingNode::getTargetPosition()
