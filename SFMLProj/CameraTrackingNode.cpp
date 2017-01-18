@@ -1,6 +1,7 @@
 #include "CameraTrackingNode.h"
 #include "Game.h"
 #include "CollisionMap.h"
+#include "Utils.h"
 
 void CameraTrackingNode::start()
 {
@@ -28,23 +29,12 @@ void CameraTrackingNode::start()
 	bot_right = sf::Vector2f(world_width, world_height) - camera_half_size;
 }
 
-// couldn't be bothered to find out where the clamp function was hiding
-float clamp(float value, float min, float max)
-{
-	if (value < min)
-		return min;
-	if (value > max)
-		return max;
-
-	return value;
-}
-
 void CameraTrackingNode::update()
 {
 	// ensure that the camera is in the world bounds
 	sf::Vector2f position = _transform->position;
-	position.x = clamp(position.x, top_left.x, bot_right.x);
-	position.y = clamp(position.y, top_left.y, bot_right.y);
+	position.x = Utils::clamp(position.x, top_left.x, bot_right.x);
+	position.y = Utils::clamp(position.y, top_left.y, bot_right.y);
 
 	_camera->setCenter(position.x, position.y);
 }
