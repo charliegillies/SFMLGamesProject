@@ -64,6 +64,7 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 	TransformNode* transform = new TransformNode;
 	transform->position = sf::Vector2f(x, y);
+	transform->origin = sf::Vector2f(40.5f, 40.5f);
 	base_node->addChild(transform);
 
 	base_node->addChild(new CollisionNode(45));
