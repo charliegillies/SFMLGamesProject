@@ -28,10 +28,10 @@ void PlayerShipNode::shoot(sf::Vector2f dir)
 	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(20, 15);
 
 	getGame()->addSceneNode(NodeFactory::createShipProjectile(
-		gun1, dir, 100.0f, _transform->rotation));
+		gun1, dir, 400, _transform->rotation));
 
 	getGame()->addSceneNode(NodeFactory::createShipProjectile(
-		gun2, dir, 100.0f, _transform->rotation));
+		gun2, dir, 400, _transform->rotation));
 }
 
 void PlayerShipNode::start()
