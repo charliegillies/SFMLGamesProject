@@ -103,11 +103,7 @@ void Scene::addSceneNode(SceneNode* node)
 {
 	// check if the node shouldn't be added until the next frame
 	if (_started)
-	{
 		_waitingNodes.push(node);
-		node->subscribeEvents();
-		node->start();
-	}
 	else // or if it should go immediately into the current node set
 		_sceneNodes.push_back(node);
 }
