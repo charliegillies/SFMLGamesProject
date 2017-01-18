@@ -21,6 +21,6 @@ public:
 private:
 	void onColliderRegister(BaseEvent* e);
 
+	vector<CollisionNode*> _allColliders;
 	CollisionMap _collisionMap;
-	std::vector<CollisionNode*> _allColliders;
 };

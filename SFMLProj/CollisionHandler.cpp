@@ -6,7 +6,7 @@
 
 typedef map<string, bool> CheckMap;
 
-	CollisionHandler::CollisionHandler() 
+CollisionHandler::CollisionHandler() 
 	: _allColliders(), _collisionMap(&_allColliders) { }
 
 CollisionHandler::~CollisionHandler() { }
@@ -48,6 +48,8 @@ void CollisionHandler::update()
 
 					if (a->collides(b))
 					{
+						// notify a and b that we have collided
+
 					}
 				}
 			}
