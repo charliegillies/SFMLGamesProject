@@ -19,15 +19,17 @@ void CollisionMap::buildMap()
 		int min_x = entity->getTopX() / cellSize;
 		int min_y = entity->getTopY() / cellSize;
 
+		int max_x = (entity->getTopX() + entity->getWidth()) / cellSize;
+		int max_y = (entity->getTopY() + entity->getHeight()) / cellSize;
+
 		// the entity has gone out of collision bounds
-		if (min_x < 0 || min_y < 0)
+		if (min_x < 0 || min_y < 0 || min_x >= width || min_y >= height || max_x >= width || max_y >= height)
 		{
 			std::cout << "Entity has gone out of bounds. This must be handled!!" << endl;
 			return;
 		}
 
-		int max_x = (entity->getTopX() + entity->getWidth()) / cellSize;
-		int max_y = (entity->getTopY() + entity->getHeight()) / cellSize;
+
 
 		for (int x = min_x; x <= max_x; x++)
 		{
