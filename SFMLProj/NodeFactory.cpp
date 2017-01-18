@@ -22,7 +22,7 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(transform_node);
 
 	base_node->addChild(new PlayerShipNode());
-	base_node->addChild(new CameraTrackingNode(0, 0));
+	base_node->addChild(new CameraTrackingNode());
 
 	// collider will be static
 	CollisionNode* collider = new CollisionNode(40, sf::Vector2f(9, -6));
