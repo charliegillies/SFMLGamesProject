@@ -9,6 +9,9 @@ CollisionHandler::~CollisionHandler() { }
 
 void CollisionHandler::update()
 {
+	tests = 0;
+	collisions = 0;
+
 	unregisterWaiting();
 	_collisionMap.buildMap();
 
@@ -29,6 +32,10 @@ void CollisionHandler::update()
 			checkPotentialCollisions(check_map, cell_nodes);
 		}
 	}
+
+	getGame()->setDebugValue("potential cols", to_string(tests));
+	getGame()->setDebugValue("collisions", to_string(collisions));
+	getGame()->setDebugValue("colliders", to_string(_allColliders.size()));
 }
 
 void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<CollisionNode*>& cell_nodes)
@@ -55,14 +62,20 @@ void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<Coll
 			check_map[aHash] = true;
 			check_map[bHash] = true;
 
+			tests++;
+
 			if (a->collides(b))
 			{
 				// notify a and b that we have collided
 				a->onCollide(b);
 				b->onCollide(a);
+
+				collisions++;
 			}
 		}
 	}
+
+
 }
 
 void CollisionHandler::subscribeEvents()

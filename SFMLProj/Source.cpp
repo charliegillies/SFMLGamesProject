@@ -115,6 +115,7 @@ int main()
 			// update the game
 			game->onUpdate();
 
+			// set the deltatime as a debug value
 			game->setDebugValue("dt", to_string(dt));
 
 			// render the game

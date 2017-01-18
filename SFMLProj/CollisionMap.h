@@ -16,7 +16,7 @@ public:
 	std::vector<CollisionNode*>& getCollidersInCell(int x, int y);
 	
 	CollisionMap(std::vector<CollisionNode*>* colliders) 
-		: _colliders(colliders) {}
+		: _colliders(colliders) { }
 	
 	~CollisionMap() {}
 

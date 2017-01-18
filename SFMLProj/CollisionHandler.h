@@ -29,6 +29,9 @@ private:
 
 	void unregisterWaiting();
 
+	int tests = 0;
+	int collisions = 0;
+
 	queue<CollisionNode*> _unregisterQueue;
 	vector<CollisionNode*> _allColliders;
 	CollisionMap _collisionMap;

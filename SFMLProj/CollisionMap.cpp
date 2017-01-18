@@ -29,8 +29,6 @@ void CollisionMap::buildMap()
 			return;
 		}
 
-
-
 		for (int x = min_x; x <= max_x; x++)
 		{
 			for (int y = min_y; y <= max_y; y++)
