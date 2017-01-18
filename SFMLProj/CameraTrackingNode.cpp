@@ -21,5 +21,7 @@ void CameraTrackingNode::start()
 
 void CameraTrackingNode::update()
 {
+	// ensure that the camera is in the world bounds
+
 	_camera->setCenter(_transform->position.x + _xOffset, _transform->position.y + _yOffset);
 }

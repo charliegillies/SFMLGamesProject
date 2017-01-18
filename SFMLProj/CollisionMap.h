@@ -13,6 +13,12 @@ public:
 	static const int height = 20;
 	static const int cellSize = 100;
 
+
+	static const int world_top_left_x = 0;
+	static const int world_top_left_y = 0;
+	static const int world_bot_right_x = (width * cellSize);
+	static const int world_bot_right_y = (height * cellSize);
+
 	std::vector<CollisionNode*>& getCollidersInCell(int x, int y);
 	
 	CollisionMap(std::vector<CollisionNode*>* colliders) 
