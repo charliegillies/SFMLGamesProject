@@ -24,7 +24,7 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new CameraTrackingNode(0, 0));
 
 	// collider will be static
-	base_node->addChild(new CollisionNode(true, 48));
+	base_node->addChild(new CollisionNode(48));
 
 	return base_node;
 }
@@ -51,7 +51,7 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	base_node->addChild(transform_node);
 
 	// collider will be static
-	base_node->addChild(new CollisionNode(true, 48));
+	base_node->addChild(new CollisionNode(48));
 
 	return base_node;
 }
@@ -65,7 +65,7 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	transform->position = sf::Vector2f(x, y);
 	base_node->addChild(transform);
 
-	base_node->addChild(new CollisionNode(false, 45));
+	base_node->addChild(new CollisionNode(45));
 
 	return base_node;
 }

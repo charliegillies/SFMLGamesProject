@@ -9,8 +9,8 @@
 class CollisionNode : public SceneNode
 {
 public:
-	explicit CollisionNode(bool isStatic, float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
-		: isStatic(isStatic), radius(radius), circle(radius)
+	explicit CollisionNode(float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
+		: radius(radius), circle(radius)
 	{
 		// ensures generation of unique num for every collider
 		static int gId = 0;
@@ -25,10 +25,6 @@ public:
 	virtual string getNodeTag() override;
 	// tests if the two circles collide or not
 	bool collides(CollisionNode* test_node);
-
-	// defines if this object will or will not move (not including rotation!)
-	// this makes it easier to perform basic collision tests.
-	const bool isStatic;
 
 	// gets the x co-ordinate of the top left hand side of the collider
 	int getTopX();
