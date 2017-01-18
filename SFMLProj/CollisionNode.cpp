@@ -12,8 +12,14 @@ bool CollisionNode::collides(CollisionNode* testNode)
 {
 	// test the flag values, if both colliders have flags on
 	if (test_flag && testNode->test_flag)
-		if ((collision_flag & testNode->node_flag) == 0) 
+	{
+		auto a = maskBits & testNode->categoryBits;
+		auto b = testNode->maskBits & categoryBits;
+
+		bool flagsCorrect = a != 0 && b != 0;
+		if (!flagsCorrect)
 			return false;
+	}
 
 	// temporary: if we choose to move away from just circle colliders
 	// then this will need to be virtual and overriden.
@@ -59,10 +65,10 @@ int CollisionNode::getID() const
 	return _id;
 }
 
-void CollisionNode::setFlags(byte owner_flag, byte collision_flag)
+void CollisionNode::setFlags(flag category, flag mask)
 {
-	this->node_flag = owner_flag;
-	this->collision_flag = collision_flag;
+	this->categoryBits = category;
+	this->maskBits = mask;
 	this->test_flag = true;
 }
 

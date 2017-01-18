@@ -5,7 +5,7 @@
 #include "CollisionEvent.h"
 #include "stdint.h"
 
-typedef uint8_t byte;
+typedef uint16_t flag;
 
 /*
 	Basic scene node that contains data about collision.
@@ -13,15 +13,16 @@ typedef uint8_t byte;
 class CollisionNode : public SceneNode
 {
 public:
-	static const byte NO_MASK = 0;
-	static const byte PLAYER_MASK = 1;
-	static const byte OBSTACLE_MASK = 2;
-	static const byte ENEMY_MASK = 4;
-	static const byte ALL_MASKS = PLAYER_MASK | OBSTACLE_MASK | ENEMY_MASK;
+	static const flag NO_MASK		= 0x0000;
+	static const flag PLAYER_MASK	= 0x0002;
+	static const flag OBSTACLE_MASK = 0x0004;
+	static const flag ENEMY_MASK	= 0x0008;
+	static const flag PROJECTILE	= 0x0010;
+	static const flag ALL_MASKS		= PLAYER_MASK | ENEMY_MASK | PROJECTILE;
 
 	explicit CollisionNode(float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
-		: radius(radius), test_flag(false), node_flag(NO_MASK), 
-		collision_flag(NO_MASK), offset(offset), circle(radius)
+		: radius(radius), test_flag(false), categoryBits(NO_MASK), 
+		maskBits(NO_MASK), offset(offset), circle(radius)
 	{
 		// ensures generation of unique num for every collider
 		static int gId = 0;
@@ -72,7 +73,7 @@ public:
 	// automatically turns test_flag on, meaning that flags will
 	// be compared during the collides test method.
 	// this allows us to filter out unwanted collision responses with ease.
-	void setFlags(byte ownerFlag, byte collision_flag);
+	void setFlags(flag category, flag maskFlag);
 
 private:
 	int _id;
@@ -81,9 +82,9 @@ private:
 	// if the flag should be tested or not during collision
 	bool test_flag;
 	// the bits representing who owns this collision node
-	byte node_flag;
+	flag categoryBits;
 	// the bits representing who this node can collide with
-	byte collision_flag;
+	flag maskBits;
 	
 	// a local copy of the collision event that will be
 	// reused as it is broadcasted to our parent when we collide.

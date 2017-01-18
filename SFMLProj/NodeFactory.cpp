@@ -28,8 +28,8 @@ SceneNode* NodeFactory::createPlayerNode()
 	CollisionNode* collider = new CollisionNode(40, sf::Vector2f(9, -6));
 
 	// i am the player, and i can collide with the enemy and obstacles.
-	//collider->setFlags(CollisionNode::PLAYER_MASK, 
-	//	CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+	collider->setFlags(CollisionNode::PLAYER_MASK, 
+		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE );
 	
 	base_node->addChild(collider);
 
@@ -58,7 +58,8 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	base_node->addChild(transform_node);
 
 	CollisionNode* collider = new CollisionNode(48);
-	//collider->setFlags(CollisionNode::OBSTACLE_MASK, CollisionNode::ALL_MASKS);
+	collider->setFlags(CollisionNode::OBSTACLE_MASK, CollisionNode::ALL_MASKS);
+
 	base_node->addChild(collider);
 
 	return base_node;
@@ -75,8 +76,9 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	base_node->addChild(transform);
 
 	CollisionNode* collider = new CollisionNode(45);
-	//collider->setFlags(CollisionNode::ENEMY_MASK, 
-	//	CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK);
+	collider->setFlags(CollisionNode::ENEMY_MASK, 
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE);
+
 	base_node->addChild(collider);
 
 	return base_node;
@@ -98,8 +100,7 @@ SceneNode* NodeFactory::createShipProjectile(sf::Vector2f position, sf::Vector2f
 
 	// setup collider
 	CollisionNode* collider = new CollisionNode(8);
-	//collider->setFlags(CollisionNode::OBSTACLE_MASK,
-	//	CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+	collider->setFlags(CollisionNode::PROJECTILE, CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
 	base_node->addChild(collider);
 
 	base_node->addChild(new VelocityNode(speed, direction));

@@ -4,7 +4,6 @@
 #include "EventTags.h"
 #include "PlayerLostLifeEvent.h"
 #include "NodeFactory.h"
-#include <iostream>
 #include "CollisionEvent.h"
 
 void PlayerShipNode::update()
@@ -67,7 +66,7 @@ void PlayerShipNode::onCollide(BaseEvent* e)
 	assert(collision != nullptr);
 
 	SceneNode* collider = collision->collider;
-	cout << "Player has registered collision." << endl;
+
 }
 
 sf::Vector2f PlayerShipNode::rotateToMouse()
