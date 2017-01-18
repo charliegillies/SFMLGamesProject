@@ -12,6 +12,8 @@ void CollisionHandler::update()
 	tests = 0;
 	collisions = 0;
 
+	// start a clock
+	sf::Clock _collisionClock;
 	unregisterWaiting();
 	_collisionMap.buildMap();
 
@@ -36,6 +38,7 @@ void CollisionHandler::update()
 	getGame()->setDebugValue("potential cols", to_string(tests));
 	getGame()->setDebugValue("collisions", to_string(collisions));
 	getGame()->setDebugValue("colliders", to_string(_allColliders.size()));
+	getGame()->setDebugValue("col time", to_string(_collisionClock.getElapsedTime().asSeconds()));
 }
 
 void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<CollisionNode*>& cell_nodes)
