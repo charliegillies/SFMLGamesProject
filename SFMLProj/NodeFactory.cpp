@@ -87,7 +87,7 @@ SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2
 	base_node->addChild(new DestroyAfterTimeNode(2.5f));
 
 	//base_node->addChild(new CollisionNode(8, sf::Vector2f(2, 0)));
-	//base_node->addChild(new VelocityNode(speed, direction));
+	base_node->addChild(new VelocityNode(speed, direction));
 
 	return base_node;
 }

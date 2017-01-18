@@ -18,6 +18,8 @@ private:
 	sf::Vector2f rotateToMouse();
 	sf::Vector2f handleMovement();
 
+	void shoot(sf::Vector2f direction);
+
 	ControlScheme* _controlScheme;
 	TransformNode* _transform;
 

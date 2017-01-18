@@ -14,10 +14,23 @@ void PlayerShipNode::update()
 
 	// create a projectile
 	if (_controlScheme->fired())
-	{
-		getGame()->addSceneNode(NodeFactory::createBasicProjectile(
-			_transform->position, dir, 100.0f, _transform->rotation));
-	}
+		shoot(dir);
+}
+
+void PlayerShipNode::shoot(sf::Vector2f dir)
+{
+	sf::Vector2f ship_pos = _transform->position;
+
+	// transform the points by rotation, fire
+	sf::Transform sf_transform; 
+	sf_transform.rotate(_transform->rotation);
+	sf::Vector2f gun1 = ship_pos + sf_transform.transformPoint(-20, 15);
+	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(20, 15);
+
+	getGame()->addSceneNode(NodeFactory::createBasicProjectile(
+		gun1, dir, 100.0f, _transform->rotation));
+	getGame()->addSceneNode(NodeFactory::createBasicProjectile(
+		gun2, dir, 100.0f, _transform->rotation));
 }
 
 void PlayerShipNode::start()
