@@ -12,7 +12,7 @@
 class Scene
 {
 public:
-	Scene() : _sceneNodes(), _started(false), _waitingNodes()
+	Scene() : _waitingNodes(), _sceneNodes(), _destroyNodes(), _started(false)
 	{
 		_eventSystem = new EventSystem();
 	}
@@ -38,6 +38,11 @@ public:
 	// adds a scene node to the current scene
 	void addSceneNode(SceneNode* node);
 
+	// removes a node from the scene
+	// node param should be the highest node in
+	// the hierarchy, as we will not go searching for it.
+	void removeSceneNode(SceneNode* node);
+
 	// gets the event system which is specific to the scene
 	EventSystem* getEventSystem();
 
@@ -49,10 +54,18 @@ protected:
 	Game* _game;
 
 private:
+	// initializes all of the waiting nodes, if any
+	void initializeWaiting();
+	// destroys all of the nodes that are waiting to be destroyed
+	void destroyNodes();
+
 	// these are nodes that were added during a scenes runtime
 	queue<SceneNode*> _waitingNodes;
 	// the scene nodes that are active in the current scene
 	vector<SceneNode*> _sceneNodes;
+	// the nodes that need to be destroyed from the hierarchy
+	queue<SceneNode*> _destroyNodes;
+
 	// determines if the scene has already been started or not
 	bool _started;
 

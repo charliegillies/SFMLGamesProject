@@ -1,7 +1,7 @@
 #include "SceneNode.h"
 #include "Game.h"
 
-SceneNode::SceneNode() : _localEventSys(), _childNodes()
+SceneNode::SceneNode() : _localEventSys(), _childNodes(), _removed(false)
 {
 	_parent = nullptr;
 	_game = nullptr;
@@ -47,12 +47,14 @@ void SceneNode::render()
 
 void SceneNode::onRemoved() { }
 
-void SceneNode::removed()
+void SceneNode::remove()
 {
+	_removed = true;
+
 	// destroy all child nodes
 	for (auto i = _childNodes.begin(); i != _childNodes.end(); ++i)
 	{
-		(*i)->removed();
+		(*i)->remove();
 		(*i)->onRemoved();
 	}
 }

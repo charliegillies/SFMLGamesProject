@@ -49,6 +49,9 @@ public:
 	// adds a scene node to the current scene
 	void addSceneNode(SceneNode* node);
 
+	// removes a scene node from the current scene
+	void removeSceneNode(SceneNode* node);
+
 	// gets the control scheme
 	ControlScheme* getControlScheme();
 

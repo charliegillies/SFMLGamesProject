@@ -19,6 +19,9 @@ public:
 	SceneNode();
 	virtual ~SceneNode();
 
+	// if this scene node has or has not been removed
+	bool waitingRemoval() { return _removed; }
+
 	// adds a child to the internal list of child nodes
 	SceneNode* addChild(SceneNode* node);
 
@@ -40,7 +43,7 @@ public:
 	virtual void onRemoved();
 
 	// called when the scene removes the node from it's hierarchy
-	void removed();
+	void remove();
 
 	// gets the parent of this scene node
 	SceneNode* getParent();
@@ -78,5 +81,6 @@ private:
 	vector<SceneNode*> _childNodes;
 	SceneNode* _parent;
 	Game* _game;
+	bool _removed;
 };
 

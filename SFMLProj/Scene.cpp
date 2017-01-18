@@ -16,7 +16,7 @@ void Scene::onStart()
 
 void Scene::onExit() {}
 
-void Scene::onUpdate()
+void Scene::initializeWaiting()
 {
 	int size = _waitingNodes.size();
 	for (int i = 0; i < size; i++)
@@ -43,17 +43,55 @@ void Scene::onUpdate()
 		// remove the node from the queue
 		_waitingNodes.pop();
 	}
+}
+
+void Scene::destroyNodes()
+{
+	while (!_destroyNodes.empty())
+	{
+		SceneNode* destroy_node = _destroyNodes.front();
+		_destroyNodes.pop();
+
+		// search for the node to destroy, erase it
+		for (auto i = _sceneNodes.begin(); i != _sceneNodes.end(); ++i)
+		{
+			if (destroy_node != (*i)) continue;
+
+			_sceneNodes.erase(i);
+			break;
+		}
+	}
+}
+
+void Scene::onUpdate()
+{
+	initializeWaiting();
+	destroyNodes();
 
 	// update all child nodes
 	for (auto i = _sceneNodes.begin(); i != _sceneNodes.end(); ++i)
-		(*i)->update();
+	{
+		SceneNode* node = (*i);
+
+		// skip if the node has been removed during this frame
+		if (node->waitingRemoval()) continue;
+
+		node->update();
+	}
 }
 
 void Scene::onRender()
 {
 	// render all child nodes
 	for (auto i = _sceneNodes.begin(); i != _sceneNodes.end(); ++i)
-		(*i)->render();
+	{
+		SceneNode* node = (*i);
+
+		// skip if the node has been removed during this frame
+		if (node->waitingRemoval()) continue;
+
+		node->render();
+	}
 }
 
 void Scene::setGame(Game* game)
@@ -72,6 +110,17 @@ void Scene::addSceneNode(SceneNode* node)
 	}
 	else // or if it should go immediately into the current node set
 		_sceneNodes.push_back(node);
+}
+
+void Scene::removeSceneNode(SceneNode* node)
+{
+	// only the top hierarchy node can be removed, ensure it has no parent
+	assert(node->getParent() == nullptr);
+
+	// inform the node that we're removing it from the hiearchy
+	node->remove();
+	// now put the node into the queue for removal on the next update
+	_destroyNodes.push(node);
 }
 
 EventSystem* Scene::getEventSystem()

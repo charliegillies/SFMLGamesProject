@@ -75,6 +75,12 @@ void Game::addSceneNode(SceneNode* node)
 	_currentScene->addSceneNode(node);
 }
 
+void Game::removeSceneNode(SceneNode* node)
+{
+	assert(_currentScene != nullptr);
+	_currentScene->removeSceneNode(node);
+}
+
 ControlScheme* Game::getControlScheme()
 {
 	return _controlScheme;
