@@ -2,7 +2,8 @@
 #include "Scene.h"
 
 /*
-	Scene for testing mechanics.
+	Battle scene where the player engages in combat
+	against the enemies that are set.
 */
 class BattleScene : public Scene
 {
