@@ -22,7 +22,12 @@ public:
 	void start() override;
 	void render() override;
 
+	// this is called when this collision node collides 
+	// with another known collision node. 
+	void onCollide(CollisionNode* b);
+
 	virtual string getNodeTag() override;
+
 	// tests if the two circles collide or not
 	bool collides(CollisionNode* test_node);
 

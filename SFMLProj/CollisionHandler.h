@@ -4,6 +4,9 @@
 #include "SceneNode.h"
 #include "CollisionNode.h"
 #include "CollisionMap.h"
+#include <map>
+
+typedef map<string, bool> CheckMap;
 
 /*
 	Handles collision inside of the world space for entities
@@ -17,6 +20,8 @@ public:
 
 	void subscribeEvents() override;
 	void update() override;
+
+	void checkPotentialCollisions(CheckMap& map, vector<CollisionNode*>& nodes);
 
 private:
 	void onColliderRegister(BaseEvent* e);

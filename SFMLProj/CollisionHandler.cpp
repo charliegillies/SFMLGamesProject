@@ -1,10 +1,6 @@
 #include "CollisionHandler.h"
 #include "RegisterColliderEvent.h"
 #include "EventTags.h"
-#include <iostream>
-#include <map>
-
-typedef map<string, bool> CheckMap;
 
 CollisionHandler::CollisionHandler() 
 	: _allColliders(), _collisionMap(&_allColliders) { }
@@ -28,32 +24,38 @@ void CollisionHandler::update()
 			// without even 2 elements, don't bother testing..
 			if (cell_nodes.size() < 2) continue;
 
-			// we have more than 2 potential colliders, let's find out..
-			for (auto i = cell_nodes.begin(); i != cell_nodes.end(); ++i)
+			// check for potential collisions inside of this cell
+			checkPotentialCollisions(check_map, cell_nodes);
+		}
+	}
+}
+
+void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<CollisionNode*>& cell_nodes)
+{
+	// we have more than 2 potential colliders, let's find out..
+	for (auto i = cell_nodes.begin(); i != cell_nodes.end(); ++i)
+	{
+		CollisionNode* a = (*i);
+
+		for (auto j = (i + 1); j != cell_nodes.end(); ++j)
+		{
+			CollisionNode* b = (*j);
+
+			const string aHash = to_string(a->getID()) + ":" + to_string(b->getID());
+			const string bHash = to_string(b->getID()) + ":" + to_string(a->getID());
+
+			// check we haven't checked this collision before, if we have - skip
+			if (check_map[aHash] || check_map[bHash]) continue;
+
+			check_map[aHash] = true;
+			check_map[bHash] = true;
+
+			if (a->collides(b))
 			{
-				CollisionNode* a = (*i);
-
-				for (auto j = (i + 1); j != cell_nodes.end(); ++j)
-				{
-					CollisionNode* b = (*j);
-
-					const string aHash = to_string(a->getID()) + ":" + to_string(b->getID());
-					const string bHash = to_string(b->getID()) + ":" + to_string(a->getID());
-
-					// check we haven't checked this collision before, if we have - skip
-					if (check_map[aHash] || check_map[bHash]) continue;
-
-					check_map[aHash] = true;
-					check_map[bHash] = true;
-
-					if (a->collides(b))
-					{
-						// notify a and b that we have collided
-
-					}
-				}
+				// notify a and b that we have collided
+				a->onCollide(b);
+				b->onCollide(a);
 			}
-
 		}
 	}
 }
