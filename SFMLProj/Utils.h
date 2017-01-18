@@ -10,8 +10,12 @@ class Utils
 public:
 	static float clamp(float value, float min, float max);
 
-	static float lerpSmoothStep(float currentTime, float lerpTime);
+	static float easeSmoothStep(float currentTime, float lerpTime);
 
 	static sf::Vector2f normalize(sf::Vector2f source);
+
+	static float lerp(float a, float b, float value);
+
+	static sf::Vector2f lerpVector(sf::Vector2f a, sf::Vector2f b, float value);
 };
 

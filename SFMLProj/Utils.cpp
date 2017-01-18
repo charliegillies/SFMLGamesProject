@@ -11,7 +11,7 @@ float Utils::clamp(float value, float min, float max)
 	return value;
 }
 
-float Utils::lerpSmoothStep(float currentTime, float lerpTime)
+float Utils::easeSmoothStep(float currentTime, float lerpTime)
 {
 	float t = currentTime / lerpTime;
 	return t * t * (3.0f - 2.0f * t);
@@ -24,4 +24,17 @@ sf::Vector2f Utils::normalize(sf::Vector2f source)
 		return sf::Vector2f(source.x / length, source.y / length);
 	else
 		return source;
+}
+
+float Utils::lerp(float a, float b, float value)
+{
+	return a * value + b * (1 - value);
+}
+
+sf::Vector2f Utils::lerpVector(sf::Vector2f a, sf::Vector2f b, float value)
+{
+	sf::Vector2f lerp;
+	lerp.x = Utils::lerp(a.x, b.x, value);
+	lerp.y = Utils::lerp(a.y, b.y, value);
+	return lerp;
 }

@@ -27,14 +27,23 @@ void CameraTrackingNode::start()
 	float world_height = CollisionMap::height * CollisionMap::cellSize;
 	top_left = camera_half_size;
 	bot_right = sf::Vector2f(world_width, world_height) - camera_half_size;
+
+	// align the camera
+	sf::Vector2f target = getTargetPosition();
+	_camera->setCenter(target.x, target.y);
 }
 
 void CameraTrackingNode::update()
+{
+	sf::Vector2f target = getTargetPosition();
+	_camera->setCenter(target.x, target.y);
+}
+
+sf::Vector2f CameraTrackingNode::getTargetPosition()
 {
 	// ensure that the camera is in the world bounds
 	sf::Vector2f position = _transform->position;
 	position.x = Utils::clamp(position.x, top_left.x, bot_right.x);
 	position.y = Utils::clamp(position.y, top_left.y, bot_right.y);
-
-	_camera->setCenter(position.x, position.y);
+	return position;
 }
