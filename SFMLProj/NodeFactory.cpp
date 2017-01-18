@@ -79,8 +79,11 @@ SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2
 	transform_node->position = position;
 	transform_node->origin = sf::Vector2f(4, 18);
 	transform_node->rotation = rot;
-
 	base_node->addChild(transform_node);
+
+	//base_node->addChild(new CollisionNode(8, sf::Vector2f(2, 0)));
 	base_node->addChild(new VelocityNode(speed, direction));
+
+
 	return base_node;
 }
