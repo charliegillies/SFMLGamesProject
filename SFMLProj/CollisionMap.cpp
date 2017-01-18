@@ -35,6 +35,9 @@ void CollisionMap::buildMap()
 			{
 				vector<CollisionNode*>& cell = _grid[y][x];
 				cell.push_back(entity);
+
+				sf::RectangleShape& shape = _drawGrid[y][x];
+				shape.setFillColor(sf::Color(255, 0, 0, 128));
 			}
 		}
 	}
@@ -47,6 +50,9 @@ void CollisionMap::clearGrid()
 		{
 			vector<CollisionNode*>& cell = getCollidersInCell(x, y);
 			cell.clear();
+
+			sf::RectangleShape& shape = _drawGrid[y][x];
+			shape.setFillColor(sf::Color(255, 255, 255, 128));
 		}
 }
 

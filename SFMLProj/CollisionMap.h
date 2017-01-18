@@ -25,7 +25,7 @@ public:
 				sf::RectangleShape& shape = _drawGrid[y][x];
 				shape.setPosition(x * cellSize, y * cellSize);
 				shape.setSize(sf::Vector2f(cellSize, cellSize));
-				shape.setFillColor(sf::Color(255, 255, 255, 120));
+				shape.setFillColor(sf::Color(255, 255, 255, 128));
 				shape.setOutlineColor(sf::Color::Black);
 				shape.setOutlineThickness(1);
 			}
