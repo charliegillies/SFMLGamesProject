@@ -45,6 +45,18 @@ void SceneNode::render()
 		(*i)->render();
 }
 
+void SceneNode::onRemoved() { }
+
+void SceneNode::removed()
+{
+	// destroy all child nodes
+	for (auto i = _childNodes.begin(); i != _childNodes.end(); ++i)
+	{
+		(*i)->removed();
+		(*i)->onRemoved();
+	}
+}
+
 SceneNode* SceneNode::getParent()
 {
 	return _parent;

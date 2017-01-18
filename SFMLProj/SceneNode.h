@@ -36,6 +36,12 @@ public:
 	// allows the scene node to render
 	virtual void render();
 
+	// called by the parent scene node after removed() has been called.
+	virtual void onRemoved();
+
+	// called when the scene removes the node from it's hierarchy
+	void removed();
+
 	// gets the parent of this scene node
 	SceneNode* getParent();
 
