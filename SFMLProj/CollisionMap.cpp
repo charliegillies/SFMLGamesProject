@@ -25,7 +25,7 @@ void CollisionMap::buildMap()
 		// the entity has gone out of collision bounds
 		if (min_x < 0 || min_y < 0 || min_x >= width || min_y >= height || max_x >= width || max_y >= height)
 		{
-			std::cout << "Entity has gone out of bounds. This must be handled!!" << endl;
+			cout << "Entity has gone out of bounds. This must be handled!!" << endl;
 			return;
 		}
 
@@ -44,5 +44,8 @@ void CollisionMap::clearGrid()
 {
 	for (int x = 0; x < width; x++)
 		for (int y = 0; y < height; y++)
-			getCollidersInCell(x, y).clear();
+		{
+			vector<CollisionNode*>& cell = getCollidersInCell(x, y);
+			cell.clear();
+		}
 }

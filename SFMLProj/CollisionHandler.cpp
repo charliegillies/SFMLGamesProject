@@ -15,7 +15,10 @@ void CollisionHandler::update()
 	// start a clock
 	sf::Clock _collisionClock;
 	unregisterWaiting();
+
+	float mapBuildTime = _collisionClock.getElapsedTime().asSeconds();
 	_collisionMap.buildMap();
+	mapBuildTime = _collisionClock.getElapsedTime().asSeconds() - mapBuildTime;
 
 	CheckMap check_map{};
 
@@ -25,7 +28,7 @@ void CollisionHandler::update()
 		for (int y = 0; y < CollisionMap::height; y++)
 		{
 			// get the test nodes in this cell
-			vector<CollisionNode*> cell_nodes = _collisionMap.getCollidersInCell(x, y);
+			vector<CollisionNode*>& cell_nodes = _collisionMap.getCollidersInCell(x, y);
 
 			// without even 2 elements, don't bother testing..
 			if (cell_nodes.size() < 2) continue;
@@ -39,6 +42,7 @@ void CollisionHandler::update()
 	getGame()->setDebugValue("collisions", to_string(collisions));
 	getGame()->setDebugValue("colliders", to_string(_allColliders.size()));
 	getGame()->setDebugValue("col time", to_string(_collisionClock.getElapsedTime().asSeconds()));
+	getGame()->setDebugValue("map build", to_string(mapBuildTime));
 }
 
 void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<CollisionNode*>& cell_nodes)
