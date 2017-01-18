@@ -2,7 +2,9 @@
 #include "AIState.h"
 
 /*
-	The brain is the personality of the AI.
+	The brain is the master-controller of the AI.
+	It considers what it should do next by working
+	together with AIStates and the StateMachineNode.
 */
 class AIBrain
 {
@@ -10,5 +12,7 @@ public:
 	AIBrain() {}
 	virtual ~AIBrain() {}
 
-	virtual AIState* getState() = 0;
+	// the brain will consider what it should do next
+	// be wary, this can return nullptr!
+	virtual AIState* think() = 0;
 };

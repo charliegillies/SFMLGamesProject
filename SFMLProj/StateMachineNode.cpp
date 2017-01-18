@@ -41,7 +41,7 @@ void StateMachineNode::update()
 
 void StateMachineNode::askBrain()
 {
-	auto state = _brain->getState();
+	auto state = _brain->think();
 	if (state == nullptr) return;
 
 	pushState(state);
