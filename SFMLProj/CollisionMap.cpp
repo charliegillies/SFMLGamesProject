@@ -49,3 +49,10 @@ void CollisionMap::clearGrid()
 			cell.clear();
 		}
 }
+
+void CollisionMap::drawDebugGrid(Game* game)
+{
+	for (int x = 0; x < width; x++)
+		for (int y = 0; y < height; y++)
+			game->draw(_drawGrid[y][x]);
+}

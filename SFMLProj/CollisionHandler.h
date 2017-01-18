@@ -20,6 +20,7 @@ public:
 
 	void subscribeEvents() override;
 	void update() override;
+	void render() override;
 
 	void checkPotentialCollisions(CheckMap& map, vector<CollisionNode*>& nodes);
 

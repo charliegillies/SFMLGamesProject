@@ -48,6 +48,11 @@ void CollisionHandler::update()
 	getGame()->setDebugValue("map build time", to_string(map_build_time));
 }
 
+void CollisionHandler::render()
+{
+	_collisionMap.drawDebugGrid(getGame());
+}
+
 void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<CollisionNode*>& cell_nodes)
 {
 	// we have more than 2 potential colliders, let's find out..
