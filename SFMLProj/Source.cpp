@@ -6,8 +6,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Game.h"
-#include "BattleScene.h"
-#include <iostream>
 #include "MenuScene.h"
 
 int main()
@@ -116,6 +114,8 @@ int main()
 
 			// update the game
 			game->onUpdate();
+
+			game->setDebugValue("dt", to_string(dt));
 
 			// render the game
 			game->onRender();

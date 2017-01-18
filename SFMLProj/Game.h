@@ -70,6 +70,9 @@ public:
 	// gets the instance of the input
 	Input* getInput();
 
+	// puts an item onto the debug panel, this is rebuilt every frame
+	void setDebugValue(std::string key, std::string value);
+
 	// closes the window
 	void exitGame();
 
@@ -80,6 +83,9 @@ private:
 	ControlScheme* _controlScheme;
 	Camera* _camera;
 	Input* _input;
+
+	std::string _debugStr;
+	sf::Text _debugText;
 
 	FontLoader* _fontLoader;
 	TextureLoader* _textureLoader;

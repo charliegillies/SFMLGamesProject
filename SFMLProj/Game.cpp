@@ -13,6 +13,11 @@ Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 	this->_controlScheme = new ControlScheme(_input);
 	this->_camera = new Camera(window);
 	this->_deltaTime = 0;
+
+	_debugText.setPosition(0, 60);
+	_debugText.setFillColor(sf::Color::White);
+	_debugText.setFont(getFont("Fonts//kenvector_future.ttf"));
+	_debugText.setCharacterSize(12);
 }
 
 Game::~Game() {}
@@ -25,6 +30,9 @@ void Game::onStart()
 
 void Game::onUpdate()
 {
+	// reset debug
+	_debugStr = "DEBUG STATS\n";
+
 	if (_currentScene != nullptr)
 		_currentScene->onUpdate();
 }
@@ -39,6 +47,12 @@ void Game::onRender()
 {
 	if (_currentScene != nullptr)
 		_currentScene->onRender();
+
+	// render debug
+	_camera->switchToUIView();
+	_debugText.setString(_debugStr);
+	draw(_debugText);
+	_camera->switchToGameView();
 }
 
 void Game::changeScene(Scene* scene)
@@ -109,6 +123,12 @@ EventSystem* Game::getEventSystem()
 Input* Game::getInput()
 {
 	return _input;
+}
+
+void Game::setDebugValue(std::string key, std::string value)
+{
+	string line = key + ": " + value + "\n";
+	_debugStr += line;
 }
 
 void Game::exitGame()
