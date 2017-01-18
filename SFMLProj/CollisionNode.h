@@ -34,6 +34,7 @@ public:
 
 	void start() override;
 	void render() override;
+	void onRemoved() override;
 
 	// this is called when this collision node collides 
 	// with another known collision node. 

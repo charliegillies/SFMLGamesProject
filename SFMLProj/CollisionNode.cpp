@@ -69,8 +69,8 @@ void CollisionNode::setFlags(byte owner_flag, byte collision_flag)
 void CollisionNode::start()
 {
 	//todo cleanup required
-	RegisterColliderEvent* register_collider = new RegisterColliderEvent(this);
-	invokeGlobalEvent(EventTags::registerCollider, register_collider);
+	RegisterColliderEvent register_collider(this);
+	invokeGlobalEvent(EventTags::registerCollider, &register_collider);
 
 	// get transform node
 	transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
@@ -88,6 +88,13 @@ void CollisionNode::render()
 	circle.setOrigin(transform->origin);
 	
 	getGame()->draw(circle);
+}
+
+void CollisionNode::onRemoved()
+{
+	// send global event notifying collision system that we've been removed
+	RegisterColliderEvent unregister_collider(this);
+	invokeGlobalEvent(EventTags::unregisterCollider, &unregister_collider);
 }
 
 void CollisionNode::onCollide(CollisionNode* b)

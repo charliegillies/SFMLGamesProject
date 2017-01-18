@@ -25,7 +25,11 @@ public:
 
 private:
 	void onColliderRegister(BaseEvent* e);
+	void onColliderUnregister(BaseEvent* e);
 
+	void unregisterWaiting();
+
+	queue<CollisionNode*> _unregisterQueue;
 	vector<CollisionNode*> _allColliders;
 	CollisionMap _collisionMap;
 };
