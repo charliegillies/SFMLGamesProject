@@ -9,9 +9,9 @@
 class CollisionMap
 {
 public:
-	static const int width = 40;
-	static const int height = 40;
-	static const int cellSize = 50;
+	static const int width = 20;
+	static const int height = 20;
+	static const int cellSize = 100;
 
 	std::vector<CollisionNode*>& getCollidersInCell(int x, int y);
 	
