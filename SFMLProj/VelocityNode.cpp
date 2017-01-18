@@ -5,8 +5,8 @@ void VelocityNode::update()
 {
 	// calculate vector
 	sf::Vector2f velocity = _direction;
-	_direction *= _speed;
-	_direction *= getGame()->deltaTime();
+	velocity *= _speed;
+	velocity *= getGame()->deltaTime();
 
 	// apply velocity onto position
 	_transform->position += velocity;
