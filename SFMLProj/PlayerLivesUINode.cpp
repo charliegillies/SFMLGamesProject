@@ -34,7 +34,7 @@ void PlayerLivesUINode::subscribeEvents()
 	life_lost_event.Bind(this, &PlayerLivesUINode::onPlayerLostLife);
 
 	// subscribe to the global event
-	addGlobalEventReceiver(EventTags::playerLostLife, life_lost_event);
+	subGlobalEvent(EventTags::playerLostLife, life_lost_event);
 }
 
 void PlayerLivesUINode::onPlayerLostLife(BaseEvent* e)

@@ -5,6 +5,7 @@
 #include "PlayerLostLifeEvent.h"
 #include "NodeFactory.h"
 #include <iostream>
+#include "CollisionEvent.h"
 
 void PlayerShipNode::update()
 {
@@ -39,6 +40,20 @@ void PlayerShipNode::start()
 
 	// Send out 'player lost life' event
 	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(3));
+
+	// subscribe to the collision event
+	Delegate1<BaseEvent*> on_collide_event;
+	on_collide_event.Bind(this, &PlayerShipNode::onCollide);
+	subLocalEvent(EventTags::collided, on_collide_event);
+}
+
+void PlayerShipNode::onCollide(BaseEvent* e)
+{
+	CollisionEvent* collision = static_cast<CollisionEvent*>(e);
+	assert(collision != nullptr);
+
+	SceneNode* collider = collision->collider;
+	cout << "Player has registered collision." << endl;
 }
 
 sf::Vector2f PlayerShipNode::rotateToMouse()

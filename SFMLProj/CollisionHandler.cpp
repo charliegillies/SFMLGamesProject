@@ -64,7 +64,7 @@ void CollisionHandler::subscribeEvents()
 {
 	Gallant::Delegate1<BaseEvent*> collision_register;
 	collision_register.Bind(this, &CollisionHandler::onColliderRegister);
-	addGlobalEventReceiver(EventTags::registerCollider, collision_register);
+	subGlobalEvent(EventTags::registerCollider, collision_register);
 }
 
 void CollisionHandler::onColliderRegister(BaseEvent* e)

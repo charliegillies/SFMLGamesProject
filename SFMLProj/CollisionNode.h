@@ -2,6 +2,7 @@
 #include "SceneNode.h"
 #include <SFML/Graphics/CircleShape.hpp>
 #include "TransformNode.h"
+#include "CollisionEvent.h"
 
 /*
 	Basic scene node that contains data about collision.
@@ -15,6 +16,8 @@ public:
 		// ensures generation of unique num for every collider
 		static int gId = 0;
 		_id = ++gId;
+
+		collisionEvent = new CollisionEvent();
 	}
 	
 	~CollisionNode() {}
@@ -58,6 +61,10 @@ public:
 private:
 	int _id;
 	float radius;
+	
+	// a local copy of the collision event that will be
+	// reused as it is broadcasted to our parent when we collide.
+	CollisionEvent* collisionEvent;
 	
 	// offset position of the collider, if any
 	sf::Vector2f offset;

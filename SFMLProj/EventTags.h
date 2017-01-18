@@ -12,4 +12,5 @@ class EventTags
 public:
 	static const string playerLostLife;
 	static const string registerCollider;
+	static const string collided;
 };

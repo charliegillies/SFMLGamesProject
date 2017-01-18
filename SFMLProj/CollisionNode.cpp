@@ -81,13 +81,11 @@ void CollisionNode::render()
 
 void CollisionNode::onCollide(CollisionNode* b)
 {
-	// now.. we need to figure out what sort of design decision
-	// we should make here. Two choices being either:
-	// a) make an event specific to the entity that owns our node (parent)
-	//    that allows all nodes to subscribe to the potential collision
-	//	  without ever finding the collision node.
-	// b) or.. put a signal/delegate on the collision node and let other nodes
-	//    find and subscribe to it. 
+	// if collider node 'b' has a parent, use that, else use b
+	SceneNode* collider = (b->getParent() != nullptr) ? b->getParent() : b;
+	collisionEvent->collider = collider;
 
-
+	// lets all collision event subscribers know that
+	// we've just collided with CollisionNode b
+	invokeLocalEvent(EventTags::collided, collisionEvent);
 }

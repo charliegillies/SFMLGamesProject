@@ -13,6 +13,8 @@ public:
 	void start() override;
 
 private:
+	void onCollide(BaseEvent* e);
+
 	sf::Vector2f rotateToMouse();
 	sf::Vector2f handleMovement();
 

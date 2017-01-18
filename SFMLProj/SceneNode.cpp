@@ -1,7 +1,7 @@
 #include "SceneNode.h"
 #include "Game.h"
 
-SceneNode::SceneNode() : _childNodes()
+SceneNode::SceneNode() : _localEventSys(), _childNodes()
 {
 	_parent = nullptr;
 	_game = nullptr;
@@ -79,7 +79,7 @@ SceneNode* SceneNode::getNode(string tag)
 	return nullptr;
 }
 
-EventReceiver* SceneNode::addGlobalEventReceiver(const string id, Gallant::Delegate1<BaseEvent*> del)
+EventReceiver* SceneNode::subGlobalEvent(const string id, Gallant::Delegate1<BaseEvent*> del)
 {
 	return getGame()->getEventSystem()->addReceiver(id, del);
 }
@@ -87,6 +87,24 @@ EventReceiver* SceneNode::addGlobalEventReceiver(const string id, Gallant::Deleg
 void SceneNode::invokeGlobalEvent(const string id, BaseEvent* param)
 {
 	getGame()->getEventSystem()->invokeEvent(id, param);
+}
+
+EventReceiver* SceneNode::subLocalEvent(const string id, Gallant::Delegate1<BaseEvent*> del)
+{
+	// events all go through the highest most node in the local hierachy
+	if (getParent() != nullptr)
+		return getParent()->subLocalEvent(id, del);
+
+	return _localEventSys.addReceiver(id, del);
+}
+
+void SceneNode::invokeLocalEvent(const string id, BaseEvent* param)
+{
+	// events all go through the highest most node in the local hierachy
+	if (getParent() != nullptr)
+		return getParent()->invokeLocalEvent(id, param);
+
+	_localEventSys.invokeEvent(id, param);
 }
 
 Game* SceneNode::getGame()
