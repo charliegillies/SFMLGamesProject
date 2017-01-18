@@ -16,9 +16,10 @@ void CollisionHandler::update()
 	sf::Clock _collisionClock;
 	unregisterWaiting();
 
-	float mapBuildTime = _collisionClock.getElapsedTime().asSeconds();
+	// calculate how long it takes to build the map
+	float map_build_time = _collisionClock.getElapsedTime().asSeconds();
 	_collisionMap.buildMap();
-	mapBuildTime = _collisionClock.getElapsedTime().asSeconds() - mapBuildTime;
+	map_build_time = _collisionClock.getElapsedTime().asSeconds() - map_build_time;
 
 	CheckMap check_map{};
 
@@ -38,11 +39,13 @@ void CollisionHandler::update()
 		}
 	}
 
+	float col_check_time = _collisionClock.getElapsedTime().asSeconds() - map_build_time;
+
 	getGame()->setDebugValue("potential cols", to_string(tests));
 	getGame()->setDebugValue("collisions", to_string(collisions));
 	getGame()->setDebugValue("colliders", to_string(_allColliders.size()));
-	getGame()->setDebugValue("col time", to_string(_collisionClock.getElapsedTime().asSeconds()));
-	getGame()->setDebugValue("map build", to_string(mapBuildTime));
+	getGame()->setDebugValue("collision time", to_string(col_check_time));
+	getGame()->setDebugValue("map build time", to_string(map_build_time));
 }
 
 void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<CollisionNode*>& cell_nodes)
