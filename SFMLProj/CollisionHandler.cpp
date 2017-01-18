@@ -2,8 +2,11 @@
 #include "RegisterColliderEvent.h"
 #include "EventTags.h"
 #include <iostream>
+#include <map>
 
-CollisionHandler::CollisionHandler() 
+typedef map<string, bool> CheckMap;
+
+	CollisionHandler::CollisionHandler() 
 	: _allColliders(), _collisionMap(&_allColliders) { }
 
 CollisionHandler::~CollisionHandler() { }
@@ -11,6 +14,8 @@ CollisionHandler::~CollisionHandler() { }
 void CollisionHandler::update()
 {
 	_collisionMap.buildMap();
+
+	CheckMap check_map{};
 
 	// test all possible collisions
 	for (int x = 0; x < CollisionMap::width; x++)
@@ -32,9 +37,17 @@ void CollisionHandler::update()
 				{
 					CollisionNode* b = (*j);
 
+					const string aHash = to_string(a->getID()) + ":" + to_string(b->getID());
+					const string bHash = to_string(b->getID()) + ":" + to_string(a->getID());
+
+					// check we haven't checked this collision before, if we have - skip
+					if (check_map[aHash] || check_map[bHash]) continue;
+
+					check_map[aHash] = true;
+					check_map[bHash] = true;
+
 					if (a->collides(b))
 					{
-						std::cout << "SOMETHING COLLIDES!" << endl;
 					}
 				}
 			}
