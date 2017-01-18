@@ -25,7 +25,13 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new CameraTrackingNode(0, 0));
 
 	// collider will be static
-	base_node->addChild(new CollisionNode(40, sf::Vector2f(9, -6)));
+	CollisionNode* collider = new CollisionNode(40, sf::Vector2f(9, -6));
+
+	// i am the player, and i can collide with the enemy and obstacles.
+	collider->setFlags(CollisionNode::PLAYER_MASK, 
+		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+	
+	base_node->addChild(collider);
 
 	return base_node;
 }
@@ -51,8 +57,9 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	base_node->addChild(new RotationNode(60));
 	base_node->addChild(transform_node);
 
-	// collider will be static
-	base_node->addChild(new CollisionNode(48));
+	CollisionNode* collider = new CollisionNode(48);
+	collider->setFlags(CollisionNode::OBSTACLE_MASK, CollisionNode::ALL_MASKS);
+	base_node->addChild(collider);
 
 	return base_node;
 }
@@ -67,12 +74,15 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	transform->origin = sf::Vector2f(40.5f, 40.5f);
 	base_node->addChild(transform);
 
-	base_node->addChild(new CollisionNode(45));
+	CollisionNode* collider = new CollisionNode(45);
+	collider->setFlags(CollisionNode::ENEMY_MASK, 
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK);
+	base_node->addChild(collider);
 
 	return base_node;
 }
 
-SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot)
+SceneNode* NodeFactory::createShipProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot)
 {
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode("Sprites//laserBlue03.png"));
@@ -86,7 +96,12 @@ SceneNode* NodeFactory::createBasicProjectile(sf::Vector2f position, sf::Vector2
 	// destroy after 2.5 seconds
 	base_node->addChild(new DestroyAfterTimeNode(2.5f));
 
-	//base_node->addChild(new CollisionNode(8, sf::Vector2f(0, 0)));
+	// setup collider
+	CollisionNode* collider = new CollisionNode(8);
+	collider->setFlags(CollisionNode::OBSTACLE_MASK,
+		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+	base_node->addChild(collider);
+
 	base_node->addChild(new VelocityNode(speed, direction));
 
 	return base_node;

@@ -10,10 +10,14 @@ string CollisionNode::getNodeTag()
 
 bool CollisionNode::collides(CollisionNode* testNode)
 {
+	// test the flag values, if both colliders have flags on
+	if (test_flag && testNode->test_flag)
+		if ((collision_flag & testNode->node_flag) == 0) 
+			return false;
+
 	// temporary: if we choose to move away from just circle colliders
 	// then this will need to be virtual and overriden.
 	// for now, we will just do the circle collision check here.
-
 	int dx = testNode->getX() - getX();
 	int dy = testNode->getY() - getY();
 	int comb_radius = testNode->radius + radius;
@@ -53,6 +57,13 @@ int CollisionNode::getHeight()
 int CollisionNode::getID() const
 {
 	return _id;
+}
+
+void CollisionNode::setFlags(byte owner_flag, byte collision_flag)
+{
+	this->node_flag = owner_flag;
+	this->collision_flag = collision_flag;
+	this->test_flag = true;
 }
 
 void CollisionNode::start()
