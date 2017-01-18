@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "MenuScene.h"
+#include <math.h>
 
 int main()
 {
@@ -101,6 +102,9 @@ int main()
 
 		if (dt >= time)
 		{
+			// restart the clock, we have a local copy of dt
+			clock.restart();
+
 			// set deltaTime
 			game->setDt(dt);
 
@@ -116,16 +120,13 @@ int main()
 			game->onUpdate();
 
 			// set the deltatime as a debug value
-			game->setDebugValue("dt", to_string(dt));
+			game->setDebugValue("fps", to_string(round(1 / dt)));
 
 			// render the game
 			game->onRender();
 
 			// display everything in the window
 			window.display();
-
-			// restart the clock
-			clock.restart();
 		}
 	}
 
