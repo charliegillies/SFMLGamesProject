@@ -36,6 +36,8 @@ void CameraTrackingNode::start()
 void CameraTrackingNode::update()
 {
 	sf::Vector2f target = getTargetPosition();
+
+
 	_camera->setCenter(target.x, target.y);
 }
 

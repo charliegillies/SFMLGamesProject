@@ -17,5 +17,7 @@ public:
 	static float lerp(float a, float b, float value);
 
 	static sf::Vector2f lerpVector(sf::Vector2f a, sf::Vector2f b, float value);
+
+	static float distance(sf::Vector2f a, sf::Vector2f b);
 };
 

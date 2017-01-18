@@ -38,3 +38,8 @@ sf::Vector2f Utils::lerpVector(sf::Vector2f a, sf::Vector2f b, float value)
 	lerp.y = Utils::lerp(a.y, b.y, value);
 	return lerp;
 }
+
+float Utils::distance(sf::Vector2f a, sf::Vector2f b)
+{
+	return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
+}
