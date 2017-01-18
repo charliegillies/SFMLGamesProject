@@ -2,13 +2,14 @@
 #include "RegisterColliderEvent.h"
 #include "EventTags.h"
 
-CollisionHandler::CollisionHandler() : _allColliders(), 
-	_collisionMap(NUM_CELLS_X, NUM_CELLS_Y, CELL_SIZE, _allColliders) {}
+CollisionHandler::CollisionHandler() 
+	: _allColliders(), _collisionMap(_allColliders) {}
+
 CollisionHandler::~CollisionHandler() {}
 
 void CollisionHandler::update()
 {
-	
+	_collisionMap.buildMap();
 }
 
 void CollisionHandler::subscribeEvents()

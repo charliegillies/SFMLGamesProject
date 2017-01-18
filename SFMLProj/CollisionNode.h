@@ -25,10 +25,14 @@ public:
 	// this makes it easier to perform basic collision tests.
 	const bool isStatic;
 
-	// gets the x co-ordinate of the collider with the offset (if any) applied.
+	// gets the x co-ordinate of the collider with the offset (if any) applied
+	// as well as the origin of the transform subtracted from the position
+	// so x represents the top left hand corner of the entity regardless.
 	int getX();
 
-	// gets the y co-ordinate of the collider with the offset (if any) applied.
+	// gets the y co-ordinate of the collider with the offset (if any) applied
+	// as well as the origin of the transform subtracted from the position
+	// so x represents the top left hand corner of the entity regardless.
 	int getY();
 
 	// gets the width of the collider

@@ -16,6 +16,7 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new SpriteNode(fp));
 
 	TransformNode* transform_node = new TransformNode();
+	transform_node->position = sf::Vector2<float>(100, 100);
 	transform_node->origin = sf::Vector2<float>(50, 37);
 	base_node->addChild(transform_node);
 

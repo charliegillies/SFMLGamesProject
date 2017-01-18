@@ -9,8 +9,12 @@
 class CollisionMap
 {
 public:
-	CollisionMap(int width, int height, int cellSize, std::vector<CollisionNode*>& colliders) 
-		: width(width), height(height), cellsize(cellsize), _colliders(colliders) {}
+	static const int width = 40;
+	static const int height = 40;
+	static const int cellSize = 50;
+	
+	CollisionMap(std::vector<CollisionNode*>& colliders) 
+		: _colliders(colliders) {}
 	
 	~CollisionMap() {}
 
@@ -18,9 +22,7 @@ public:
 	void buildMap();
 
 private:
-	int width;
-	int height;
-	int cellsize;
+	std::vector<CollisionNode*> _grid[height][width];
 
 	std::vector<CollisionNode*>& _colliders;
 };
