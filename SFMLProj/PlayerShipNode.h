@@ -22,7 +22,5 @@ private:
 
 	ControlScheme* _controlScheme;
 	TransformNode* _transform;
-
-	sf::Vector2f normalize(sf::Vector2f source);
 };
 

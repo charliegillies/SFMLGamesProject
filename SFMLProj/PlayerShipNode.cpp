@@ -5,6 +5,7 @@
 #include "PlayerLostLifeEvent.h"
 #include "NodeFactory.h"
 #include "CollisionEvent.h"
+#include "Utils.h"
 
 void PlayerShipNode::update()
 {
@@ -81,7 +82,7 @@ sf::Vector2f PlayerShipNode::rotateToMouse()
 	_transform->rotation = angle;
 
 	sf::Vector2f s = mousePos - pos;
-	return normalize(s);
+	return Utils::normalize(s);
 }
 
 sf::Vector2f PlayerShipNode::handleMovement()
@@ -104,13 +105,4 @@ sf::Vector2f PlayerShipNode::handleMovement()
 	_transform->position += velocity;
 
 	return direction;
-}
-
-sf::Vector2f PlayerShipNode::normalize(sf::Vector2f source)
-{
-	float length = sqrt((source.x * source.x) + (source.y * source.y));
-	if (length != 0)
-		return sf::Vector2f(source.x / length, source.y / length);
-	else
-		return source;
 }

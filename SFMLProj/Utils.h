@@ -11,5 +11,7 @@ public:
 	static float clamp(float value, float min, float max);
 
 	static float lerpSmoothStep(float currentTime, float lerpTime);
+
+	static sf::Vector2f normalize(sf::Vector2f source);
 };
 
