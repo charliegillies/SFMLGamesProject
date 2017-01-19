@@ -56,8 +56,8 @@ public:
 	// tests if the two circles collide or not
 	bool collides(CollisionNode* test_node);
 
-	// tests if a line collides this point
-	bool lineCollides(Raycast ray);
+	// tests if a raycast intersects with this point
+	Raycast testRaycast(Raycast ray);
 
 	// gets the x co-ordinate of the top left hand side of the collider
 	int getTopX();

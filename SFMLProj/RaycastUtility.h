@@ -9,8 +9,12 @@
 */
 struct Raycast
 {
+	sf::Vector2f intersect_1;
+	sf::Vector2f intersect_2;
+
 	sf::Vector2f start;
 	sf::Vector2f end;
+
 	bool hit;
 	CollisionNode* collider;
 };

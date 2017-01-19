@@ -31,7 +31,7 @@ bool CollisionNode::collides(CollisionNode* testNode)
 	return (dx*dx) + (dy*dy) < (comb_radius*comb_radius);
 }
 
-bool CollisionNode::lineCollides(Raycast ray)
+Raycast CollisionNode::testRaycast(Raycast ray)
 {
 	// a, b is the start/end points of the line
 	auto a = ray.start;
@@ -58,11 +58,18 @@ bool CollisionNode::lineCollides(Raycast ray)
 	if (lec < radius)
 	{
 		auto dt = sqrt(pow(radius, 2) - pow(lec, 2));
-		
-		return true;
+
+		ray.collider = this;
+		ray.hit = true;
+
+		ray.intersect_1.x = (t - dt)*d.x + a.x;
+		ray.intersect_1.y = (t - dt)*d.y + a.y;
+
+		ray.intersect_2.x = (t + dt)*d.x + a.x;
+		ray.intersect_2.y = (t + dt)*d.y + a.y;
 	}
 
-	return false;
+	return ray;
 }
 
 int CollisionNode::getTopX()

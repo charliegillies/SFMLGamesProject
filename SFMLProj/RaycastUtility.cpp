@@ -17,21 +17,35 @@ Raycast RaycastUtility::cast(sf::Vector2f start, sf::Vector2f dir, float range, 
 		return ray;
 
 	// check for actual collisions with the potentials
-	vector<CollisionNode*> colliding;
+	vector<Raycast> colliding;
 
 	for (auto i = potentials.begin(); i != potentials.end(); ++i)
 	{
 		CollisionNode* potential = (*i);
-		if (potential->lineCollides(ray))
+		Raycast cast = potential->testRaycast(ray);
+
+		if (cast.hit)
+			colliding.push_back(cast);
+	}
+
+	Raycast closest_hit = ray;
+	float closest_dst = 100000;
+
+	// find the closest hit
+	for (auto i = colliding.begin(); i != colliding.end(); ++i)
+	{
+		Raycast& cast = (*i);
+
+		float dst = Utils::distance(start, cast.intersect_1);
+		
+		if (dst < closest_dst)
 		{
-			colliding.push_back(potential);
+			closest_dst = dst;
+			closest_hit = cast;
 		}
 	}
 
-	// ray hit if we hit any colliders
-	ray.hit = colliding.size() > 0;
-
-	return ray;
+	return closest_hit;
 }
 
 void RaycastUtility::drawCast(Raycast raycast)
