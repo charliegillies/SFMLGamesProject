@@ -14,7 +14,7 @@ void PlayerShipNode::update()
 	_mouseTargetRotation = getMouseTarget();
 
 	_mouseLerpRot = Utils::lerpVector(_mouseLerpRot, _mouseTargetRotation,
-		Utils::easeSmoothStep(0.5f, 1.0f));
+		Utils::easeSmoothStep(0.6f, 1.0f));
 
 	// apply rotation & movement
 	applyRotation();
