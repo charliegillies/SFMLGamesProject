@@ -50,3 +50,8 @@ float Utils::calcAngle(sf::Vector2f a, sf::Vector2f b)
 	angle = angle * (180 / 3.14159265358979323846);
 	return angle;
 }
+
+float Utils::radToDeg(float x)
+{
+	return x * 180 / 3.14159265358979323846;
+}

@@ -19,9 +19,12 @@ private:
 	void onCollide(BaseEvent* e);
 
 	Raycast cast;
+	sf::Vector2f _mouseTargetRotation;
+	sf::Vector2f _currentRotation;
 
-	sf::Vector2f rotateToMouse();
-	sf::Vector2f handleMovement();
+	sf::Vector2f getMouseTarget();
+	void applyMovement();
+	void applyRotation();
 
 	void shoot(sf::Vector2f direction);
 

@@ -11,15 +11,22 @@
 
 void PlayerShipNode::update()
 {
-	// also handles rotation
-	sf::Vector2f dir = handleMovement();
+	_mouseTargetRotation = getMouseTarget();
 
-	cast = _collision->raycast(_transform->position, dir, 500.0f, 
+	// apply rotation & movement
+	applyRotation();
+	applyMovement();
+
+	getGame()->setDebugValue("rot", to_string(_transform->rotation));
+	getGame()->setDebugValue("cur rot", to_string(_currentRotation.x) + " , " + to_string(_currentRotation.y));
+	getGame()->setDebugValue("des rot", to_string(_mouseTargetRotation.x) + " , " + to_string(_mouseTargetRotation.y));
+
+	cast = _collision->raycast(_transform->position, _currentRotation, 500.0f, 
 		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
 
 	// create a projectile
 	if (_controlScheme->fired())
-		shoot(dir);
+		shoot(_currentRotation);
 }
 
 void PlayerShipNode::render()
@@ -57,6 +64,11 @@ void PlayerShipNode::start()
 	Delegate1<BaseEvent*> on_collide_event;
 	on_collide_event.Bind(this, &PlayerShipNode::onCollide);
 	subLocalEvent(EventTags::collided, on_collide_event);
+
+	// start at mouse rot
+	_mouseTargetRotation = getMouseTarget();
+	_currentRotation = _mouseTargetRotation;
+	applyRotation();
 }
 
 void PlayerShipNode::onCollide(BaseEvent* e)
@@ -65,29 +77,23 @@ void PlayerShipNode::onCollide(BaseEvent* e)
 	assert(collision != nullptr);
 
 	SceneNode* collider = collision->collider;
-
 }
 
-sf::Vector2f PlayerShipNode::rotateToMouse()
+sf::Vector2f PlayerShipNode::getMouseTarget()
 {
 	// get mouse and ship position
 	auto mousePos = getGame()->getCamera()->getWorldMouse();
 	auto pos = _transform->position;
-	// rotate towards mouse
-	auto angle = Utils::calcAngle(mousePos, pos);
-	angle += 90; // sprite doesn't face right, quick fix
-	_transform->rotation = angle;
-
 	sf::Vector2f s = mousePos - pos;
 	return Utils::normalize(s);
 }
 
-sf::Vector2f PlayerShipNode::handleMovement()
+void PlayerShipNode::applyMovement()
 {
 	const float speed = 240.0f;
 
 	// rotate towards the mouse
-	sf::Vector2f direction = rotateToMouse();
+	sf::Vector2f direction = _currentRotation;
 	sf::Vector2f velocity(0, 0);
 
 	if (_controlScheme->forwards())
@@ -100,6 +106,12 @@ sf::Vector2f PlayerShipNode::handleMovement()
 
 	velocity *= getGame()->deltaTime();
 	_transform->position += velocity;
+}
 
-	return direction;
+void PlayerShipNode::applyRotation()
+{
+	_currentRotation = _mouseTargetRotation;
+	float angle = Utils::radToDeg(atan2(_currentRotation.y, _currentRotation.x));
+	angle += 90;
+	_transform->rotation = angle;
 }
