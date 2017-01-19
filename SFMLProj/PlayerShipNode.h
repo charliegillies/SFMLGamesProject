@@ -22,6 +22,7 @@ public:
 		shape_ray_int_2.setOutlineColor(sf::Color::Black);
 		shape_ray_int_2.setOutlineThickness(1);
 	}
+
 	~PlayerShipNode() {}
 
 	void update() override;
