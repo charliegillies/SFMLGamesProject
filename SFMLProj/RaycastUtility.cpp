@@ -54,7 +54,7 @@ void RaycastUtility::drawCast(Raycast raycast)
 	shape_ray_line.setPosition(raycast.start);
 	shape_ray_line.setRotation(Utils::calcAngle(raycast.start, raycast.end) + 90);
 	shape_ray_line.setSize(sf::Vector2f(4, Utils::distance(raycast.start, raycast.end)));
-	shape_ray_line.setFillColor(raycast.hit ? sf::Color::Red : sf::Color::White);
+	shape_ray_line.setFillColor(raycast.hit ? sf::Color::Green : sf::Color::White);
 	game->draw(shape_ray_line);
 
 	shape_ray_int_1.setPosition(raycast.start);

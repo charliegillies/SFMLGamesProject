@@ -40,6 +40,7 @@ public:
 		shape_ray_int_2.setOutlineColor(sf::Color::Black);
 		shape_ray_int_2.setOutlineThickness(1);
 	}
+
 	~RaycastUtility() {}
 
 	Raycast cast(sf::Vector2f start, sf::Vector2f dir, float range, flag searchCategory);
