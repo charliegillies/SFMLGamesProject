@@ -23,7 +23,9 @@ Raycast RaycastUtility::cast(sf::Vector2f start, sf::Vector2f dir, float range, 
 	{
 		CollisionNode* potential = (*i);
 		if (potential->lineCollides(ray))
+		{
 			colliding.push_back(potential);
+		}
 	}
 
 	// ray hit if we hit any colliders

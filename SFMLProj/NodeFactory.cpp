@@ -81,6 +81,8 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 	base_node->addChild(collider);
 
+	//base_node->addChild(new RotationNode(120));
+
 	return base_node;
 }
 

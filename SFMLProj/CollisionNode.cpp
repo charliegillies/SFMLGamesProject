@@ -33,21 +33,17 @@ bool CollisionNode::collides(CollisionNode* testNode)
 
 bool CollisionNode::lineCollides(Raycast ray)
 {
-	auto b = ray.end;
 	auto a = ray.start;
+	auto b = ray.end;
+	auto c = sf::Vector2f(getX(), getY());
 
 	// euclidean distance
-	auto lab = Utils::distance(b, a);
+	auto lab = Utils::distance(a, b);
 
 	// compute directional vector
 	auto d = (b - a) / lab;
-
-	auto c = sf::Vector2f(getX(), getY());
-
-	auto t = d.x * (c.x - a.x) + d.y*(c.y - a.y);
-
+	auto t = d.x*(c.x - a.x) + d.y*(c.y - a.y);
 	auto e = sf::Vector2f(t*d.x + a.x, t*d.y + a.y);
-
 	auto lec = Utils::distance(e, c);
 
 	if (lec < radius)
