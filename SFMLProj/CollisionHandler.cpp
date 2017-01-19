@@ -43,11 +43,11 @@ void CollisionHandler::update()
 
 	float col_check_time = _collisionClock.getElapsedTime().asSeconds() - map_build_time;
 
-	getGame()->setDebugValue("potential cols", to_string(tests));
+	/*getGame()->setDebugValue("potential cols", to_string(tests));
 	getGame()->setDebugValue("collisions", to_string(collisions));
 	getGame()->setDebugValue("colliders", to_string(_allColliders.size()));
 	getGame()->setDebugValue("collision time", to_string(col_check_time));
-	getGame()->setDebugValue("map build time", to_string(map_build_time));
+	getGame()->setDebugValue("map build time", to_string(map_build_time));*/
 }
 
 void CollisionHandler::render()
