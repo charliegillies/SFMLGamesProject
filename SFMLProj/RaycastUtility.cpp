@@ -38,7 +38,7 @@ void RaycastUtility::drawCast(Raycast raycast)
 {
 	// set the position, rotation & size of the raycast
 	rectangle.setPosition(raycast.start);
-	rectangle.setRotation(Utils::calcAngle(raycast.start, raycast.end));
+	rectangle.setRotation(Utils::calcAngle(raycast.start, raycast.end) + 90);
 	rectangle.setSize(sf::Vector2f(4, Utils::distance(raycast.start, raycast.end)));
 	rectangle.setFillColor(raycast.hit ? sf::Color::Red : sf::Color::White);
 

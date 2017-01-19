@@ -14,8 +14,10 @@ void PlayerShipNode::update()
 	// also handles rotation
 	sf::Vector2f dir = handleMovement();
 
-	cast = _collision->raycast(_transform->position, dir, 100.0f, 
+	cast = _collision->raycast(_transform->position, sf::Vector2f(1, 0), 100.0f, 
 		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+
+	getGame()->setDebugValue("player dir", to_string(dir.x) + "," + to_string(dir.y));
 
 	// create a projectile
 	if (_controlScheme->fired())
