@@ -19,6 +19,7 @@ public:
 	~CollisionHandler();
 
 	void subscribeEvents() override;
+	void start() override;
 	void update() override;
 	void render() override;
 

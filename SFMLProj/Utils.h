@@ -19,5 +19,7 @@ public:
 	static sf::Vector2f lerpVector(sf::Vector2f a, sf::Vector2f b, float value);
 
 	static float distance(sf::Vector2f a, sf::Vector2f b);
+
+	static float calcAngle(sf::Vector2f a, sf::Vector2f b);
 };
 

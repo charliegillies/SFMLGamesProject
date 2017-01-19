@@ -5,7 +5,6 @@
 CollisionHandler::CollisionHandler() 
 	: _unregisterQueue(), _allColliders(), _collisionMap(&_allColliders)
 {
-	_rayUtility = new RaycastUtility(_allColliders);
 }
 
 CollisionHandler::~CollisionHandler() { }
@@ -105,6 +104,11 @@ void CollisionHandler::subscribeEvents()
 	Gallant::Delegate1<BaseEvent*> collider_unregister;
 	collider_unregister.Bind(this, &CollisionHandler::onColliderUnregister);
 	subGlobalEvent(EventTags::unregisterCollider, collider_unregister);
+}
+
+void CollisionHandler::start()
+{
+	_rayUtility = new RaycastUtility(_allColliders, getGame());
 }
 
 void CollisionHandler::onColliderRegister(BaseEvent* e)

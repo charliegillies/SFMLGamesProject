@@ -7,14 +7,23 @@
 #include "CollisionEvent.h"
 #include "Utils.h"
 
+#include "RaycastUtility.h"
+
 void PlayerShipNode::update()
 {
 	// also handles rotation
 	sf::Vector2f dir = handleMovement();
 
+	cast = _collision->raycast(_transform->position, dir, 100.0f);
+
 	// create a projectile
 	if (_controlScheme->fired())
 		shoot(dir);
+}
+
+void PlayerShipNode::render()
+{
+	_collision->drawCast(cast);
 }
 
 void PlayerShipNode::shoot(sf::Vector2f dir)
@@ -37,20 +46,8 @@ void PlayerShipNode::shoot(sf::Vector2f dir)
 void PlayerShipNode::start()
 {
 	_controlScheme = getGame()->getControlScheme();
-
-	// try and get a transform node
-	SceneNode* node;
-	if (getParent() != nullptr)
-	{
-		node = getParent()->getNode(NodeTag::transform_node);
-
-		// attempt cast
-		if (node != nullptr)
-			_transform = static_cast<TransformNode*>(node);
-	}
-
-	// ensure that _transform is not null
-	assert(_transform != nullptr);
+	_transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
+	_collision = static_cast<CollisionNode*>(getParent()->getNode(NodeTag::collision_node));
 
 	// Send out 'player lost life' event
 	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(3));
@@ -76,8 +73,7 @@ sf::Vector2f PlayerShipNode::rotateToMouse()
 	auto mousePos = getGame()->getCamera()->getWorldMouse();
 	auto pos = _transform->position;
 	// rotate towards mouse
-	auto angle = atan2(mousePos.y - pos.y, mousePos.x - pos.x);
-	angle = angle * (180 / 3.14159265358979323846);
+	auto angle = Utils::calcAngle(mousePos, pos);
 	angle += 90; // sprite doesn't face right, quick fix
 	_transform->rotation = angle;
 

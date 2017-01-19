@@ -43,3 +43,10 @@ float Utils::distance(sf::Vector2f a, sf::Vector2f b)
 {
 	return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2));
 }
+
+float Utils::calcAngle(sf::Vector2f a, sf::Vector2f b)
+{
+	auto angle = atan2(a.y - b.y, a.x - b.x);
+	angle = angle * (180 / 3.14159265358979323846);
+	return angle;
+}

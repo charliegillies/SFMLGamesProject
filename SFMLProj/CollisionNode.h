@@ -6,6 +6,7 @@
 #include "stdint.h"
 
 class RaycastUtility;
+struct Raycast;
 
 typedef uint16_t flag;
 
@@ -77,6 +78,8 @@ public:
 	// this allows us to filter out unwanted collision responses with ease.
 	void setFlags(flag category, flag maskFlag);
 
+	Raycast raycast(sf::Vector2f start, sf::Vector2f dir, float range);
+	void drawCast(Raycast cast);
 private:
 	int _id;
 	float radius;

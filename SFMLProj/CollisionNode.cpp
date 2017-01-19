@@ -72,6 +72,16 @@ void CollisionNode::setFlags(flag category, flag mask)
 	this->test_flag = true;
 }
 
+Raycast CollisionNode::raycast(sf::Vector2f start, sf::Vector2f dir, float range)
+{
+	return _rayUtility->cast(start, dir, range);
+}
+
+void CollisionNode::drawCast(Raycast cast)
+{
+	_rayUtility->drawCast(cast);
+}
+
 void CollisionNode::start()
 {
 	//todo cleanup required

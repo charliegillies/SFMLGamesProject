@@ -21,11 +21,17 @@ struct Raycast
 class RaycastUtility
 {
 public:
-	RaycastUtility(std::vector<CollisionNode*>& colliders)
-		: _colliders(colliders) {}
+	RaycastUtility(std::vector<CollisionNode*>& colliders, Game* game)
+		: _colliders(colliders), game(game) {}
 	~RaycastUtility() {}
 
+	Raycast cast(sf::Vector2f start, sf::Vector2f dir, float range);
+
+	void drawCast(Raycast raycast);
+
 private:
+	sf::RectangleShape rectangle;
+	Game* game;
 	std::vector<CollisionNode*>& _colliders;
 };
 
