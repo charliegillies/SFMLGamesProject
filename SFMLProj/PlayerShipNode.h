@@ -22,6 +22,8 @@ private:
 	sf::Vector2f _mouseTargetRotation;
 	sf::Vector2f _mouseLerpRot;
 
+	sf::Vector2f _lastMovement;
+
 	sf::Vector2f _topLeftMovementBound;
 	sf::Vector2f _botRightMovementBound;
 

@@ -159,8 +159,8 @@ void CollisionNode::onRemoved()
 void CollisionNode::onCollide(CollisionNode* b)
 {
 	// if collider node 'b' has a parent, use that, else use b
-	SceneNode* collider = (b->getParent() != nullptr) ? b->getParent() : b;
-	collisionEvent->collider = collider;
+	collisionEvent->collider_b = b;
+	collisionEvent->collider_a = this;
 
 	// lets all collision event subscribers know that
 	// we've just collided with CollisionNode b

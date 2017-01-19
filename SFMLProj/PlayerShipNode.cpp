@@ -82,7 +82,14 @@ void PlayerShipNode::onCollide(BaseEvent* e)
 	CollisionEvent* collision = static_cast<CollisionEvent*>(e);
 	assert(collision != nullptr);
 
-	SceneNode* collider = collision->collider;
+	CollisionNode* collider = collision->collider_b;
+
+	// test if the collider is an obstacle, if so - we need to stop moving..
+	if ((collider->categoryBits & CollisionNode::OBSTACLE_MASK) != 0)
+	{
+		// move back to where we were
+		_transform->position -= _lastMovement;
+	}
 }
 
 sf::Vector2f PlayerShipNode::getMouseTarget()
@@ -111,6 +118,7 @@ void PlayerShipNode::applyMovement()
 	}
 
 	velocity *= getGame()->deltaTime();
+	sf::Vector2f pre_move_pos = _transform->position;
 	sf::Vector2f pos = _transform->position + velocity;
 
 	// make sure we're in bounds
@@ -118,6 +126,7 @@ void PlayerShipNode::applyMovement()
 	pos.y = Utils::clamp(pos.y, _topLeftMovementBound.y, _botRightMovementBound.y);
 
 	_transform->position = pos;
+	_lastMovement = pos - pre_move_pos;
 }
 
 void PlayerShipNode::applyRotation()

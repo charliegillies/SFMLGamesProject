@@ -2,6 +2,8 @@
 #include "BaseEvent.h"
 #include "Scene.h"
 
+class CollisionNode;
+
 /*
 	Event is invoked when the entity collides with another entity.
 	
@@ -11,8 +13,10 @@
 class CollisionEvent : public BaseEvent
 {
 public:
-	// the parent scene node of the collider that we hit.
-	SceneNode* collider;
+	// the collider that belongs to us
+	CollisionNode* collider_a;
+	// the collider that we hit
+	CollisionNode* collider_b;
 
 	CollisionEvent() {}
 	~CollisionEvent() {}
