@@ -38,19 +38,14 @@ Raycast CollisionNode::testRaycast(Raycast ray)
 	auto b = ray.end;
 	// c is the (x,y) position of the circle
 	auto c = sf::Vector2f(getX(), getY());
-
 	// euclidean distance of the start and end point 
 	auto lab = Utils::distance(a, b);
-
 	// compute directional vector
 	auto d = (b - a) / lab;
-
 	// t is the closest point to the circle center
 	auto t = d.x*(c.x - a.x) + d.y*(c.y - a.y);
-
 	// compute the coordinates of the point E on line and closest to c
 	auto e = sf::Vector2f(t*d.x + a.x, t*d.y + a.y);
-
 	// now get the distance from the closest point and the circle
 	auto lec = Utils::distance(e, c);
 

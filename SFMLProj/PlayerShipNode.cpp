@@ -17,8 +17,6 @@ void PlayerShipNode::update()
 	cast = _collision->raycast(_transform->position, dir, 500.0f, 
 		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
 
-	getGame()->setDebugValue("player dir", to_string(dir.x) + "," + to_string(dir.y));
-
 	// create a projectile
 	if (_controlScheme->fired())
 		shoot(dir);
@@ -27,19 +25,6 @@ void PlayerShipNode::update()
 void PlayerShipNode::render()
 {
 	_collision->drawCast(cast);
-
-	shape_ray_int_1.setPosition(cast.start);
-	shape_ray_int_2.setPosition(cast.end);
-	getGame()->draw(shape_ray_int_1);
-	getGame()->draw(shape_ray_int_2);
-
-	if (cast.hit)
-	{
-		shape_ray_int_1.setPosition(cast.intersect_1);
-		shape_ray_int_2.setPosition(cast.intersect_2);
-		getGame()->draw(shape_ray_int_1);
-		getGame()->draw(shape_ray_int_2);
-	}
 }
 
 void PlayerShipNode::shoot(sf::Vector2f dir)

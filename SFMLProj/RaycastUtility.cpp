@@ -51,12 +51,24 @@ Raycast RaycastUtility::cast(sf::Vector2f start, sf::Vector2f dir, float range, 
 void RaycastUtility::drawCast(Raycast raycast)
 {
 	// set the position, rotation & size of the raycast
-	rectangle.setPosition(raycast.start);
-	rectangle.setRotation(Utils::calcAngle(raycast.start, raycast.end) + 90);
-	rectangle.setSize(sf::Vector2f(4, Utils::distance(raycast.start, raycast.end)));
-	rectangle.setFillColor(raycast.hit ? sf::Color::Red : sf::Color::White);
+	shape_ray_line.setPosition(raycast.start);
+	shape_ray_line.setRotation(Utils::calcAngle(raycast.start, raycast.end) + 90);
+	shape_ray_line.setSize(sf::Vector2f(4, Utils::distance(raycast.start, raycast.end)));
+	shape_ray_line.setFillColor(raycast.hit ? sf::Color::Red : sf::Color::White);
+	game->draw(shape_ray_line);
 
-	game->draw(rectangle);
+	shape_ray_int_1.setPosition(raycast.start);
+	shape_ray_int_2.setPosition(raycast.end);
+	game->draw(shape_ray_int_1);
+	game->draw(shape_ray_int_2);
+
+	if (raycast.hit)
+	{
+		shape_ray_int_1.setPosition(raycast.intersect_1);
+		shape_ray_int_2.setPosition(raycast.intersect_2);
+		game->draw(shape_ray_int_1);
+		game->draw(shape_ray_int_2);
+	}
 }
 
 std::vector<CollisionNode*> RaycastUtility::getPotentialColliders(flag searchCategory, sf::Vector2f start, float range)
