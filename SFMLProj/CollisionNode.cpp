@@ -33,19 +33,28 @@ bool CollisionNode::collides(CollisionNode* testNode)
 
 bool CollisionNode::lineCollides(Raycast ray)
 {
+	// a, b is the start/end points of the line
 	auto a = ray.start;
 	auto b = ray.end;
+	// c is the (x,y) position of the circle
 	auto c = sf::Vector2f(getX(), getY());
 
-	// euclidean distance
+	// euclidean distance of the start and end point 
 	auto lab = Utils::distance(a, b);
 
 	// compute directional vector
 	auto d = (b - a) / lab;
+
+	// t is the closest point to the circle center
 	auto t = d.x*(c.x - a.x) + d.y*(c.y - a.y);
+
+	// compute the coordinates of the point E on line and closest to c
 	auto e = sf::Vector2f(t*d.x + a.x, t*d.y + a.y);
+
+	// now get the distance from the closest point and the circle
 	auto lec = Utils::distance(e, c);
 
+	// if we're within radius, the line is touching
 	if (lec < radius)
 	{
 		auto dt = sqrt(pow(radius, 2) - pow(lec, 2));
