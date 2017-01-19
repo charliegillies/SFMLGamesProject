@@ -27,6 +27,14 @@ void PlayerShipNode::update()
 void PlayerShipNode::render()
 {
 	_collision->drawCast(cast);
+
+	if (cast.hit)
+	{
+		shape_ray_int_1.setPosition(cast.intersect_1);
+		shape_ray_int_2.setPosition(cast.intersect_2);
+		getGame()->draw(shape_ray_int_1);
+		getGame()->draw(shape_ray_int_2);
+	}
 }
 
 void PlayerShipNode::shoot(sf::Vector2f dir)
