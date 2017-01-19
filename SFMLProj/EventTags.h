@@ -14,4 +14,5 @@ public:
 	static const string registerCollider;
 	static const string unregisterCollider;
 	static const string collided;
+	static const string projectileCollision;
 };

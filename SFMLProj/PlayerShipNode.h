@@ -8,15 +8,17 @@
 class PlayerShipNode : public SceneNode
 {
 public:
-	PlayerShipNode() : SceneNode() {}
+	PlayerShipNode() : SceneNode(), _remainingLives(3) {}
 	~PlayerShipNode() {}
 
 	void update() override;
 	void start() override;
 	void render() override;
-
+	void subscribeEvents() override;
+	
 private:
 	void onCollide(BaseEvent* e);
+	void onProjectileCollide(BaseEvent* e);
 
 	Raycast cast;
 	sf::Vector2f _mouseTargetRotation;
@@ -32,6 +34,8 @@ private:
 	void applyRotation();
 
 	void shoot(sf::Vector2f direction);
+
+	int _remainingLives;
 
 	CollisionNode* _collision;
 	ControlScheme* _controlScheme;

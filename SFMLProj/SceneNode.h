@@ -66,6 +66,12 @@ public:
 	// view the set parameters in the NodeTag class.
 	SceneNode* getNode(string tag);
 
+	// creates an event receiver that is unique to the ultimate parent node
+	EventReceiver* subLocalEvent(const string id, Gallant::Delegate1<BaseEvent*> del);
+
+	// invokes a local event for all listening receivers
+	void invokeLocalEvent(const string id, BaseEvent* param);
+
 protected:
 	Game* getGame();
 
@@ -73,11 +79,6 @@ protected:
 	EventReceiver* subGlobalEvent(const string id, Gallant::Delegate1<BaseEvent*> del);
 	// invokes a global event for all listening receivers
 	void invokeGlobalEvent(const string id, BaseEvent* param);
-
-	// creates an event receiver that is unique to the ultimate parent node
-	EventReceiver* subLocalEvent(const string id, Gallant::Delegate1<BaseEvent*> del);
-	// invokes a local event for all listening receivers
-	void invokeLocalEvent(const string id, BaseEvent* param);
 
 private:
 	EventSystem _localEventSys;

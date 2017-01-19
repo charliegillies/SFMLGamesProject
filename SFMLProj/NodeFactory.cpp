@@ -8,6 +8,7 @@
 #include "VelocityNode.h"
 #include "CollisionNode.h"
 #include "DestroyAfterTimeNode.h"
+#include "ProjectileNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -99,6 +100,8 @@ SceneNode* NodeFactory::createShipProjectile(sf::Vector2f position, sf::Vector2f
 
 	// destroy after 2.5 seconds
 	base_node->addChild(new DestroyAfterTimeNode(2.5f));
+
+	base_node->addChild(new ProjectileNode(15));
 
 	// setup collider
 	CollisionNode* collider = new CollisionNode(8);

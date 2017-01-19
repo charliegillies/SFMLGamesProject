@@ -9,6 +9,7 @@
 
 #include "RaycastUtility.h"
 #include "CollisionMap.h"
+#include "ProjectileCollisionEvent.h"
 
 void PlayerShipNode::update()
 {
@@ -32,6 +33,18 @@ void PlayerShipNode::update()
 void PlayerShipNode::render()
 {
 	_collision->drawCast(cast);
+}
+
+void PlayerShipNode::subscribeEvents()
+{
+	// subscribe to the collision event
+	Delegate1<BaseEvent*> on_collide_event;
+	on_collide_event.Bind(this, &PlayerShipNode::onCollide);
+	subLocalEvent(EventTags::collided, on_collide_event);
+
+	Delegate1<BaseEvent*> on_projectile_collide_event;
+	on_projectile_collide_event.Bind(this, &PlayerShipNode::onProjectileCollide);
+	subLocalEvent(EventTags::projectileCollision, on_projectile_collide_event);
 }
 
 void PlayerShipNode::shoot(sf::Vector2f dir)
@@ -58,12 +71,7 @@ void PlayerShipNode::start()
 	_collision = static_cast<CollisionNode*>(getParent()->getNode(NodeTag::collision_node));
 
 	// Send out 'player lost life' event
-	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(3));
-
-	// subscribe to the collision event
-	Delegate1<BaseEvent*> on_collide_event;
-	on_collide_event.Bind(this, &PlayerShipNode::onCollide);
-	subLocalEvent(EventTags::collided, on_collide_event);
+	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(_remainingLives));
 
 	// start at mouse rot
 	_mouseTargetRotation = getMouseTarget();
@@ -90,6 +98,16 @@ void PlayerShipNode::onCollide(BaseEvent* e)
 		// move back to where we were
 		_transform->position -= _lastMovement;
 	}
+}
+
+void PlayerShipNode::onProjectileCollide(BaseEvent* e)
+{
+	ProjectileCollisionEvent* projectileCollision = static_cast<ProjectileCollisionEvent*>(e);
+	
+	_remainingLives--;
+	// handle this better, but for now...
+	PlayerLostLifeEvent lost_life_event(_remainingLives);
+	invokeGlobalEvent(EventTags::playerLostLife, &lost_life_event);
 }
 
 sf::Vector2f PlayerShipNode::getMouseTarget()
