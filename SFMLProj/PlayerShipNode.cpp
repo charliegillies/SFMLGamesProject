@@ -13,20 +13,23 @@ void PlayerShipNode::update()
 {
 	_mouseTargetRotation = getMouseTarget();
 
+	_mouseLerpRot = Utils::lerpVector(_mouseLerpRot, _mouseTargetRotation,
+		Utils::easeSmoothStep(0.5f, 1.0f));
+
 	// apply rotation & movement
 	applyRotation();
 	applyMovement();
 
 	getGame()->setDebugValue("rot", to_string(_transform->rotation));
-	getGame()->setDebugValue("cur rot", to_string(_currentRotation.x) + " , " + to_string(_currentRotation.y));
+	getGame()->setDebugValue("cur rot", to_string(_mouseLerpRot.x) + " , " + to_string(_mouseLerpRot.y));
 	getGame()->setDebugValue("des rot", to_string(_mouseTargetRotation.x) + " , " + to_string(_mouseTargetRotation.y));
 
-	cast = _collision->raycast(_transform->position, _currentRotation, 500.0f, 
+	cast = _collision->raycast(_transform->position, _mouseLerpRot, 500.0f, 
 		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
 
 	// create a projectile
 	if (_controlScheme->fired())
-		shoot(_currentRotation);
+		shoot(_mouseLerpRot);
 }
 
 void PlayerShipNode::render()
@@ -67,7 +70,7 @@ void PlayerShipNode::start()
 
 	// start at mouse rot
 	_mouseTargetRotation = getMouseTarget();
-	_currentRotation = _mouseTargetRotation;
+	_mouseLerpRot = _mouseTargetRotation;
 	applyRotation();
 }
 
@@ -93,7 +96,7 @@ void PlayerShipNode::applyMovement()
 	const float speed = 240.0f;
 
 	// rotate towards the mouse
-	sf::Vector2f direction = _currentRotation;
+	sf::Vector2f direction = _mouseLerpRot;
 	sf::Vector2f velocity(0, 0);
 
 	if (_controlScheme->forwards())
@@ -110,8 +113,7 @@ void PlayerShipNode::applyMovement()
 
 void PlayerShipNode::applyRotation()
 {
-	_currentRotation = _mouseTargetRotation;
-	float angle = Utils::radToDeg(atan2(_currentRotation.y, _currentRotation.x));
+	float angle = Utils::radToDeg(atan2(_mouseLerpRot.y, _mouseLerpRot.x));
 	angle += 90;
 	_transform->rotation = angle;
 }

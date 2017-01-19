@@ -20,7 +20,7 @@ private:
 
 	Raycast cast;
 	sf::Vector2f _mouseTargetRotation;
-	sf::Vector2f _currentRotation;
+	sf::Vector2f _mouseLerpRot;
 
 	sf::Vector2f getMouseTarget();
 	void applyMovement();
