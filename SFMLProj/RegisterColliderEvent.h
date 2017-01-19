@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseEvent.h"
 #include "CollisionNode.h"
+#include "RaycastUtility.h"
 
 /*
 	Event that allows the collision handler to listen for
@@ -10,6 +11,7 @@ class RegisterColliderEvent : public BaseEvent
 {
 public:
 	CollisionNode* collider;
+	RaycastUtility* rayUtility;
 
 	RegisterColliderEvent(CollisionNode* collider)
 	{

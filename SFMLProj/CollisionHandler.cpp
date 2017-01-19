@@ -3,7 +3,10 @@
 #include "EventTags.h"
 
 CollisionHandler::CollisionHandler() 
-	: _unregisterQueue(), _allColliders(), _collisionMap(&_allColliders) { }
+	: _unregisterQueue(), _allColliders(), _collisionMap(&_allColliders)
+{
+	_rayUtility = new RaycastUtility(_allColliders);
+}
 
 CollisionHandler::~CollisionHandler() { }
 
@@ -112,6 +115,7 @@ void CollisionHandler::onColliderRegister(BaseEvent* e)
 	// also ensure that the collider being registered is not null
 	assert(register_collider->collider != nullptr);
 
+	register_collider->rayUtility = _rayUtility;
 	_allColliders.push_back(register_collider->collider);
 }
 

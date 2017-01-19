@@ -5,6 +5,8 @@
 #include "CollisionEvent.h"
 #include "stdint.h"
 
+class RaycastUtility;
+
 typedef uint16_t flag;
 
 /*
@@ -78,6 +80,8 @@ public:
 private:
 	int _id;
 	float radius;
+
+	RaycastUtility* _rayUtility;
 
 	// if the flag should be tested or not during collision
 	bool test_flag;

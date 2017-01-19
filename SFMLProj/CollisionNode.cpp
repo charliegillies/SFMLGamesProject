@@ -77,6 +77,7 @@ void CollisionNode::start()
 	//todo cleanup required
 	RegisterColliderEvent register_collider(this);
 	invokeGlobalEvent(EventTags::registerCollider, &register_collider);
+	_rayUtility = register_collider.rayUtility;
 
 	// get transform node
 	transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));

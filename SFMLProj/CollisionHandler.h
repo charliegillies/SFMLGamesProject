@@ -33,6 +33,7 @@ private:
 	int tests = 0;
 	int collisions = 0;
 
+	RaycastUtility* _rayUtility;
 	queue<CollisionNode*> _unregisterQueue;
 	vector<CollisionNode*> _allColliders;
 	CollisionMap _collisionMap;
