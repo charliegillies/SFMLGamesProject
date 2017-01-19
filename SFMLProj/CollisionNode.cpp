@@ -50,10 +50,6 @@ bool CollisionNode::lineCollides(Raycast ray)
 	{
 		auto dt = sqrt(pow(radius, 2) - pow(lec, 2));
 		
-		ray.intersection_p = sf::Vector2f(
-			(t - dt)*d.x + a.x,
-			(t - dt)*d.y + a.y );
-		
 		return true;
 	}
 

@@ -9,7 +9,6 @@
 */
 struct Raycast
 {
-	sf::Vector2f intersection_p;
 	sf::Vector2f start;
 	sf::Vector2f end;
 	bool hit;
