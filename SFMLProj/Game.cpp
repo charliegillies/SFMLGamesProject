@@ -15,7 +15,9 @@ Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 	this->_deltaTime = 0;
 
 	_debugText.setPosition(5, 60);
-	_debugText.setFillColor(sf::Color::White);
+	_debugText.setFillColor(sf::Color::Yellow);
+	_debugText.setOutlineColor(sf::Color::Black);
+	_debugText.setOutlineThickness(1);
 	_debugText.setFont(getFont("Fonts//kenvector_future.ttf"));
 	_debugText.setCharacterSize(16);
 }
