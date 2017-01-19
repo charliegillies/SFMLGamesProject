@@ -24,8 +24,8 @@ public:
 	static const flag ALL_MASKS		= PLAYER_MASK | ENEMY_MASK | PROJECTILE;
 
 	explicit CollisionNode(float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
-		: radius(radius), test_flag(false), categoryBits(NO_MASK), 
-		maskBits(NO_MASK), offset(offset), circle(radius)
+		: radius(radius), test_flag(false), categoryBits(NO_MASK), maskBits(NO_MASK), 
+			offset(offset), circle(radius)
 	{
 		// ensures generation of unique num for every collider
 		static int gId = 0;
@@ -35,6 +35,13 @@ public:
 	}
 	
 	~CollisionNode() {}
+
+	// if the flag should be tested or not during collision
+	bool test_flag;
+	// the bits representing who owns this collision node
+	flag categoryBits;
+	// the bits representing who this node can collide with
+	flag maskBits;
 
 	void start() override;
 	void render() override;
@@ -48,6 +55,9 @@ public:
 
 	// tests if the two circles collide or not
 	bool collides(CollisionNode* test_node);
+
+	// tests if a line collides this point
+	bool lineCollides(Raycast ray);
 
 	// gets the x co-ordinate of the top left hand side of the collider
 	int getTopX();
@@ -78,21 +88,16 @@ public:
 	// this allows us to filter out unwanted collision responses with ease.
 	void setFlags(flag category, flag maskFlag);
 
-	Raycast raycast(sf::Vector2f start, sf::Vector2f dir, float range);
+	Raycast raycast(sf::Vector2f start, sf::Vector2f dir, float range, flag searchCategory);
+
 	void drawCast(Raycast cast);
+
 private:
 	int _id;
 	float radius;
 
 	RaycastUtility* _rayUtility;
 
-	// if the flag should be tested or not during collision
-	bool test_flag;
-	// the bits representing who owns this collision node
-	flag categoryBits;
-	// the bits representing who this node can collide with
-	flag maskBits;
-	
 	// a local copy of the collision event that will be
 	// reused as it is broadcasted to our parent when we collide.
 	CollisionEvent* collisionEvent;

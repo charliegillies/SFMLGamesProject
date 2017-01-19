@@ -2,6 +2,7 @@
 #include "EventTags.h"
 #include "RegisterColliderEvent.h"
 #include "Game.h"
+#include "Utils.h"
 
 string CollisionNode::getNodeTag()
 {
@@ -28,6 +29,39 @@ bool CollisionNode::collides(CollisionNode* testNode)
 	int dy = testNode->getY() - getY();
 	int comb_radius = testNode->radius + radius;
 	return (dx*dx) + (dy*dy) < (comb_radius*comb_radius);
+}
+
+bool CollisionNode::lineCollides(Raycast ray)
+{
+	auto b = ray.end;
+	auto a = ray.start;
+
+	// euclidean distance
+	auto lab = Utils::distance(b, a);
+
+	// compute directional vector
+	auto d = (b - a) / lab;
+
+	auto c = sf::Vector2f(getX(), getY());
+
+	auto t = d.x * (c.x - a.x) + d.y*(c.y - a.y);
+
+	auto e = sf::Vector2f(t*d.x + a.x, t*d.y + a.y);
+
+	auto lec = Utils::distance(e, c);
+
+	if (lec < radius)
+	{
+		auto dt = sqrt(pow(radius, 2) - pow(lec, 2));
+		
+		ray.intersection_p = sf::Vector2f(
+			(t - dt)*d.x + a.x,
+			(t - dt)*d.y + a.y );
+		
+		return true;
+	}
+
+	return false;
 }
 
 int CollisionNode::getTopX()
@@ -72,9 +106,9 @@ void CollisionNode::setFlags(flag category, flag mask)
 	this->test_flag = true;
 }
 
-Raycast CollisionNode::raycast(sf::Vector2f start, sf::Vector2f dir, float range)
+Raycast CollisionNode::raycast(sf::Vector2f start, sf::Vector2f dir, float range, flag searchCategory)
 {
-	return _rayUtility->cast(start, dir, range);
+	return _rayUtility->cast(start, dir, range, searchCategory);
 }
 
 void CollisionNode::drawCast(Raycast cast)

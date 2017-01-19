@@ -9,6 +9,7 @@
 */
 struct Raycast
 {
+	sf::Vector2f intersection_p;
 	sf::Vector2f start;
 	sf::Vector2f end;
 	bool hit;
@@ -25,11 +26,11 @@ public:
 		: _colliders(colliders), game(game) {}
 	~RaycastUtility() {}
 
-	Raycast cast(sf::Vector2f start, sf::Vector2f dir, float range);
+	Raycast cast(sf::Vector2f start, sf::Vector2f dir, float range, flag searchCategory);
 
 	void drawCast(Raycast raycast);
 private:
-	std::vector<CollisionNode*> getPotentialColliders(sf::Vector2f start, float range);
+	std::vector<CollisionNode*> getPotentialColliders(flag searchCategory, sf::Vector2f start, float range);
 
 	sf::RectangleShape rectangle;
 	Game* game;
