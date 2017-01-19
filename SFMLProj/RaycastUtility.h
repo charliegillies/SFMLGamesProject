@@ -28,8 +28,9 @@ public:
 	Raycast cast(sf::Vector2f start, sf::Vector2f dir, float range);
 
 	void drawCast(Raycast raycast);
-
 private:
+	std::vector<CollisionNode*> getPotentialColliders(sf::Vector2f start, float range);
+
 	sf::RectangleShape rectangle;
 	Game* game;
 	std::vector<CollisionNode*>& _colliders;
