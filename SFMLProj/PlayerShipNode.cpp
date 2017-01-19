@@ -8,6 +8,7 @@
 #include "Utils.h"
 
 #include "RaycastUtility.h"
+#include "CollisionMap.h"
 
 void PlayerShipNode::update()
 {
@@ -19,10 +20,6 @@ void PlayerShipNode::update()
 	// apply rotation & movement
 	applyRotation();
 	applyMovement();
-
-	getGame()->setDebugValue("rot", to_string(_transform->rotation));
-	getGame()->setDebugValue("cur rot", to_string(_mouseLerpRot.x) + " , " + to_string(_mouseLerpRot.y));
-	getGame()->setDebugValue("des rot", to_string(_mouseTargetRotation.x) + " , " + to_string(_mouseTargetRotation.y));
 
 	cast = _collision->raycast(_transform->position, _mouseLerpRot, 500.0f, 
 		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
@@ -72,6 +69,12 @@ void PlayerShipNode::start()
 	_mouseTargetRotation = getMouseTarget();
 	_mouseLerpRot = _mouseTargetRotation;
 	applyRotation();
+
+	// assign bounds
+	_topLeftMovementBound = _transform->origin;
+	_botRightMovementBound = sf::Vector2f(
+		CollisionMap::width * CollisionMap::cellSize,
+		CollisionMap::height * CollisionMap::cellSize) - _topLeftMovementBound;
 }
 
 void PlayerShipNode::onCollide(BaseEvent* e)
@@ -108,7 +111,13 @@ void PlayerShipNode::applyMovement()
 	}
 
 	velocity *= getGame()->deltaTime();
-	_transform->position += velocity;
+	sf::Vector2f pos = _transform->position + velocity;
+
+	// make sure we're in bounds
+	pos.x = Utils::clamp(pos.x, _topLeftMovementBound.x, _botRightMovementBound.x);
+	pos.y = Utils::clamp(pos.y, _topLeftMovementBound.y, _botRightMovementBound.y);
+
+	_transform->position = pos;
 }
 
 void PlayerShipNode::applyRotation()
