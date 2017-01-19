@@ -59,8 +59,10 @@ Raycast CollisionNode::testRaycast(Raycast ray)
 	{
 		auto dt = sqrt(pow(radius, 2) - pow(lec, 2));
 
-		//if ((t - dt) < 0 || (t + dt) < 0)
-		//	return ray;
+		// this ensures that the ray is inside of the circle
+		// as apposed to the vectors line
+		if ((t - dt) < 0 || (t + dt) < 0)
+			return ray;
 
 		ray.collider = this;
 		ray.hit = true;
