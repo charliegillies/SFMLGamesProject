@@ -3,7 +3,6 @@
 #include <stack>
 #include "AIState.h"
 
-class AIBrain;
 class AIState;
 
 /*
@@ -12,20 +11,15 @@ class AIState;
 class StateMachineNode : public SceneNode
 {
 public:
-	StateMachineNode(AIBrain* brain);
+	StateMachineNode();
 	~StateMachineNode();
 
 	void start() override;
 	void update() override;
 
-	// Not to be confused with 'ask brian'
-	// Brian will get annoyed if you ask him questions a lot
-	void askBrain();
-
 	void pushState(AIState* state);
 
 private:
-	AIBrain* _brain;
 	stack<AIState*> _stateStack;
 };
 

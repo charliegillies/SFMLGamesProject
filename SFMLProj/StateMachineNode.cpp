@@ -1,23 +1,19 @@
 #include "StateMachineNode.h"
-#include "AIBrain.h"
 
-StateMachineNode::StateMachineNode(AIBrain* brain) : _stateStack()
+StateMachineNode::StateMachineNode() : _stateStack()
 {
-	_brain = brain;
 }
 
 StateMachineNode::~StateMachineNode() {}
 
 void StateMachineNode::start()
 {
-	askBrain();
 }
 
 void StateMachineNode::update()
 {
 	if (_stateStack.empty())
 	{
-		askBrain();
 		return;
 	}
 
@@ -37,14 +33,6 @@ void StateMachineNode::update()
 		if (!_stateStack.empty())
 			_stateStack.top()->onEnter();
 	}
-}
-
-void StateMachineNode::askBrain()
-{
-	auto state = _brain->think();
-	if (state == nullptr) return;
-
-	pushState(state);
 }
 
 void StateMachineNode::pushState(AIState* state)
