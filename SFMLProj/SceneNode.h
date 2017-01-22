@@ -72,6 +72,12 @@ public:
 	// invokes a local event for all listening receivers
 	void invokeLocalEvent(const string id, BaseEvent* param);
 
+	// sets the name of the scene node
+	void setName(string name);
+
+	// gets the name of the scene node
+	string getName();
+
 protected:
 	Game* getGame();
 
@@ -86,5 +92,6 @@ private:
 	SceneNode* _parent;
 	Game* _game;
 	bool _removed;
+	string _name;
 };
 

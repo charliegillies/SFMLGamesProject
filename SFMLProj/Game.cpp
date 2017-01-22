@@ -141,6 +141,11 @@ void Game::exitGame()
 	_window.close();
 }
 
+SceneNode* Game::searchForNode(std::string name)
+{
+	return _currentScene->searchforNode(name);
+}
+
 void Game::draw(sf::Drawable& sprite)
 {
 	_window.draw(sprite);

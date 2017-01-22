@@ -121,6 +121,16 @@ void SceneNode::invokeLocalEvent(const string id, BaseEvent* param)
 	_localEventSys.invokeEvent(id, param);
 }
 
+void SceneNode::setName(string name)
+{
+	_name = name;
+}
+
+string SceneNode::getName()
+{
+	return _name;
+}
+
 Game* SceneNode::getGame()
 {
 	// only the top most node will have a reference to the game

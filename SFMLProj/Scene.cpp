@@ -124,6 +124,18 @@ EventSystem* Scene::getEventSystem()
 	return _eventSystem;
 }
 
+SceneNode* Scene::searchforNode(string name)
+{
+	for (auto i = _sceneNodes.begin(); i != _sceneNodes.end(); ++i)
+	{
+		auto node = (*i);
+		if (node->getName() == name)
+			return node;
+	}
+
+	return nullptr;
+}
+
 void Scene::changeScene(Scene* scene)
 {
 	_game->changeScene(scene);

@@ -76,6 +76,9 @@ public:
 	// closes the window
 	void exitGame();
 
+	// searches for a node
+	SceneNode* searchForNode(std::string name);
+
 private:
 	float _deltaTime;
 	Scene* _currentScene;

@@ -16,6 +16,9 @@ void StateMachineNode::start()
 	nTransform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
 	nCollider = static_cast<CollisionNode*>	(getParent()->getNode(NodeTag::collision_node));
 
+	auto playerNode = getGame()->searchForNode("player");
+	playerTransform = static_cast<TransformNode*>(playerNode->getNode(NodeTag::transform_node));
+
 	if (_stateStack.size() > 0)
 	{
 		// get and remove stack element 0

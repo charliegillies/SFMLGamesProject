@@ -17,6 +17,7 @@ SceneNode* NodeFactory::createPlayerNode()
 	string fp = "Sprites//playerShip1_blue.png";
 
 	SceneNode* base_node = new SceneNode();
+	base_node->setName("player");
 	base_node->addChild(new SpriteNode(fp));
 
 	TransformNode* transform_node = new TransformNode();
@@ -73,15 +74,16 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode("Sprites//enemies//ufoRed.png"));
 
+	// Create transform of ufo
 	TransformNode* transform = new TransformNode;
 	transform->position = sf::Vector2f(x, y);
 	transform->origin = sf::Vector2f(40.5f, 40.5f);
 	base_node->addChild(transform);
 
+	// Create appropiate collider
 	CollisionNode* collider = new CollisionNode(45);
 	collider->setFlags(CollisionNode::ENEMY_MASK, 
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE);
-
 	base_node->addChild(collider);
 
 	// create state hierarchy & machine

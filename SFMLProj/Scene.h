@@ -46,6 +46,9 @@ public:
 	// gets the event system which is specific to the scene
 	EventSystem* getEventSystem();
 
+	// searches for a node inside of the scene hierarchy
+	SceneNode* searchforNode(string name);
+
 protected:
 	// changes the current displayed scene
 	void changeScene(Scene* scene);

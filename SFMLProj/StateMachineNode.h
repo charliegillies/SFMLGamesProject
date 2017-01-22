@@ -23,6 +23,9 @@ public:
 
 	// The transform of the node, can be nullptr
 	TransformNode* nTransform;
+
+	// A cache of the players transform position
+	TransformNode* playerTransform;
 	
 	// The collider of the node, can be nullptr
 	CollisionNode* nCollider;
