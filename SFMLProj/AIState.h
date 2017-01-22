@@ -13,13 +13,13 @@ public:
 	virtual ~AIState() {}
 
 	// called when the state begins it's operations
-	virtual void onEnter() {}
+	virtual void onEnter() = 0;
 
 	// called every frame while state is operating
-	virtual void execute() {}
+	virtual void execute() = 0;
 
 	// called when the state has finished or is exited early
-	virtual void onExit() {}
+	virtual void onExit() = 0;
 
 	// if the state has been complete internally or not
 	bool isComplete()

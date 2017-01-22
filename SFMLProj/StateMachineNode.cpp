@@ -1,13 +1,32 @@
 #include "StateMachineNode.h"
 
-StateMachineNode::StateMachineNode() : _stateStack()
+StateMachineNode::StateMachineNode(AIState* defaultState) : 
+	nTransform(nullptr), nCollider(nullptr), _stateStack()
 {
+	if (defaultState != nullptr)
+		_stateStack.push(defaultState);
 }
 
 StateMachineNode::~StateMachineNode() {}
 
 void StateMachineNode::start()
 {
+	// We want to cache some common nodes here so the
+	// states can access them without needing to find them again and again
+	nTransform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
+	nCollider = static_cast<CollisionNode*>	(getParent()->getNode(NodeTag::collision_node));
+
+	if (_stateStack.size() > 0)
+	{
+		// get and remove stack element 0
+		AIState* state = _stateStack.top();
+		_stateStack.pop();
+
+		// now push it, this configures the state properly
+		// as it cannot be configured inside of the constructor
+		// due to correct execution order.
+		pushState(state);
+	}
 }
 
 void StateMachineNode::update()

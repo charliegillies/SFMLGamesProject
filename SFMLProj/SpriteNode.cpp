@@ -12,19 +12,10 @@ void SpriteNode::start()
 	_sprite.setTexture(txr);
 	txr.setSmooth(true);
 
-	// try and get a transform node
-	SceneNode* node;
-	if (getParent() != nullptr)
-	{
-		node = getParent()->getNode(NodeTag::transform_node);
-		
-		// attempt cast
-		if (node != nullptr)
-			_transform = static_cast<TransformNode*>(node);
-	}
-
+	_transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
 	// ensure that _transform is not null
 	assert(_transform != nullptr);
+
 }
 
 void SpriteNode::render()

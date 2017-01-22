@@ -9,6 +9,8 @@
 #include "CollisionNode.h"
 #include "DestroyAfterTimeNode.h"
 #include "ProjectileNode.h"
+#include "AIState.h"
+#include "UfoIdleState.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -82,7 +84,9 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 	base_node->addChild(collider);
 
-	//base_node->addChild(new RotationNode(120));
+	// create state hierarchy & machine
+	AIState* base_state = new UfoIdleState();
+	base_node->addChild(new StateMachineNode(base_state));
 
 	return base_node;
 }
