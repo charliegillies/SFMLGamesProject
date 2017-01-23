@@ -11,6 +11,8 @@
 #include "ProjectileNode.h"
 #include "AIState.h"
 #include "UfoIdleState.h"
+#include "PlayerInDistanceCondition.h"
+#include "SteerTowardsPlayerState.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -88,6 +90,9 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 	// create state hierarchy & machine
 	AIState* base_state = new UfoIdleState();
+
+	base_state->addTransition(new PlayerInDistanceCondition(300.0f), new SteerTowardsPlayerState(100.0f));
+
 	base_node->addChild(new StateMachineNode(base_state));
 
 	return base_node;

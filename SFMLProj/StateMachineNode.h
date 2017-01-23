@@ -21,6 +21,8 @@ public:
 
 	void pushState(AIState* state);
 
+	float getDt();
+
 	// The transform of the node, can be nullptr
 	TransformNode* nTransform;
 

@@ -43,18 +43,30 @@ void StateMachineNode::update()
 	auto state = _stateStack.top();
 	state->execute();
 
-	// if we're complete..
-	if (state->isComplete())
+	// now check if we can transition out..
+	for (auto i = state->transitions.begin(); i != state->transitions.end(); ++i)
 	{
-		// exit this state
-		state->onExit();
-		// remove it from the stack
-		_stateStack.pop();
+		StateTransition* transition = (*i);
 
-		// if there are other states in the stack, enter it
-		if (!_stateStack.empty())
-			_stateStack.top()->onEnter();
+		if (transition->conditionMet(this))
+		{
+			pushState(transition->getNextState());
+			break;
+		}
 	}
+
+	// if we're complete..
+	//if (state->isComplete())
+	//{
+	//	// exit this state
+	//	state->onExit();
+	//	// remove it from the stack
+	//	_stateStack.pop();
+
+	//	// if there are other states in the stack, enter it
+	//	if (!_stateStack.empty())
+	//		_stateStack.top()->onEnter();
+	//}
 }
 
 void StateMachineNode::pushState(AIState* state)
@@ -65,4 +77,9 @@ void StateMachineNode::pushState(AIState* state)
 	state->setStateMachine(this);
 	_stateStack.push(state);
 	state->onEnter();
+}
+
+float StateMachineNode::getDt()
+{
+	return getGame()->deltaTime();
 }

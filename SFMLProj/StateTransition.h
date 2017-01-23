@@ -1,5 +1,7 @@
 #pragma once
-#include "AIState.h"
+
+class AIState;
+class StateMachineNode;
 
 /*
 	Handles the transition between states.
@@ -13,10 +15,10 @@ public:
 	// Tests if the condition of the state transition
 	// has been met. If it has, then call getNextState() 
 	// to get the next state that this transition holds.
-	virtual bool conditionMet() = 0;
+	virtual bool conditionMet(StateMachineNode* stateMachine) = 0;
 
 	// Gets the next state that has been set inside of the .setState method.
-	virtual AIState* getNextState()
+	AIState* getNextState()
 	{
 		return _next;
 	}
