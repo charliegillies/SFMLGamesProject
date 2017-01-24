@@ -18,6 +18,7 @@
 #include "ReturnToStartPositionState.h"
 #include "CanShootCondition.h"
 #include "FixedCondition.h"
+#include "InDistanceOfStartCondition.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -95,6 +96,7 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 	// create state hierarchy & machine
 	float sight_range = 100.0f;
+	float lose_sight_range = 150.0f;
 	float chase_speed = 120.0f;
 
 	AIState* idle_state = new UfoIdleState();
@@ -109,7 +111,7 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	steer_state->addTransition(new CanShootCondition(), shoot_state);
 	
 	//a4, if distance between us and player is too far, give up and return
-	auto outOfRangeCondition = new PlayerInDistanceCondition(sight_range);
+	auto outOfRangeCondition = new PlayerInDistanceCondition(lose_sight_range);
 	outOfRangeCondition->toggleViewAsInverse();
 	steer_state->addTransition(outOfRangeCondition, return_state);
 
@@ -117,7 +119,7 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	shoot_state->addTransition(new FixedCondition(true), steer_state);
 
 	//a5, return to idle state from return state
-
+	return_state->addTransition(new InDistanceOfStartCondition(10.0f), idle_state);
 
 	// now create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));
