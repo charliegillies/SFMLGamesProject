@@ -94,11 +94,12 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
 	base_node->addChild(collider);
 
-	// create state hierarchy & machine
+	// ai settings for UFO
 	float sight_range = 100.0f;
 	float lose_sight_range = 150.0f;
 	float chase_speed = 120.0f;
 
+	// create the ai state & transitions
 	AIState* idle_state = new UfoIdleState();
 	AIState* steer_state = new SteerTowardsPlayerState(chase_speed);
 	AIState* shoot_state = new ShootState();
