@@ -126,28 +126,3 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 	return base_node;
 }
-
-SceneNode* NodeFactory::createShipProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot)
-{
-	SceneNode* base_node = new SceneNode();
-	base_node->addChild(new SpriteNode("Sprites//laserBlue03.png"));
-
-	TransformNode* transform_node = new TransformNode();
-	transform_node->position = position;
-	transform_node->origin = sf::Vector2f(4, 18);
-	transform_node->rotation = rot;
-	base_node->addChild(transform_node);
-
-	// destroy after 2.5 seconds
-	base_node->addChild(new DestroyAfterTimeNode(2.5f));
-	base_node->addChild(new ProjectileNode(15));
-
-	// setup collider
-	CollisionNode* collider = new CollisionNode(8);
-	collider->setFlags(CollisionNode::PROJECTILE_MASK, CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
-	base_node->addChild(collider);
-
-	base_node->addChild(new VelocityNode(speed, direction));
-
-	return base_node;
-}

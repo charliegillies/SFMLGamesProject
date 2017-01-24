@@ -9,7 +9,7 @@
 class ProjectileBuilder
 {
 public:
-	ProjectileBuilder(string texture_path, flag catFlag, flag colFlag, float lifeTime, float speed, float dmg, float radius);
+	ProjectileBuilder(string texture_path, flag colFlag, float lifeTime, float speed, float dmg, float radius);
 
 	~ProjectileBuilder();
 
@@ -23,6 +23,5 @@ private:
 	float radius;
 	float dmg;
 	flag collision_flag;
-	flag cat_flag;
 
 };
