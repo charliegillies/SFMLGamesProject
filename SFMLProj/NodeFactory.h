@@ -16,5 +16,9 @@ public:
 
 	static SceneNode* createEnemyUfo(int x, int y);
 
-	static SceneNode* createShipProjectile(sf::Vector2f position, sf::Vector2f direction, float speed, float rot);
+	static SceneNode* createHealthPickup(int x, int y);
+
+	static SceneNode* createSpeedPickup(int x, int y);
+
+	static SceneNode* createShieldPickup(int x, int y);
 };

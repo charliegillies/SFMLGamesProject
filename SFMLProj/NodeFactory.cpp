@@ -137,3 +137,18 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 	return base_node;
 }
+
+SceneNode* NodeFactory::createHealthPickup(int x, int y)
+{
+	return nullptr;
+}
+
+SceneNode* NodeFactory::createSpeedPickup(int x, int y)
+{
+	return nullptr;
+}
+
+SceneNode* NodeFactory::createShieldPickup(int x, int y)
+{
+	return nullptr;
+}

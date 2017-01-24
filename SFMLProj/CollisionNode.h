@@ -16,11 +16,13 @@ typedef uint16_t flag;
 class CollisionNode : public SceneNode
 {
 public:
-	static const flag NO_MASK			= 0x0000;
-	static const flag PLAYER_MASK		= 0x0002;
-	static const flag OBSTACLE_MASK		= 0x0004;
-	static const flag ENEMY_MASK		= 0x0008;
-	static const flag PROJECTILE_MASK	= 0x0010;
+	static const flag NO_MASK			= 0;
+	static const flag PLAYER_MASK		= 1 << 1;
+	static const flag OBSTACLE_MASK		= 1 << 2;
+	static const flag ENEMY_MASK		= 1 << 3;
+	static const flag PROJECTILE_MASK	= 1 << 4;
+	static const flag PICKUP_MASK		= 1 << 5;
+
 	static const flag ALL_MASKS			= PLAYER_MASK | ENEMY_MASK | PROJECTILE_MASK | OBSTACLE_MASK;
 
 	explicit CollisionNode(float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
