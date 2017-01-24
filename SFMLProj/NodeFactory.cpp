@@ -129,6 +129,9 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	//a5, return to idle state from return state
 	return_state->addTransition(new InDistanceOfStartCondition(10.0f), idle_state);
 
+	//a6, chase player if they spot it while retreating
+	return_state->addTransition(new ViewOnPlayerCondition(sight_range), steer_state);
+
 	// now create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));
 
