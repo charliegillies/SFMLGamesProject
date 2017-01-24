@@ -23,6 +23,9 @@ public:
 
 	float getDt();
 
+	// The cached position of this node during the start() phase.
+	sf::Vector2f startPosition;
+
 	// The transform of the node, can be nullptr
 	TransformNode* nTransform;
 
@@ -33,6 +36,7 @@ public:
 	CollisionNode* nCollider;
 
 private:
-	stack<AIState*> _stateStack;
+	AIState* defaultState;
+	AIState* currentState;
 };
 

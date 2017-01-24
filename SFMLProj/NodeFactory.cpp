@@ -15,6 +15,7 @@
 #include "SteerTowardsPlayerState.h"
 #include "ViewOnPlayerCondition.h"
 #include "ShootState.h"
+#include "ReturnToStartPositionState.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -91,16 +92,24 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	base_node->addChild(collider);
 
 	// create state hierarchy & machine
+	float sight_range = 100.0f;
+	float chase_speed = 120.0f;
+
 	AIState* base_state = new UfoIdleState();
+	AIState* steer_state = new SteerTowardsPlayerState(chase_speed);
+	AIState* shoot_state = new ShootState();
+	AIState* return_state = new ReturnToStartPositionState(chase_speed / 1.5f);
 
-	// steer state
-	AIState* steer_state = base_state->addTransition(
-		new PlayerInDistanceCondition(300.0f), new SteerTowardsPlayerState(100.0f));
+	//StateTransition* playerInDistance = new PlayerInDistanceCondition(sight_range);
+	//StateTransition* viewOnPlayer = new ViewOnPlayerCondition(sight_range);
 
-	// shoot state
-	AIState* shoot_state = steer_state->addTransition(
-		new ViewOnPlayerCondition(100.0f), new ShootState());
+	// plan out our transitions...
+	base_state->addTransition(new PlayerInDistanceCondition(sight_range), steer_state);
 
+	steer_state->addTransition(new ViewOnPlayerCondition(sight_range), shoot_state);
+
+
+	// now create the state machine
 	base_node->addChild(new StateMachineNode(base_state));
 
 	return base_node;

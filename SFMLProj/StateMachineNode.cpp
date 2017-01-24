@@ -1,11 +1,7 @@
 #include "StateMachineNode.h"
 
-StateMachineNode::StateMachineNode(AIState* defaultState) : 
-	nTransform(nullptr), nCollider(nullptr), _stateStack()
-{
-	if (defaultState != nullptr)
-		_stateStack.push(defaultState);
-}
+StateMachineNode::StateMachineNode(AIState* defaultState) 
+	: nTransform(nullptr), nCollider(nullptr), defaultState(defaultState), currentState(nullptr) {}
 
 StateMachineNode::~StateMachineNode() {}
 
@@ -16,31 +12,21 @@ void StateMachineNode::start()
 	nTransform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
 	nCollider = static_cast<CollisionNode*>	(getParent()->getNode(NodeTag::collision_node));
 
+	// cache start position
+	startPosition = nTransform->position;
+
+	// find the player, get its transform node
 	SceneNode* playerNode = getGame()->searchForNode("player");
 	playerTransform = static_cast<TransformNode*>(playerNode->getNode(NodeTag::transform_node));
 
-	if (_stateStack.size() > 0)
-	{
-		// get and remove stack element 0
-		AIState* state = _stateStack.top();
-		_stateStack.pop();
-
-		// now push it, this configures the state properly
-		// as it cannot be configured inside of the constructor
-		// due to correct execution order.
-		pushState(state);
-	}
+	// initialise default state
+	pushState(defaultState);
 }
 
 void StateMachineNode::update()
 {
-	if (_stateStack.empty())
-	{
-		return;
-	}
-
 	// get current state, execute it
-	auto state = _stateStack.top();
+	auto state = currentState;
 	state->execute();
 
 	// now check if we can transition out..
@@ -48,34 +34,27 @@ void StateMachineNode::update()
 	{
 		StateTransition* transition = (*i);
 
-		if (transition->conditionMet(this))
+		// check if we met the condition
+		bool conditionMet = transition->conditionMet(this);
+		// now check if we need to inverse it
+		if (transition->viewAsInverse)
+			conditionMet = !conditionMet;
+
+		if (conditionMet)
 		{
 			pushState(transition->getNextState());
 			break;
 		}
 	}
-
-	// if we're complete..
-	//if (state->isComplete())
-	//{
-	//	// exit this state
-	//	state->onExit();
-	//	// remove it from the stack
-	//	_stateStack.pop();
-
-	//	// if there are other states in the stack, enter it
-	//	if (!_stateStack.empty())
-	//		_stateStack.top()->onEnter();
-	//}
 }
 
 void StateMachineNode::pushState(AIState* state)
 {
-	if (_stateStack.size() > 0)
-		_stateStack.top()->onExit();
+	if (currentState != nullptr)
+		currentState->onExit();
 
 	state->setStateMachine(this);
-	_stateStack.push(state);
+	currentState = state;
 	state->onEnter();
 }
 

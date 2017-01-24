@@ -9,8 +9,13 @@ class StateMachineNode;
 class StateTransition
 {
 public:
-	StateTransition() : _next(nullptr) {}
+	StateTransition() : _next(nullptr), viewAsInverse(false) {}
 	virtual ~StateTransition() {}
+
+	// If conditionMet() should be viewed as an inverse value.
+	// e.g. if true = false, false = true. this stops us from
+	// having to create many conditions for boolean alternatives
+	bool viewAsInverse;
 
 	// Tests if the condition of the state transition
 	// has been met. If it has, then call getNextState() 
@@ -28,6 +33,13 @@ public:
 	void setState(AIState* state)
 	{
 		_next = state;
+	}
+
+	// Internally sets the 'view as inverse' flag to true.
+	StateTransition* toggleViewAsInverse()
+	{
+		viewAsInverse = true;
+		return this;
 	}
 
 private:
