@@ -1,5 +1,6 @@
 #pragma once
 #include "AIState.h"
+#include "ProjectileDataNode.h"
 
 /*
 	State that involves shooting towards an enemy.
@@ -13,4 +14,7 @@ public:
 	void onEnter() override;
 	void execute() override;
 	void onExit() override;
+
+private:
+	ProjectileDataNode* projectile_data_node;
 };

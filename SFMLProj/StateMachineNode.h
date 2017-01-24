@@ -21,6 +21,8 @@ public:
 
 	void pushState(AIState* state);
 
+	void createSceneNode(SceneNode* node);
+
 	float getDt();
 
 	// The cached position of this node during the start() phase.

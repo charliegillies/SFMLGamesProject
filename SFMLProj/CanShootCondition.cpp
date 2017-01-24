@@ -1,10 +1,14 @@
 #include "CanShootCondition.h"
+#include "ProjectileDataNode.h"
 
+#include "StateMachineNode.h"
 
 bool CanShootCondition::conditionMet(StateMachineNode* stateMachine)
 {
-	//implement this, temporary measure for now.
-	return false;
+	ProjectileDataNode* projectile_data_node = static_cast<ProjectileDataNode*>(
+		stateMachine->getParent()->getNode(NodeTag::projectile_data_node));
+
+	return projectile_data_node->timeTillNextShot == 0;
 }
 
 CanShootCondition::CanShootCondition()

@@ -19,6 +19,7 @@
 #include "CanShootCondition.h"
 #include "FixedCondition.h"
 #include "InDistanceOfStartCondition.h"
+#include "ProjectileDataNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -93,6 +94,12 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	collider->setFlags(CollisionNode::ENEMY_MASK, 
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
 	base_node->addChild(collider);
+
+	// projectile settings for the ufo
+	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//laserBlue03.png", 
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
+
+	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
 
 	// ai settings for UFO
 	float sight_range = 100.0f;

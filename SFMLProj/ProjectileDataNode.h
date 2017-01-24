@@ -15,9 +15,9 @@ public:
 	float timeTillNextShot;
 
 	// Build utility for building the projectile.
-	ProjectileBuilder builder;
+	ProjectileBuilder* builder;
 
-	ProjectileDataNode(const float timeBetweenShots, ProjectileBuilder builder) 
+	ProjectileDataNode(const float timeBetweenShots, ProjectileBuilder* builder) 
 		: timeBetweenShots(timeBetweenShots), timeTillNextShot(0), builder(builder) {}
 	
 	~ProjectileDataNode() {}
@@ -28,6 +28,12 @@ public:
 
 		if (timeTillNextShot < 0)
 			timeTillNextShot = 0;
+	}
+
+	// Sets the time to next shot to be equal to the time between shots
+	void onShoot()
+	{
+		timeTillNextShot = timeBetweenShots;
 	}
 
 	string getNodeTag() override

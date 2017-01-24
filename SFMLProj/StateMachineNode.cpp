@@ -60,6 +60,11 @@ void StateMachineNode::pushState(AIState* state)
 	state->onEnter();
 }
 
+void StateMachineNode::createSceneNode(SceneNode* node)
+{
+	getGame()->addSceneNode(node);
+}
+
 float StateMachineNode::getDt()
 {
 	return getGame()->deltaTime();
