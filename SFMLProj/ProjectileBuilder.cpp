@@ -5,8 +5,9 @@
 #include "DestroyAfterTimeNode.h"
 #include "SpriteNode.h"
 
-ProjectileBuilder::ProjectileBuilder(string texture_path, float lifeTime, float speed, float dmg, float radius)
-	: txr_fp(texture_path), destroy_time(lifeTime), speed(speed), radius(radius), dmg(dmg) { }
+ProjectileBuilder::ProjectileBuilder(string texture_path, flag cat_flag, flag col_flag, float lifeTime, float speed, float dmg, float radius)
+	: txr_fp(texture_path), destroy_time(lifeTime), speed(speed), 
+		radius(radius), dmg(dmg), collision_flag(col_flag), cat_flag(cat_flag) { }
 
 ProjectileBuilder::~ProjectileBuilder() { }
 
@@ -29,8 +30,8 @@ SceneNode* ProjectileBuilder::build(sf::Vector2f position, sf::Vector2f directio
 	base_node->addChild(new ProjectileNode(dmg));
 
 	// setup collider
-	CollisionNode* collider = new CollisionNode(8);
-	collider->setFlags(CollisionNode::PROJECTILE_MASK, CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+	CollisionNode* collider = new CollisionNode(radius);
+	collider->setFlags(cat_flag, collision_flag);
 	base_node->addChild(collider);
 
 	// movement node
