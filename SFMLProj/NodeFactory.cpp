@@ -140,15 +140,54 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 
 SceneNode* NodeFactory::createHealthPickup(int x, int y)
 {
-	return nullptr;
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("Sprites//pickups//health.png"));
+
+	TransformNode* transform_node = new TransformNode();
+	// lazy hard coding, but origin is sprite size / 2
+	transform_node->origin = sf::Vector2f(11, 10.5f);
+	transform_node->position = sf::Vector2f(x, y);
+	base_node->addChild(transform_node);
+
+	CollisionNode* collider = new CollisionNode(12);
+	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
+	base_node->addChild(collider);
+
+	return base_node;
 }
 
 SceneNode* NodeFactory::createSpeedPickup(int x, int y)
 {
-	return nullptr;
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("Sprites//pickups//speed.png"));
+
+	TransformNode* transform_node = new TransformNode();
+	// lazy hard coding, but origin is sprite size / 2
+	transform_node->origin = sf::Vector2f(17, 16.5f);
+	transform_node->position = sf::Vector2f(x, y);
+	base_node->addChild(transform_node);
+
+	CollisionNode* collider = new CollisionNode(17.0f);
+	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
+	base_node->addChild(collider);
+
+	return base_node;
 }
 
 SceneNode* NodeFactory::createShieldPickup(int x, int y)
 {
-	return nullptr;
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("Sprites//pickups//shield.png"));
+
+	TransformNode* transform_node = new TransformNode();
+	// lazy hard coding, but origin is sprite size / 2
+	transform_node->origin = sf::Vector2f(17, 16.5f);
+	transform_node->position = sf::Vector2f(x, y);
+	base_node->addChild(transform_node);
+
+	CollisionNode* collider = new CollisionNode(17.0f);
+	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
+	base_node->addChild(collider);
+
+	return base_node;
 }

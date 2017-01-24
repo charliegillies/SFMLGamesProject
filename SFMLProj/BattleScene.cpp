@@ -23,6 +23,11 @@ void BattleScene::onStart()
 	// create the player node
 	_game->addSceneNode(NodeFactory::createPlayerNode());
 
+	_game->addSceneNode(NodeFactory::createHealthPickup(1000, 500));
+	_game->addSceneNode(NodeFactory::createShieldPickup(800, 500));
+	_game->addSceneNode(NodeFactory::createSpeedPickup(1000, 300));
+
+
 	/* PLAYER UI */
 	CanvasNode* canvas = new CanvasNode();
 	canvas->addChild(new PlayerLivesUINode());
