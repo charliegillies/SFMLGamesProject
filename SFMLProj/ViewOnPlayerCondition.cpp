@@ -16,7 +16,7 @@ bool ViewOnPlayerCondition::conditionMet(StateMachineNode* stateMachine)
 		stateMachine->nTransform->position);
 	direction = Utils::normalize(direction);
 
-	Raycast cast = stateMachine->nCollider->raycast(stateMachine->playerTransform->position,
+	Raycast cast = stateMachine->nCollider->raycast(stateMachine->nTransform->position,
 		direction, range, CollisionNode::ALL_MASKS);
 
 	return cast.hit && cast.collider->getParent()->getName() == "player";
