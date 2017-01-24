@@ -103,13 +103,34 @@ void PlayerShipNode::onProjectileCollide(BaseEvent* e)
 	
 	_remainingLives--;
 	// handle this better, but for now...
-	PlayerLostLifeEvent lost_life_event(_remainingLives);
-	invokeGlobalEvent(EventTags::playerLostLife, &lost_life_event);
+	onLifeChanged();
 }
 
 void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 {
+	switch (power_up->Pickup)
+	{
+		case PICKUP_SHIELD: 
+			
+			break;
+		
+		case PICKUP_HEALTH: 
+			if (_remainingLives != max_lives)
+			{
+				// add 1 life from the pick up
+				_remainingLives += 1;
+				// broadcast event
+				onLifeChanged();
+				// destroy the power up
+				getGame()->removeSceneNode(power_up->getParent());
+			}
 
+			break;
+		
+		case PICKUP_SPEED: 
+						
+			break;
+	}
 }
 
 sf::Vector2f PlayerShipNode::getMouseTarget()
@@ -154,4 +175,10 @@ void PlayerShipNode::applyRotation()
 	float angle = Utils::radToDeg(atan2(_mouseLerpRot.y, _mouseLerpRot.x));
 	angle += 90;
 	_transform->rotation = angle;
+}
+
+void PlayerShipNode::onLifeChanged()
+{
+	PlayerLostLifeEvent lost_life_event(_remainingLives);
+	invokeGlobalEvent(EventTags::playerLostLife, &lost_life_event);
 }

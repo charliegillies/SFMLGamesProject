@@ -31,6 +31,8 @@ private:
 	void applyMovement();
 	void applyRotation();
 
+	void onLifeChanged();
+
 	// projectile builder
 	ProjectileBuilder* proj_builder;
 
