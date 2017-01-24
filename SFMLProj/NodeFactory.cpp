@@ -16,6 +16,8 @@
 #include "ViewOnPlayerCondition.h"
 #include "ShootState.h"
 #include "ReturnToStartPositionState.h"
+#include "CanShootCondition.h"
+#include "FixedCondition.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -95,22 +97,30 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	float sight_range = 100.0f;
 	float chase_speed = 120.0f;
 
-	AIState* base_state = new UfoIdleState();
+	AIState* idle_state = new UfoIdleState();
 	AIState* steer_state = new SteerTowardsPlayerState(chase_speed);
 	AIState* shoot_state = new ShootState();
 	AIState* return_state = new ReturnToStartPositionState(chase_speed / 1.5f);
 
-	//StateTransition* playerInDistance = new PlayerInDistanceCondition(sight_range);
-	//StateTransition* viewOnPlayer = new ViewOnPlayerCondition(sight_range);
+	//a1 IDLE -> MOVE TO PLAYER
+	idle_state->addTransition(new ViewOnPlayerCondition(sight_range), steer_state);
 
-	// plan out our transitions...
-	base_state->addTransition(new PlayerInDistanceCondition(sight_range), steer_state);
+	//a2 MOVE TO PLAYER -> SHOOT @ PLAYER
+	steer_state->addTransition(new CanShootCondition(), shoot_state);
+	
+	//a4, if distance between us and player is too far, give up and return
+	auto outOfRangeCondition = new PlayerInDistanceCondition(sight_range);
+	outOfRangeCondition->toggleViewAsInverse();
+	steer_state->addTransition(outOfRangeCondition, return_state);
 
-	steer_state->addTransition(new ViewOnPlayerCondition(sight_range), shoot_state);
+	//a3, GO BACK TO MOVING TO PLAYER
+	shoot_state->addTransition(new FixedCondition(true), steer_state);
+
+	//a5, return to idle state from return state
 
 
 	// now create the state machine
-	base_node->addChild(new StateMachineNode(base_state));
+	base_node->addChild(new StateMachineNode(idle_state));
 
 	return base_node;
 }

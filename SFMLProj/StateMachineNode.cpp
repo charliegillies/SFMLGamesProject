@@ -46,6 +46,8 @@ void StateMachineNode::update()
 			break;
 		}
 	}
+
+	getGame()->setDebugValue("state", typeid(*currentState).name());
 }
 
 void StateMachineNode::pushState(AIState* state)
