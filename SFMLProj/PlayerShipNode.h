@@ -10,7 +10,7 @@
 class PlayerShipNode : public SceneNode
 {
 public:
-	PlayerShipNode() : SceneNode(), _remainingLives(3)
+	PlayerShipNode() : SceneNode(), _remainingLives(max_lives)
 	{
 		proj_builder = new ProjectileBuilder("Sprites//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 2.5f, 400.0f, 15, 8);
@@ -26,25 +26,28 @@ private:
 	void onCollide(BaseEvent* e);
 	void onProjectileCollide(BaseEvent* e);
 	void applyPowerup(PowerUpNode* power_up);
-
-	ProjectileBuilder* proj_builder;
-
-	Raycast cast;
-	sf::Vector2f _mouseTargetRotation;
-	sf::Vector2f _mouseLerpRot;
-
-	sf::Vector2f _lastMovement;
-
-	sf::Vector2f _topLeftMovementBound;
-	sf::Vector2f _botRightMovementBound;
-
 	sf::Vector2f getMouseTarget();
+	void shoot(sf::Vector2f direction);
 	void applyMovement();
 	void applyRotation();
 
-	void shoot(sf::Vector2f direction);
+	// projectile builder
+	ProjectileBuilder* proj_builder;
 
+	// mouse & rotation movement
+	sf::Vector2f _mouseTargetRotation;
+	sf::Vector2f _mouseLerpRot;
+
+	// collision
+	sf::Vector2f _lastMovement;
+
+	// bounds
+	sf::Vector2f _topLeftMovementBound;
+	sf::Vector2f _botRightMovementBound;
+
+	// the remaining lives
 	int _remainingLives;
+	static const int max_lives = 3;
 
 	CollisionNode* _collision;
 	ControlScheme* _controlScheme;
