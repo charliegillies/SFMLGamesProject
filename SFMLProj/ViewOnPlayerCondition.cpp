@@ -11,7 +11,7 @@ ViewOnPlayerCondition::~ViewOnPlayerCondition() { }
 
 bool ViewOnPlayerCondition::conditionMet(StateMachineNode* stateMachine)
 {
-	// get direction..
+	// get direction of the player for the raycast
 	sf::Vector2f direction = (stateMachine->playerTransform->position - 
 		stateMachine->nTransform->position);
 	direction = Utils::normalize(direction);
@@ -19,5 +19,6 @@ bool ViewOnPlayerCondition::conditionMet(StateMachineNode* stateMachine)
 	Raycast cast = stateMachine->nCollider->raycast(stateMachine->nTransform->position,
 		direction, range, CollisionNode::ALL_MASKS);
 
+	// if the cast hit - and it was the player that we hit..
 	return cast.hit && cast.collider->getParent()->getName() == "player";
 }
