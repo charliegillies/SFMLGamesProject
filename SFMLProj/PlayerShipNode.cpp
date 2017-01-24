@@ -3,7 +3,6 @@
 #include "math.h"
 #include "EventTags.h"
 #include "PlayerLostLifeEvent.h"
-#include "NodeFactory.h"
 #include "CollisionEvent.h"
 #include "Utils.h"
 
