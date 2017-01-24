@@ -1,0 +1,40 @@
+#include "ProjectileBuilder.h"
+#include "VelocityNode.h"
+#include "CollisionNode.h"
+#include "ProjectileNode.h"
+#include "DestroyAfterTimeNode.h"
+#include "SpriteNode.h"
+
+ProjectileBuilder::ProjectileBuilder(string texture_path, float lifeTime, float speed, float dmg, float radius)
+	: txr_fp(texture_path), destroy_time(lifeTime), speed(speed), radius(radius), dmg(dmg) { }
+
+ProjectileBuilder::~ProjectileBuilder() { }
+
+SceneNode* ProjectileBuilder::build(sf::Vector2f position, sf::Vector2f direction, float rot)
+{
+	SceneNode* base_node = new SceneNode();
+
+	// sprite node
+	base_node->addChild(new SpriteNode(txr_fp));
+
+	// position, rotation, origin node
+	TransformNode* transform_node = new TransformNode();
+	transform_node->position = position;
+	transform_node->origin = sf::Vector2f(4, 18);
+	transform_node->rotation = rot;
+	base_node->addChild(transform_node);
+
+	// destroy after 2.5 seconds
+	base_node->addChild(new DestroyAfterTimeNode(destroy_time));
+	base_node->addChild(new ProjectileNode(dmg));
+
+	// setup collider
+	CollisionNode* collider = new CollisionNode(8);
+	collider->setFlags(CollisionNode::PROJECTILE_MASK, CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+	base_node->addChild(collider);
+
+	// movement node
+	base_node->addChild(new VelocityNode(speed, direction));
+
+	return base_node;
+}

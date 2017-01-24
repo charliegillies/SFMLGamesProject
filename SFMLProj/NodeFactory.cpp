@@ -140,7 +140,6 @@ SceneNode* NodeFactory::createShipProjectile(sf::Vector2f position, sf::Vector2f
 
 	// destroy after 2.5 seconds
 	base_node->addChild(new DestroyAfterTimeNode(2.5f));
-
 	base_node->addChild(new ProjectileNode(15));
 
 	// setup collider
