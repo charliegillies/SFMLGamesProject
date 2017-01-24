@@ -71,6 +71,11 @@ void RaycastUtility::drawCast(Raycast raycast)
 	}
 }
 
+void RaycastUtility::setGame(Game* game)
+{
+	this->game = game;
+}
+
 std::vector<CollisionNode*> RaycastUtility::getPotentialColliders(flag searchCategory, sf::Vector2f start, float range)
 {
 	std::vector<CollisionNode*> nodes_in_range;

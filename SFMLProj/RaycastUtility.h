@@ -27,7 +27,7 @@ struct Raycast
 class RaycastUtility
 {
 public:
-	RaycastUtility(std::vector<CollisionNode*>& colliders, Game* game)
+	RaycastUtility(std::vector<CollisionNode*>& colliders)
 		: _colliders(colliders), game(game)
 	{
 		shape_ray_int_1.setFillColor(sf::Color::Black);
@@ -48,6 +48,9 @@ public:
 	Raycast cast(sf::Vector2f start, sf::Vector2f dir, float range, flag searchCategory);
 
 	void drawCast(Raycast raycast);
+
+	void setGame(Game* game);
+
 private:
 	std::vector<CollisionNode*> getPotentialColliders(flag searchCategory, sf::Vector2f start, float range);
 

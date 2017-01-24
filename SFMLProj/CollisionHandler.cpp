@@ -5,6 +5,7 @@
 CollisionHandler::CollisionHandler() 
 	: _unregisterQueue(), _allColliders(), _collisionMap(&_allColliders)
 {
+	_rayUtility = new RaycastUtility(_allColliders);
 }
 
 CollisionHandler::~CollisionHandler() { }
@@ -108,7 +109,7 @@ void CollisionHandler::subscribeEvents()
 
 void CollisionHandler::start()
 {
-	_rayUtility = new RaycastUtility(_allColliders, getGame());
+	_rayUtility->setGame(getGame());
 }
 
 void CollisionHandler::onColliderRegister(BaseEvent* e)
