@@ -9,6 +9,8 @@
 
 #include "CollisionMap.h"
 #include "ProjectileCollisionEvent.h"
+#include "PowerUpNode.h"
+#include <iostream>
 
 void PlayerShipNode::update()
 {
@@ -86,6 +88,13 @@ void PlayerShipNode::onCollide(BaseEvent* e)
 		// move back to where we were
 		_transform->position -= _lastMovement;
 	}
+
+	if ((collider->categoryBits & CollisionNode::PICKUP_MASK) != 0)
+	{
+		// get the pickup node....
+		PowerUpNode* power_up = static_cast<PowerUpNode*>(collider->getParent()->getNode(NodeTag::powerup_node));
+		applyPowerup(power_up);
+	}
 }
 
 void PlayerShipNode::onProjectileCollide(BaseEvent* e)
@@ -96,6 +105,11 @@ void PlayerShipNode::onProjectileCollide(BaseEvent* e)
 	// handle this better, but for now...
 	PlayerLostLifeEvent lost_life_event(_remainingLives);
 	invokeGlobalEvent(EventTags::playerLostLife, &lost_life_event);
+}
+
+void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
+{
+
 }
 
 sf::Vector2f PlayerShipNode::getMouseTarget()

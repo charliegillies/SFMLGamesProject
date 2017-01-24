@@ -5,10 +5,7 @@
 #include "CameraTrackingNode.h"
 #include "BackgroundNode.h"
 #include "RotationNode.h"
-#include "VelocityNode.h"
 #include "CollisionNode.h"
-#include "DestroyAfterTimeNode.h"
-#include "ProjectileNode.h"
 #include "AIState.h"
 #include "UfoIdleState.h"
 #include "PlayerInDistanceCondition.h"
@@ -42,7 +39,8 @@ SceneNode* NodeFactory::createPlayerNode()
 
 	// i am the player, and i can collide with the enemy and obstacles.
 	collider->setFlags(CollisionNode::PLAYER_MASK, 
-		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK );
+		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK 
+		| CollisionNode::PROJECTILE_MASK | CollisionNode::PICKUP_MASK );
 	
 	base_node->addChild(collider);
 
@@ -153,6 +151,8 @@ SceneNode* NodeFactory::createHealthPickup(int x, int y)
 	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
 	base_node->addChild(collider);
 
+	base_node->addChild(new PowerUpNode(PICKUP_HEALTH));
+
 	return base_node;
 }
 
@@ -171,6 +171,8 @@ SceneNode* NodeFactory::createSpeedPickup(int x, int y)
 	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
 	base_node->addChild(collider);
 
+	base_node->addChild(new PowerUpNode(PICKUP_SPEED));
+
 	return base_node;
 }
 
@@ -188,6 +190,8 @@ SceneNode* NodeFactory::createShieldPickup(int x, int y)
 	CollisionNode* collider = new CollisionNode(17.0f);
 	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
 	base_node->addChild(collider);
+
+	base_node->addChild(new PowerUpNode(PICKUP_SHIELD));
 
 	return base_node;
 }

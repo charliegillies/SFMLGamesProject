@@ -5,6 +5,7 @@
 #include "CollisionNode.h"
 #include "RaycastUtility.h"
 #include "ProjectileBuilder.h"
+#include "PowerUpNode.h"
 
 class PlayerShipNode : public SceneNode
 {
@@ -24,6 +25,7 @@ public:
 private:
 	void onCollide(BaseEvent* e);
 	void onProjectileCollide(BaseEvent* e);
+	void applyPowerup(PowerUpNode* power_up);
 
 	ProjectileBuilder* proj_builder;
 
