@@ -7,7 +7,6 @@
 #include "CollisionEvent.h"
 #include "Utils.h"
 
-#include "RaycastUtility.h"
 #include "CollisionMap.h"
 #include "ProjectileCollisionEvent.h"
 
@@ -22,17 +21,9 @@ void PlayerShipNode::update()
 	applyRotation();
 	applyMovement();
 
-	cast = _collision->raycast(_transform->position, _mouseLerpRot, 500.0f, 
-		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
-
 	// create a projectile
 	if (_controlScheme->fired())
 		shoot(_mouseLerpRot);
-}
-
-void PlayerShipNode::render()
-{
-	_collision->drawCast(cast);
 }
 
 void PlayerShipNode::subscribeEvents()

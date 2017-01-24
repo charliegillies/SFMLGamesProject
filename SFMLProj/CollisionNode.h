@@ -16,15 +16,15 @@ typedef uint16_t flag;
 class CollisionNode : public SceneNode
 {
 public:
-	static const flag NO_MASK		= 0x0000;
-	static const flag PLAYER_MASK	= 0x0002;
-	static const flag OBSTACLE_MASK = 0x0004;
-	static const flag ENEMY_MASK	= 0x0008;
-	static const flag PROJECTILE	= 0x0010;
-	static const flag ALL_MASKS		= PLAYER_MASK | ENEMY_MASK | PROJECTILE;
+	static const flag NO_MASK			= 0x0000;
+	static const flag PLAYER_MASK		= 0x0002;
+	static const flag OBSTACLE_MASK		= 0x0004;
+	static const flag ENEMY_MASK		= 0x0008;
+	static const flag PROJECTILE_MASK	= 0x0010;
+	static const flag ALL_MASKS			= PLAYER_MASK | ENEMY_MASK | PROJECTILE_MASK | OBSTACLE_MASK;
 
 	explicit CollisionNode(float radius, sf::Vector2f offset = sf::Vector2f(0,0)) 
-		: radius(radius), test_flag(false), categoryBits(NO_MASK), maskBits(NO_MASK), 
+		: test_flag(false), categoryBits(NO_MASK), maskBits(NO_MASK), radius(radius), 
 			offset(offset), circle(radius)
 	{
 		// ensures generation of unique num for every collider

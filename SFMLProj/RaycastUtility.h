@@ -9,6 +9,8 @@
 */
 struct Raycast
 {
+	Raycast() : hit(false) {}
+
 	sf::Vector2f intersect_1;
 	sf::Vector2f intersect_2;
 

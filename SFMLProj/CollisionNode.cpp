@@ -3,6 +3,7 @@
 #include "RegisterColliderEvent.h"
 #include "Game.h"
 #include "Utils.h"
+#include <iostream>
 
 string CollisionNode::getNodeTag()
 {
@@ -116,6 +117,8 @@ void CollisionNode::setFlags(flag category, flag mask)
 
 Raycast CollisionNode::raycast(sf::Vector2f start, sf::Vector2f dir, float range, flag searchCategory)
 {
+
+
 	return _rayUtility->cast(start, dir, range, searchCategory);
 }
 

@@ -13,7 +13,6 @@ public:
 
 	void update() override;
 	void start() override;
-	void render() override;
 	void subscribeEvents() override;
 	
 private:

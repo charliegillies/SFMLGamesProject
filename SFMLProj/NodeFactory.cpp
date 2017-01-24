@@ -13,6 +13,8 @@
 #include "UfoIdleState.h"
 #include "PlayerInDistanceCondition.h"
 #include "SteerTowardsPlayerState.h"
+#include "ViewOnPlayerCondition.h"
+#include "ShootState.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -35,7 +37,7 @@ SceneNode* NodeFactory::createPlayerNode()
 
 	// i am the player, and i can collide with the enemy and obstacles.
 	collider->setFlags(CollisionNode::PLAYER_MASK, 
-		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE );
+		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK );
 	
 	base_node->addChild(collider);
 
@@ -85,13 +87,19 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	// Create appropiate collider
 	CollisionNode* collider = new CollisionNode(45);
 	collider->setFlags(CollisionNode::ENEMY_MASK, 
-		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE);
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
 	base_node->addChild(collider);
 
 	// create state hierarchy & machine
 	AIState* base_state = new UfoIdleState();
 
-	base_state->addTransition(new PlayerInDistanceCondition(300.0f), new SteerTowardsPlayerState(100.0f));
+	// steer state
+	AIState* steer_state = base_state->addTransition(
+		new PlayerInDistanceCondition(300.0f), new SteerTowardsPlayerState(100.0f));
+
+	// shoot state
+	AIState* shoot_state = steer_state->addTransition(
+		new ViewOnPlayerCondition(100.0f), new ShootState());
 
 	base_node->addChild(new StateMachineNode(base_state));
 
@@ -116,7 +124,7 @@ SceneNode* NodeFactory::createShipProjectile(sf::Vector2f position, sf::Vector2f
 
 	// setup collider
 	CollisionNode* collider = new CollisionNode(8);
-	collider->setFlags(CollisionNode::PROJECTILE, CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
+	collider->setFlags(CollisionNode::PROJECTILE_MASK, CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK);
 	base_node->addChild(collider);
 
 	base_node->addChild(new VelocityNode(speed, direction));
