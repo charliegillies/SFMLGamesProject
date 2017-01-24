@@ -9,10 +9,9 @@
 class CollisionMap
 {
 public:
-	static const int width = 20;
-	static const int height = 20;
-	static const int cellSize = 100;
-
+	static const int width = 10;
+	static const int height = 10;
+	static const int cellSize = 200;
 
 	static const int world_top_left_x = 0;
 	static const int world_top_left_y = 0;
