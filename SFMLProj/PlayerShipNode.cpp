@@ -45,6 +45,17 @@ void PlayerShipNode::subscribeEvents()
 	subLocalEvent(EventTags::projectileCollision, on_projectile_collide_event);
 }
 
+void PlayerShipNode::render()
+{
+	// draw shield....
+	if (_shieldPickupTime > 0)
+	{
+		_shieldSprite.setPosition(_transform->position);
+		_shieldSprite.setRotation(_transform->rotation);
+		getGame()->draw(_shieldSprite);
+	}
+}
+
 void PlayerShipNode::shoot(sf::Vector2f dir)
 {
 	sf::Vector2f ship_pos = _transform->position;
@@ -78,6 +89,14 @@ void PlayerShipNode::start()
 	_botRightMovementBound = sf::Vector2f(
 		CollisionMap::width * CollisionMap::cellSize,
 		CollisionMap::height * CollisionMap::cellSize) - _topLeftMovementBound;
+
+	// load shield sprite
+	sf::Texture& shield_txr = getGame()->getTexture("Sprites//shield.png");
+	shield_txr.setSmooth(true);
+	_shieldSprite.setTexture(shield_txr);
+	// set origin to .5 of the txr
+	auto size = shield_txr.getSize();
+	_shieldSprite.setOrigin(size.x / 2, size.y / 2);
 }
 
 void PlayerShipNode::onCollide(BaseEvent* e)

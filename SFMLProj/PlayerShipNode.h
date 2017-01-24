@@ -10,7 +10,7 @@
 class PlayerShipNode : public SceneNode
 {
 public:
-	PlayerShipNode() : SceneNode(), _remainingLives(max_lives)
+	PlayerShipNode() : SceneNode(), _remainingLives(max_lives), _shieldSprite()
 	{
 		proj_builder = new ProjectileBuilder("Sprites//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 2.5f, 400.0f, 15, 8);
@@ -21,6 +21,7 @@ public:
 	void update() override;
 	void start() override;
 	void subscribeEvents() override;
+	void render() override;
 	
 private:
 	void onCollide(BaseEvent* e);
@@ -55,6 +56,7 @@ private:
 	float _speedPickupTime;
 	// shield modifier
 	float _shieldPickupTime;
+	sf::Sprite _shieldSprite;
 
 	CollisionNode* _collision;
 	ControlScheme* _controlScheme;
