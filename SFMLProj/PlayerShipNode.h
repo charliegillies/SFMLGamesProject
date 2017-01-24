@@ -51,6 +51,11 @@ private:
 	int _remainingLives;
 	static const int max_lives = 3;
 
+	// speed modifier
+	float _speedPickupTime;
+	// shield modifier
+	float _shieldPickupTime;
+
 	CollisionNode* _collision;
 	ControlScheme* _controlScheme;
 	TransformNode* _transform;

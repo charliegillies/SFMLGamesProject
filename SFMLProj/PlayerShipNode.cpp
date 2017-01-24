@@ -14,6 +14,11 @@
 
 void PlayerShipNode::update()
 {
+	if (_speedPickupTime > 0)
+		_speedPickupTime -= getGame()->deltaTime();
+	if (_shieldPickupTime > 0)
+		_shieldPickupTime -= getGame()->deltaTime();
+
 	_mouseTargetRotation = getMouseTarget();
 
 	_mouseLerpRot = Utils::lerpVector(_mouseLerpRot, _mouseTargetRotation,
@@ -108,10 +113,13 @@ void PlayerShipNode::onProjectileCollide(BaseEvent* e)
 
 void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 {
+	const float pickup_time = 3.0f;
+
 	switch (power_up->Pickup)
 	{
 		case PICKUP_SHIELD: 
-			
+			_shieldPickupTime = pickup_time;
+			getGame()->removeSceneNode(power_up->getParent());
 			break;
 		
 		case PICKUP_HEALTH: 
@@ -128,7 +136,8 @@ void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 			break;
 		
 		case PICKUP_SPEED: 
-						
+			_speedPickupTime = pickup_time;
+			getGame()->removeSceneNode(power_up->getParent());
 			break;
 	}
 }
@@ -144,7 +153,11 @@ sf::Vector2f PlayerShipNode::getMouseTarget()
 
 void PlayerShipNode::applyMovement()
 {
-	const float speed = 240.0f;
+	float speed = 240.0f;
+
+	// check if the speed modifier applies
+	if (_speedPickupTime > 0)
+		speed *= 1.5f;
 
 	// rotate towards the mouse
 	sf::Vector2f direction = _mouseLerpRot;
