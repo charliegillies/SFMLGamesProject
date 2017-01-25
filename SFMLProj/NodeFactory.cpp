@@ -20,6 +20,8 @@
 #include "BomberIdleState.h"
 #include "BomberExplodeState.h"
 #include "AnimatedSpriteNode.h"
+#include "MultiCondition.h"
+#include "TimeCountCondition.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -189,8 +191,11 @@ SceneNode* NodeFactory::createEnemyBomber(int x, int y)
 	lost_sight_condition->toggleViewAsInverse();
 	chase_state->addTransition(lost_sight_condition, return_state);
 
-	// a3, CHARGE -> (IN BOMB DISTANCE?) -> EXPLODE
-	charge_state->addTransition(new PlayerInDistanceCondition(bomb_range + 5.0f), explode_state);
+	// a3, CHARGE -> (IN BOMB DISTANCE && 0.5 SECONDS PASSED ?) -> EXPLODE
+	MultiCondition* explode_conditions = new MultiCondition(true);
+	explode_conditions->addChild(new PlayerInDistanceCondition(bomb_range + 5.0f))
+		->addChild(new TimeCountCondition(0.5f));
+	charge_state->addTransition(explode_conditions, explode_state);
 
 	// create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));
