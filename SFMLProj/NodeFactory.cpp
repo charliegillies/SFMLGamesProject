@@ -23,6 +23,7 @@
 #include "MultiCondition.h"
 #include "TimeCountCondition.h"
 #include "PreExplosionState.h"
+#include "TwinShootState.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -200,6 +201,66 @@ SceneNode* NodeFactory::createEnemyBomber(int x, int y)
 	pre_explode_state->addTransition(new TimeCountCondition(0.5f), explode_state);
 
 	// create the state machine
+	base_node->addChild(new StateMachineNode(idle_state));
+
+	return base_node;
+}
+
+SceneNode* NodeFactory::createEnemyShooter(int x, int y)
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("Sprites//enemies//twin_shooter.png"));
+
+	// Create transform of ufo
+	TransformNode* transform = new TransformNode;
+	transform->position = sf::Vector2f(x, y);
+	transform->origin = sf::Vector2f(51.5f, 42.0f);
+	base_node->addChild(transform);
+
+	// Create appropiate collider
+	CollisionNode* collider = new CollisionNode(45);
+	collider->setFlags(CollisionNode::ENEMY_MASK,
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
+	base_node->addChild(collider);
+
+	// projectile settings for the ufo
+	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png",
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
+
+	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
+
+	// ai settings for UFO
+	float sight_range = 100.0f;
+	float lose_sight_range = 150.0f;
+	float chase_speed = 120.0f;
+
+	// create the ai state & transitions
+	AIState* idle_state = new UfoIdleState();
+	AIState* steer_state = new SteerTowardsPlayerState(chase_speed);
+	AIState* shoot_state = new TwinShootState();
+	AIState* return_state = new ReturnToStartPositionState(chase_speed / 1.5f);
+
+	//a1 IDLE -> MOVE TO PLAYER
+	idle_state->addTransition(new ViewOnPlayerCondition(sight_range), steer_state);
+
+	//a2 MOVE TO PLAYER -> SHOOT @ PLAYER
+	steer_state->addTransition(new CanShootCondition(), shoot_state);
+
+	//a4, if distance between us and player is too far, give up and return
+	auto outOfRangeCondition = new PlayerInDistanceCondition(lose_sight_range);
+	outOfRangeCondition->toggleViewAsInverse();
+	steer_state->addTransition(outOfRangeCondition, return_state);
+
+	//a3, GO BACK TO MOVING TO PLAYER
+	shoot_state->addTransition(new FixedCondition(true), steer_state);
+
+	//a5, return to idle state from return state
+	return_state->addTransition(new InDistanceOfStartCondition(10.0f), idle_state);
+
+	//a6, chase player if they spot it while retreating
+	return_state->addTransition(new ViewOnPlayerCondition(sight_range), steer_state);
+
+	// now create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));
 
 	return base_node;

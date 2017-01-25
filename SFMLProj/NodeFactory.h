@@ -18,6 +18,8 @@ public:
 
 	static SceneNode* createEnemyBomber(int x, int y);
 
+	static SceneNode* createEnemyShooter(int x, int y);
+
 	static SceneNode* createSonicExplosion(int x, int y);
 
 	static SceneNode* createPixelExplosion(int x, int y);

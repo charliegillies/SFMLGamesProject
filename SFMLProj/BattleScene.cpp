@@ -17,18 +17,18 @@ void BattleScene::onStart()
 	_game->addSceneNode(NodeFactory::createAsteroid(100, 100));
 	
 	//_game->addSceneNode(NodeFactory::createEnemyUfo(800, 800));
-	_game->addSceneNode(NodeFactory::createEnemyBomber(800, 800));
-	
+	//_game->addSceneNode(NodeFactory::createEnemyBomber(800, 800));
+	_game->addSceneNode(NodeFactory::createEnemyShooter(800, 800));
+
 	// add the collision handler node
 	_game->addSceneNode(new CollisionHandler());
 
 	// create the player node
 	_game->addSceneNode(NodeFactory::createPlayerNode());
 
-	_game->addSceneNode(NodeFactory::createHealthPickup(1000, 500));
-	_game->addSceneNode(NodeFactory::createShieldPickup(800, 500));
-	_game->addSceneNode(NodeFactory::createSpeedPickup(1000, 300));
-
+	//_game->addSceneNode(NodeFactory::createHealthPickup(1000, 500));
+	//_game->addSceneNode(NodeFactory::createShieldPickup(800, 500));
+	//_game->addSceneNode(NodeFactory::createSpeedPickup(1000, 300));
 
 	/* PLAYER UI */
 	CanvasNode* canvas = new CanvasNode();

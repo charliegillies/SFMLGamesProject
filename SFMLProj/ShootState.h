@@ -13,8 +13,10 @@ public:
 
 	void onEnter() override;
 	void execute() override;
+	virtual void shoot(TransformNode* transform, sf::Vector2f dir);
 	void onExit() override;
 
-private:
+protected:
 	ProjectileDataNode* projectile_data_node;
+	sf::Transform sf_transform;
 };

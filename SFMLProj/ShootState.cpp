@@ -19,11 +19,20 @@ void ShootState::execute()
 	sf::Vector2f dir = (stateMachine->playerTransform->position - transform->position);
 	dir = Utils::normalize(dir);
 
-	// construct a projectile to shoot
-	SceneNode* projectile = projectile_data_node->builder->build(transform->position, dir, transform->rotation);
-	stateMachine->createSceneNode(projectile);
+	shoot(transform, dir);
 
 	projectile_data_node->onShoot();
+}
+
+void ShootState::shoot(TransformNode* transform, sf::Vector2f dir)
+{
+	// figure out where we're supposed to spawn the projectile
+	sf_transform.rotate(transform->rotation);
+	sf::Vector2f pos = transform->position + sf_transform.transformPoint(0, 22.5f);
+
+	// construct a projectile to shoot
+	SceneNode* projectile = projectile_data_node->builder->build(pos, dir, transform->rotation);
+	stateMachine->createSceneNode(projectile);
 }
 
 void ShootState::onExit()
