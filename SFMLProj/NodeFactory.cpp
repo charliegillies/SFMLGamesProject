@@ -22,6 +22,7 @@
 #include "AnimatedSpriteNode.h"
 #include "MultiCondition.h"
 #include "TimeCountCondition.h"
+#include "PreExplosionState.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -179,6 +180,7 @@ SceneNode* NodeFactory::createEnemyBomber(int x, int y)
 	AIState* charge_state = new SteerTowardsPlayerState(charge_speed);
 	AIState* explode_state = new BomberExplodeState(bomb_range);
 	AIState* return_state = new ReturnToStartPositionState(chase_speed / 1.5f);
+	AIState* pre_explode_state = new PreExplosionState();
 
 	// a1, IDLE -> (SEE PLAYER?) -> CHASE/STEER
 	idle_state->addTransition(new ViewOnPlayerCondition(sight_range), chase_state);
@@ -191,11 +193,11 @@ SceneNode* NodeFactory::createEnemyBomber(int x, int y)
 	lost_sight_condition->toggleViewAsInverse();
 	chase_state->addTransition(lost_sight_condition, return_state);
 
-	// a3, CHARGE -> (IN BOMB DISTANCE && 0.5 SECONDS PASSED ?) -> EXPLODE
-	MultiCondition* explode_conditions = new MultiCondition(true);
-	explode_conditions->addChild(new PlayerInDistanceCondition(bomb_range + 5.0f))
-		->addChild(new TimeCountCondition(0.5f));
-	charge_state->addTransition(explode_conditions, explode_state);
+	// a3, CHARGE -> (IN BOMB DISTANCE?) -> BEGIN TO EXPLODE
+	charge_state->addTransition(new PlayerInDistanceCondition(bomb_range + 5.0f), pre_explode_state);
+
+	// a5, BEGIN TO EXPLODE -> (TIME PASSED?) -> EXPLODE
+	pre_explode_state->addTransition(new TimeCountCondition(0.5f), explode_state);
 
 	// create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));
