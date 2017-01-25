@@ -17,6 +17,8 @@
 #include "FixedCondition.h"
 #include "InDistanceOfStartCondition.h"
 #include "ProjectileDataNode.h"
+#include "BomberIdleState.h"
+#include "BomberExplodeState.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -84,7 +86,7 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;
 	transform->position = sf::Vector2f(x, y);
-	transform->origin = sf::Vector2f(40.5f, 40.5f);
+	transform->origin = sf::Vector2f(45.5f, 45.5f);
 	base_node->addChild(transform);
 
 	// Create appropiate collider
@@ -131,6 +133,65 @@ SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 	return_state->addTransition(new ViewOnPlayerCondition(sight_range), steer_state);
 
 	// now create the state machine
+	base_node->addChild(new StateMachineNode(idle_state));
+
+	return base_node;
+}
+
+SceneNode* NodeFactory::createEnemyBomber(int x, int y)
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode("Sprites//enemies//bomber.png"));
+
+	// Create transform of ufo
+	TransformNode* transform = new TransformNode;
+	transform->position = sf::Vector2f(x, y);
+	transform->origin = sf::Vector2f(51.5f, 42);
+	base_node->addChild(transform);
+
+	// Create appropiate collider
+	CollisionNode* collider = new CollisionNode(45, sf::Vector2f(8, 0));
+	collider->setFlags(CollisionNode::ENEMY_MASK,
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
+	base_node->addChild(collider);
+
+	// projectile settings for the ufo
+	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png",
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
+
+	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
+
+	// ai settings for UFO
+	float chase_speed = 250.0f;
+	float charge_speed = chase_speed * 1.4f;
+
+	float sight_range = 400.0f;
+	float lose_sight_range = 450.0f;
+	float charge_range = 150.0f;
+	float bomb_range = 100.0f;
+
+	// create the ai state & transitions
+	AIState* idle_state = new BomberIdleState();
+	AIState* chase_state = new SteerTowardsPlayerState(chase_speed);
+	AIState* charge_state = new SteerTowardsPlayerState(charge_speed);
+	AIState* explode_state = new BomberExplodeState(bomb_range);
+	AIState* return_state = new ReturnToStartPositionState(chase_speed / 1.5f);
+
+	// a1, IDLE -> (SEE PLAYER?) -> CHASE/STEER
+	idle_state->addTransition(new ViewOnPlayerCondition(sight_range), chase_state);
+
+	// a2, CHASE -> (SEE PLAYER IN BOMB RANGE?) -> CHARGE
+	chase_state->addTransition(new ViewOnPlayerCondition(charge_range), charge_state);
+	
+	// a4, CHASE -> (LOST SIGHT OF PLAYER?) -> RETURN
+	auto lost_sight_condition = new ViewOnPlayerCondition(lose_sight_range);
+	lost_sight_condition->toggleViewAsInverse();
+	chase_state->addTransition(lost_sight_condition, return_state);
+
+	// a3, CHARGE -> (IN BOMB DISTANCE?) -> EXPLODE
+	charge_state->addTransition(new PlayerInDistanceCondition(bomb_range + 5.0f), explode_state);
+
+	// create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));
 
 	return base_node;

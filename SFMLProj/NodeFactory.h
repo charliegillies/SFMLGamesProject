@@ -16,6 +16,8 @@ public:
 
 	static SceneNode* createEnemyUfo(int x, int y);
 
+	static SceneNode* createEnemyBomber(int x, int y);
+
 	static SceneNode* createHealthPickup(int x, int y);
 
 	static SceneNode* createSpeedPickup(int x, int y);
