@@ -12,10 +12,10 @@ class PlayerShipNode : public SceneNode
 public:
 	PlayerShipNode() : SceneNode(), _remainingLives(max_lives), _shieldSprite()
 	{
-		primary_proj_builder = new ProjectileBuilder("Sprites//laserBlue03.png", 
+		primary_proj_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 2.5f, 400.0f, 15, 8);
 
-		secondary_proj_builder = new ProjectileBuilder("Sprites//missile_1.png",
+		secondary_proj_builder = new ProjectileBuilder("Sprites//projectiles//missile_1.png",
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 2.5f, 600.0f, 15, 8);
 	}
 

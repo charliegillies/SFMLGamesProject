@@ -11,7 +11,7 @@ BattleScene::~BattleScene() {}
 void BattleScene::onStart()
 {
 	// load standard game background
-	_game->addSceneNode(NodeFactory::createBackgroundNode("Sprites//purple.png"));
+	_game->addSceneNode(NodeFactory::createBackgroundNode("Sprites//backgrounds//purple.png"));
 	
 	// we're going to either load or generate our asteroids and enemies
 	_game->addSceneNode(NodeFactory::createAsteroid(100, 100));

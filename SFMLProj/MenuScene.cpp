@@ -10,7 +10,7 @@ MenuScene::~MenuScene() {}
 
 void MenuScene::onStart()
 {
-	_game->addSceneNode(NodeFactory::createBackgroundNode("Sprites//blue.png"));
+	_game->addSceneNode(NodeFactory::createBackgroundNode("Sprites//backgrounds//blue.png"));
 
 	SceneNode* canvasNode = new CanvasNode();
 
