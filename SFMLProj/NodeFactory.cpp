@@ -101,7 +101,6 @@ SceneNode* NodeFactory::createPixelExplosion(int x, int y)
 
 	TransformNode* transform_node = new TransformNode();
 	transform_node->position = sf::Vector2f(x, y);
-	transform_node->scale = sf::Vector2f(2, 2);
 	base_node->addChild(transform_node);
 
 	// create animation

@@ -22,9 +22,9 @@ void ProjectileNode::onCollide(BaseEvent* event)
 
 	if (onDeathCreateFunc != nullptr)
 	{
-		TransformNode* transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
-
 		// get transform
+		TransformNode* transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
+		// invoke the creator function
 		SceneNode* created = onDeathCreateFunc(transform->position.x, transform->position.y);
 		getGame()->addSceneNode(created);
 	}

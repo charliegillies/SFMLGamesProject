@@ -20,6 +20,7 @@
 #include "TwinShootState.h"
 #include "HealthNode.h"
 #include "ProjectileCollisionListenerNode.h"
+#include "DestroyAfterTimeNode.h"
 
 SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 {
@@ -41,6 +42,7 @@ SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 	// projectile settings for the ufo
 	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserRed07.png",
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
+	projectile_builder->setCreatorPtr(createRedLaserFx2);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
 
@@ -162,6 +164,7 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 	// projectile settings for the shooter
 	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserRed03.png",
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
+	projectile_builder->setCreatorPtr(createRedLaserFx1);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
 
@@ -204,4 +207,30 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 	base_node->addChild(new StateMachineNode(idle_state));
 
 	return base_node;
+}
+
+SceneNode* EnemyFactory::createProjectileFx(int x, int y, std::string sprite, sf::Vector2f origin, float life_time)
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode(sprite));
+
+	// Create transform of ufo
+	TransformNode* transform = new TransformNode;
+	transform->position = sf::Vector2f(x, y);
+	transform->origin = origin;
+	base_node->addChild(transform);
+
+	base_node->addChild(new DestroyAfterTimeNode(life_time));
+
+	return base_node;
+}
+
+SceneNode* EnemyFactory::createRedLaserFx1(int x, int y)
+{
+	return createProjectileFx(x, y, "Sprites//projectiles//laserRed08.png", sf::Vector2f(24, 23), 0.1f);
+}
+
+SceneNode* EnemyFactory::createRedLaserFx2(int x, int y)
+{
+	return createProjectileFx(x, y, "Sprites//projectiles//laserRed09.png", sf::Vector2f(24, 23), 0.1f);
 }
