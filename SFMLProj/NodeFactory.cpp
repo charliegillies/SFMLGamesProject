@@ -20,7 +20,7 @@
 
 SceneNode* NodeFactory::createPlayerNode()
 {
-	string fp = "Sprites//playerShip1_blue.png";
+	string fp = "Sprites//player//ship.png";
 
 	SceneNode* base_node = new SceneNode();
 	base_node->setName("player");
@@ -79,7 +79,7 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 SceneNode* NodeFactory::createEnemyUfo(int x, int y)
 {
 	SceneNode* base_node = new SceneNode();
-	base_node->addChild(new SpriteNode("Sprites//enemies//ufoRed.png"));
+	base_node->addChild(new SpriteNode("Sprites//enemies//ufo.png"));
 
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;

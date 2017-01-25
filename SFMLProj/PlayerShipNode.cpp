@@ -104,7 +104,7 @@ void PlayerShipNode::start()
 		CollisionMap::height * CollisionMap::cellSize) - _topLeftMovementBound;
 
 	// load shield sprite
-	sf::Texture& shield_txr = getGame()->getTexture("Sprites//shield.png");
+	sf::Texture& shield_txr = getGame()->getTexture("Sprites//player//shield.png");
 	shield_txr.setSmooth(true);
 	_shieldSprite.setTexture(shield_txr);
 	// set origin to .5 of the txr
