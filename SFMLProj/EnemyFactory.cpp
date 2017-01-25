@@ -218,6 +218,7 @@ SceneNode* EnemyFactory::createProjectileFx(int x, int y, std::string sprite, sf
 	TransformNode* transform = new TransformNode;
 	transform->position = sf::Vector2f(x, y);
 	transform->origin = origin;
+	transform->scale = sf::Vector2f(0.5f, 0.5f);
 	base_node->addChild(transform);
 
 	base_node->addChild(new DestroyAfterTimeNode(life_time));
