@@ -14,6 +14,8 @@ public:
 
 	~ControlScheme() {}
 
+	bool shieldUp();
+
 	// if the player has fired
 	bool primaryFired();
 

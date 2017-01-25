@@ -1,6 +1,11 @@
 #include "ControlScheme.h"
 #include <SFML/Window/Keyboard.hpp>
 
+bool ControlScheme::shieldUp()
+{
+	return _input->keyPressed(sf::Keyboard::Space);
+}
+
 bool ControlScheme::primaryFired()
 {
 	return _input->leftClicked();

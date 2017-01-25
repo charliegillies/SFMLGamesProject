@@ -13,11 +13,13 @@
 
 void PlayerShipNode::update()
 {
+	getGame()->setDebugValue("shield", to_string(_shieldHpNode->HP));
+
+	isShieldUp();
+
 	// if pickups are active, decrease time
 	if (_speedPickupTime > 0)
 		_speedPickupTime -= getGame()->deltaTime();
-	if (_shieldPickupTime > 0)
-		_shieldPickupTime -= getGame()->deltaTime();
 
 	_mouseTargetRotation = getMouseTarget();
 
@@ -50,7 +52,7 @@ void PlayerShipNode::subscribeEvents()
 void PlayerShipNode::render()
 {
 	// draw shield....
-	if (_shieldPickupTime > 0)
+	if (_shieldUp)
 	{
 		_shieldSprite.setPosition(_transform->position);
 		_shieldSprite.setRotation(_transform->rotation);
@@ -91,6 +93,9 @@ void PlayerShipNode::start()
 	_collision = static_cast<CollisionNode*>(getParent()->getNode(NodeTag::collision_node));
 	_hpNode = static_cast<HealthNode*>(getParent()->getNode(NodeTag::health_node));
 
+	// create the shield hp node
+	_shieldHpNode = new HealthNode(100);
+
 	// Send out 'player lost life' event
 	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(_hpNode->maxHP));
 
@@ -101,8 +106,7 @@ void PlayerShipNode::start()
 
 	// assign bounds
 	_topLeftMovementBound = _transform->origin;
-	_botRightMovementBound = sf::Vector2f(
-		CollisionMap::width * CollisionMap::cellSize,
+	_botRightMovementBound = sf::Vector2f(CollisionMap::width * CollisionMap::cellSize,
 		CollisionMap::height * CollisionMap::cellSize) - _topLeftMovementBound;
 
 	// load shield sprite
@@ -140,7 +144,15 @@ void PlayerShipNode::onProjectileCollide(BaseEvent* e)
 {
 	auto* proj_col_event = static_cast<ProjectileCollisionEvent*>(e);
 
-	_hpNode->damage(proj_col_event->damageOnHit);
+
+	if (isShieldUp())
+	{
+		_shieldHpNode->damage(5);
+
+		isShieldUp(); // evaluate condition again
+	}
+	else
+		_hpNode->damage(proj_col_event->damageOnHit);
 
 	onLifeChanged();
 }
@@ -152,8 +164,12 @@ void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 	switch (power_up->Pickup)
 	{
 		case PICKUP_SHIELD: 
-			_shieldPickupTime = pickup_time;
-			getGame()->removeSceneNode(power_up->getParent());
+			if (!_shieldHpNode->atFullHP())
+			{
+				_shieldHpNode->heal(25);
+				getGame()->removeSceneNode(power_up->getParent());
+			}
+
 			break;
 		
 		case PICKUP_HEALTH: 
@@ -226,4 +242,10 @@ void PlayerShipNode::onLifeChanged()
 {
 	PlayerLostLifeEvent lost_life_event(_hpNode->HP);
 	invokeGlobalEvent(EventTags::playerLostLife, &lost_life_event);
+}
+
+bool PlayerShipNode::isShieldUp()
+{
+	_shieldUp = (_controlScheme->shieldUp() && !_shieldHpNode->isDead());
+	return _shieldUp;
 }

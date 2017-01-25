@@ -12,7 +12,7 @@
 class PlayerShipNode : public SceneNode
 {
 public:
-	PlayerShipNode() : SceneNode(), _shieldSprite()
+	PlayerShipNode() : SceneNode(), _shieldSprite(), _shieldUp(false)
 	{
 		primary_proj_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.6f, 800, 15, 8);
@@ -42,7 +42,14 @@ private:
 
 	void onLifeChanged();
 
+	bool isShieldUp();
+
+	// health node, has max hp & current hp
 	HealthNode* _hpNode;
+	// shield information
+	HealthNode* _shieldHpNode;
+	bool _shieldUp;
+	sf::Sprite _shieldSprite;
 
 	// projectile builders
 	ProjectileBuilder* primary_proj_builder;
@@ -61,9 +68,6 @@ private:
 
 	// speed modifier
 	float _speedPickupTime;
-	// shield modifier
-	float _shieldPickupTime;
-	sf::Sprite _shieldSprite;
 
 	CollisionNode* _collision;
 	ControlScheme* _controlScheme;
