@@ -16,6 +16,8 @@ public:
 		primary_proj_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.6f, 800, 15, 8);
 
+		primary_proj_builder->setCreatorPtr(NodeFactory::createProjectileBlueFx);
+
 		secondary_proj_builder = new ProjectileBuilder("Sprites//projectiles//missile_1.png",
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.8f, 1000, 15, 8);
 

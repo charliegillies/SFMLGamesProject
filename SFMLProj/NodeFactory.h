@@ -1,5 +1,6 @@
 #pragma once
 #include "SceneNode.h"
+#include <SFML/System/Vector2.hpp>
 
 /*
 	Factory object for handling the creation of SceneNode hierarchies.
@@ -22,4 +23,7 @@ public:
 	static SceneNode* createSpeedPickup(int x, int y);
 
 	static SceneNode* createShieldPickup(int x, int y);
+
+	static SceneNode* createProjectileFx(int x, int y, string sprite, sf::Vector2f origin, float life_time);
+	static SceneNode* createProjectileBlueFx(int x, int y);
 };

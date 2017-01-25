@@ -21,6 +21,7 @@
 #include "HealthNode.h"
 #include "ProjectileCollisionListenerNode.h"
 #include "DestroyAfterTimeNode.h"
+#include "NodeFactory.h"
 
 SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 {
@@ -209,29 +210,12 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 	return base_node;
 }
 
-SceneNode* EnemyFactory::createProjectileFx(int x, int y, std::string sprite, sf::Vector2f origin, float life_time)
-{
-	SceneNode* base_node = new SceneNode();
-	base_node->addChild(new SpriteNode(sprite));
-
-	// Create transform of ufo
-	TransformNode* transform = new TransformNode;
-	transform->position = sf::Vector2f(x, y);
-	transform->origin = origin;
-	transform->scale = sf::Vector2f(0.5f, 0.5f);
-	base_node->addChild(transform);
-
-	base_node->addChild(new DestroyAfterTimeNode(life_time));
-
-	return base_node;
-}
-
 SceneNode* EnemyFactory::createRedLaserFx1(int x, int y)
 {
-	return createProjectileFx(x, y, "Sprites//projectiles//laserRed08.png", sf::Vector2f(24, 23), 0.1f);
+	return NodeFactory::createProjectileFx(x, y, "Sprites//projectiles//laserRed08.png", sf::Vector2f(24, 23), 0.1f);
 }
 
 SceneNode* EnemyFactory::createRedLaserFx2(int x, int y)
 {
-	return createProjectileFx(x, y, "Sprites//projectiles//laserRed09.png", sf::Vector2f(24, 23), 0.1f);
+	return NodeFactory::createProjectileFx(x, y, "Sprites//projectiles//laserRed09.png", sf::Vector2f(24, 23), 0.1f);
 }

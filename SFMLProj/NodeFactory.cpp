@@ -8,6 +8,7 @@
 #include "CollisionNode.h"
 #include "AIState.h"
 #include "AnimatedSpriteNode.h"
+#include "DestroyAfterTimeNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -181,4 +182,26 @@ SceneNode* NodeFactory::createShieldPickup(int x, int y)
 	base_node->addChild(new PowerUpNode(PICKUP_SHIELD));
 
 	return base_node;
+}
+
+SceneNode* NodeFactory::createProjectileFx(int x, int y, std::string sprite, sf::Vector2f origin, float life_time)
+{
+	SceneNode* base_node = new SceneNode();
+	base_node->addChild(new SpriteNode(sprite));
+
+	// Create transform of ufo
+	TransformNode* transform = new TransformNode;
+	transform->position = sf::Vector2f(x, y);
+	transform->origin = origin;
+	transform->scale = sf::Vector2f(0.5f, 0.5f);
+	base_node->addChild(transform);
+
+	base_node->addChild(new DestroyAfterTimeNode(life_time));
+
+	return base_node;
+}
+
+SceneNode* NodeFactory::createProjectileBlueFx(int x, int y)
+{
+	return createProjectileFx(x, y, "Sprites//projectiles//laserBlue09.png", sf::Vector2f(24, 23), 0.1f);
 }
