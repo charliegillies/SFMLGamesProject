@@ -13,6 +13,7 @@
 
 void PlayerShipNode::update()
 {
+	// if pickups are active, decrease time
 	if (_speedPickupTime > 0)
 		_speedPickupTime -= getGame()->deltaTime();
 	if (_shieldPickupTime > 0)
@@ -191,7 +192,6 @@ void PlayerShipNode::applyMovement()
 	if (_speedPickupTime > 0)
 		speed *= 1.5f;
 
-	// rotate towards the mouse
 	sf::Vector2f direction = _mouseLerpRot;
 	sf::Vector2f velocity(0, 0);
 

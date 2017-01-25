@@ -23,5 +23,7 @@ public:
 	static float calcAngle(sf::Vector2f a, sf::Vector2f b);
 	
 	static float radToDeg(float rads);
+
+	static float degToRad(float degrees);
 };
 
