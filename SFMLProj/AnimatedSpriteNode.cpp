@@ -44,7 +44,13 @@ void AnimatedSpriteNode::update()
 		frameQueue.push(frame);
 
 	// ensure we still have frames left (double check!)
-	if (frameQueue.size() == 0) return;
+	if (frameQueue.size() == 0)
+	{
+		if (mode == ANIM_DELETE_SELF)
+			getGame()->removeSceneNode(getParent());
+
+		return;
+	}
 
 	setupFrame();
 	nextFrameTime = frameTime;

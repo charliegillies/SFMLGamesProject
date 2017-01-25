@@ -208,7 +208,7 @@ SceneNode* NodeFactory::createSonicExplosion(int x, int y)
 
 	// create animation
 	AnimatedSpriteNode* animation = new AnimatedSpriteNode(
-		"Sprites//animations//sonic_explosion.png", 0.04f, ANIM_REPEAT);
+		"Sprites//animations//sonic_explosion.png", 0.04f, ANIM_DELETE_SELF);
 
 	// add animation frames
 	animation
@@ -237,7 +237,7 @@ SceneNode* NodeFactory::createPixelExplosion(int x, int y)
 
 	// create animation
 	AnimatedSpriteNode* animation = new AnimatedSpriteNode(
-		"Sprites//animations//pixel_explosion.png", 0.06f, ANIM_REPEAT);
+		"Sprites//animations//pixel_explosion.png", 0.06f, ANIM_DELETE_SELF);
 
 	// add animation frames
 	animation

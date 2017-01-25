@@ -17,8 +17,20 @@ struct AnimationFrame
 
 enum AnimationMode
 {
+	/*
+		Animation repeats until told to stop.
+	*/
 	ANIM_REPEAT = 1,
-	ANIM_PLAY_ONCE = 2
+	
+	/*
+		Animation plays just once. Does nothing else unless told otherwise.
+	*/
+	ANIM_PLAY_ONCE = 2,
+	
+	/*
+		Animation plays once, then deletes own parent from scene.
+	*/
+	ANIM_DELETE_SELF = 3
 };
 
 /*

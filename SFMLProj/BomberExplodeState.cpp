@@ -1,23 +1,24 @@
 #include "BomberExplodeState.h"
 #include <iostream>
+#include "NodeFactory.h"
 
 BomberExplodeState::BomberExplodeState(float range) 
 	: range(range) { }
 
 BomberExplodeState::~BomberExplodeState() { }
 
-void BomberExplodeState::onEnter() { }
-
-void BomberExplodeState::execute()
+void BomberExplodeState::onEnter()
 {
-	// Begin playing the animation?
+	auto pos = stateMachine->nTransform->position;
 
-	// Get everyone within our range using raycasts, damage them!
+	stateMachine->createSceneNode(NodeFactory::createPixelExplosion(pos.x, pos.y));
+	stateMachine->removeSceneNode(stateMachine->getParent());
+
+	// raycast & damage everyone we hit...
 
 
 }
 
-void BomberExplodeState::onExit()
-{
-	
-}
+void BomberExplodeState::execute() { }
+
+void BomberExplodeState::onExit() { }
