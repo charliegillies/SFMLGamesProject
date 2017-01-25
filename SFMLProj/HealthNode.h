@@ -11,6 +11,12 @@ public:
 	HealthNode(const int maxHP) : maxHP(maxHP), HP(maxHP) { }
 	~HealthNode() { }
 
+	// The maximum hp of the scene node
+	const int maxHP;
+
+	// The current hp of the scene node
+	int HP;
+
 	// Reduces HP, limits hp to 0.
 	void damage(int dmg)
 	{
@@ -53,10 +59,4 @@ public:
 		return NodeTag::health_node;
 	}
 
-private:
-	// The maximum hp of the scene node
-	const int maxHP;
-
-	// The current hp of the scene node
-	int HP;
 };

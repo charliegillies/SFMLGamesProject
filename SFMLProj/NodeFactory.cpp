@@ -28,13 +28,13 @@ SceneNode* NodeFactory::createPlayerNode()
 
 	// collider will be static
 	CollisionNode* collider = new CollisionNode(40, sf::Vector2f(9, -6));
-
 	// i am the player, and i can collide with the enemy and obstacles.
 	collider->setFlags(CollisionNode::PLAYER_MASK, 
 		CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK 
 		| CollisionNode::PROJECTILE_MASK | CollisionNode::PICKUP_MASK );
-	
 	base_node->addChild(collider);
+
+	base_node->addChild(new HealthNode(200));
 
 	return base_node;
 }

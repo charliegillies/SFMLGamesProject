@@ -7,11 +7,12 @@
 #include "ProjectileBuilder.h"
 #include "PowerUpNode.h"
 #include "NodeFactory.h"
+#include "HealthNode.h"
 
 class PlayerShipNode : public SceneNode
 {
 public:
-	PlayerShipNode() : SceneNode(), _remainingLives(max_lives), _shieldSprite()
+	PlayerShipNode() : SceneNode(), _shieldSprite()
 	{
 		primary_proj_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.6f, 800, 15, 8);
@@ -41,6 +42,8 @@ private:
 
 	void onLifeChanged();
 
+	HealthNode* _hpNode;
+
 	// projectile builders
 	ProjectileBuilder* primary_proj_builder;
 	ProjectileBuilder* secondary_proj_builder;
@@ -55,10 +58,6 @@ private:
 	// bounds
 	sf::Vector2f _topLeftMovementBound;
 	sf::Vector2f _botRightMovementBound;
-
-	// the remaining lives
-	int _remainingLives;
-	static const int max_lives = 3;
 
 	// speed modifier
 	float _speedPickupTime;

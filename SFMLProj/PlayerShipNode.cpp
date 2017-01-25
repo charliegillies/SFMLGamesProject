@@ -89,9 +89,10 @@ void PlayerShipNode::start()
 	_controlScheme = getGame()->getControlScheme();
 	_transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
 	_collision = static_cast<CollisionNode*>(getParent()->getNode(NodeTag::collision_node));
+	_hpNode = static_cast<HealthNode*>(getParent()->getNode(NodeTag::health_node));
 
 	// Send out 'player lost life' event
-	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(_remainingLives));
+	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(_hpNode->maxHP));
 
 	// start at mouse rot
 	_mouseTargetRotation = getMouseTarget();
@@ -137,10 +138,10 @@ void PlayerShipNode::onCollide(BaseEvent* e)
 
 void PlayerShipNode::onProjectileCollide(BaseEvent* e)
 {
-	ProjectileCollisionEvent* projectileCollision = static_cast<ProjectileCollisionEvent*>(e);
-	
-	_remainingLives--;
-	// handle this better, but for now...
+	auto* proj_col_event = static_cast<ProjectileCollisionEvent*>(e);
+
+	_hpNode->damage(proj_col_event->damageOnHit);
+
 	onLifeChanged();
 }
 
@@ -156,10 +157,9 @@ void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 			break;
 		
 		case PICKUP_HEALTH: 
-			if (_remainingLives != max_lives)
+			if (!_hpNode->atFullHP())
 			{
-				// add 1 life from the pick up
-				_remainingLives += 1;
+				_hpNode->heal(25);
 				// broadcast event
 				onLifeChanged();
 				// destroy the power up
@@ -224,6 +224,6 @@ void PlayerShipNode::applyRotation()
 
 void PlayerShipNode::onLifeChanged()
 {
-	PlayerLostLifeEvent lost_life_event(_remainingLives);
+	PlayerLostLifeEvent lost_life_event(_hpNode->HP);
 	invokeGlobalEvent(EventTags::playerLostLife, &lost_life_event);
 }
