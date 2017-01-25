@@ -67,8 +67,6 @@ SceneNode* NodeFactory::createAsteroid(int x, int y)
 	return base_node;
 }
 
-
-
 SceneNode* NodeFactory::createSonicExplosion(int x, int y)
 {
 	SceneNode* base_node = new SceneNode();

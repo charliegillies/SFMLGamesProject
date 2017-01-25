@@ -1,6 +1,5 @@
 #pragma once
 #include "SceneNode.h"
-#include <SFML/System/Vector2.hpp>
 
 /*
 	Factory object for handling the creation of SceneNode hierarchies.
@@ -13,8 +12,6 @@ public:
 	static SceneNode* createBackgroundNode(string filepath);
 
 	static SceneNode* createAsteroid(int x, int y);
-
-
 
 	static SceneNode* createSonicExplosion(int x, int y);
 
