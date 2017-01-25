@@ -18,6 +18,8 @@
 #include "PreExplosionState.h"
 #include "TimeCountCondition.h"
 #include "TwinShootState.h"
+#include "HealthNode.h"
+#include "ProjectileCollisionListenerNode.h"
 
 SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 {
@@ -41,6 +43,10 @@ SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
+
+	// health & projectile handling 
+	base_node->addChild(new HealthNode(100));
+	base_node->addChild(new ProjectileCollisionListenerNode());
 
 	// ai settings for UFO
 	float sight_range = 100.0f;
@@ -95,12 +101,6 @@ SceneNode* EnemyFactory::createEnemyBomber(int x, int y)
 	collider->setFlags(CollisionNode::ENEMY_MASK,
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
 	base_node->addChild(collider);
-
-	// projectile settings for the ufo
-	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png",
-		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
-
-	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
 
 	// ai settings for UFO
 	float chase_speed = 250.0f;
@@ -159,11 +159,15 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
 	base_node->addChild(collider);
 
-	// projectile settings for the ufo
+	// projectile settings for the shooter
 	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png",
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
+
+	// health & projectile handling 
+	base_node->addChild(new HealthNode(100));
+	base_node->addChild(new ProjectileCollisionListenerNode());
 
 	// ai settings for UFO
 	float sight_range = 100.0f;
