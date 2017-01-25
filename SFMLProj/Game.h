@@ -64,6 +64,12 @@ public:
 	// get deltaTime
 	float deltaTime();
 
+	// gets the time that the app has been running
+	float appTime();
+
+	// sets the time that the app has been running
+	void setAppTime(float appTime);
+
 	// gets the global event system that is specific to the scene
 	EventSystem* getEventSystem();
 
@@ -81,6 +87,8 @@ public:
 
 private:
 	float _deltaTime;
+	float _appTime;
+
 	Scene* _currentScene;
 	sf::RenderWindow& _window;
 	ControlScheme* _controlScheme;

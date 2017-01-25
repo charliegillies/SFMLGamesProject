@@ -117,6 +117,16 @@ float Game::deltaTime()
 	return _deltaTime;
 }
 
+float Game::appTime()
+{
+	return _appTime;
+}
+
+void Game::setAppTime(float appTime)
+{
+	_appTime = appTime;
+}
+
 EventSystem* Game::getEventSystem()
 {
 	return _currentScene != nullptr ? _currentScene->getEventSystem() : nullptr;

@@ -24,6 +24,7 @@ int main()
 	// inform game that we're starting initialization
 	game->onStart();
 
+	sf::Clock appClock;
 	sf::Clock clock;
 	float fps = 60;
 	float time = 1 / fps;
@@ -104,6 +105,9 @@ int main()
 		{
 			// restart the clock, we have a local copy of dt
 			clock.restart();
+
+			// sets the total application time
+			game->setAppTime(appClock.getElapsedTime().asSeconds());
 
 			// set deltaTime
 			game->setDt(dt);
