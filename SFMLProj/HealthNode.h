@@ -48,6 +48,11 @@ public:
 		return (HP / maxHP) * 100;
 	}
 
+	string getNodeTag() override
+	{
+		return NodeTag::health_node;
+	}
+
 private:
 	// The maximum hp of the scene node
 	const int maxHP;

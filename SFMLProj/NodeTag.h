@@ -16,4 +16,5 @@ public:
 	static const string sprite_node;
 	static const string collision_node;
 	static const string projectile_data_node;
+	static const string health_node;
 };
