@@ -72,4 +72,5 @@ void AnimatedSpriteNode::setupFrame()
 	origin.y = origin.y * frame.originMultiplier.y;
 
 	transform->origin = origin;
+	sprite.setOrigin(transform->origin);
 }

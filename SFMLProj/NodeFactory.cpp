@@ -198,7 +198,7 @@ SceneNode* NodeFactory::createEnemyBomber(int x, int y)
 	return base_node;
 }
 
-SceneNode* NodeFactory::createExplosion(int x, int y)
+SceneNode* NodeFactory::createSonicExplosion(int x, int y)
 {
 	SceneNode* base_node = new SceneNode();
 	
@@ -208,13 +208,12 @@ SceneNode* NodeFactory::createExplosion(int x, int y)
 
 	// create animation
 	AnimatedSpriteNode* animation = new AnimatedSpriteNode(
-		"Sprites//animations//sonic_explosion.png", 0.05f, ANIM_REPEAT);
+		"Sprites//animations//sonic_explosion.png", 0.04f, ANIM_REPEAT);
 	
 	sf::Vector2f middle_origin(0.5f, 0.5f);
 	
 	// add animation frames
-	animation
-		->addFrame(284, 0, 152, 150, middle_origin)
+	animation->addFrame(284, 0, 152, 150, middle_origin)
 		->addFrame(192, 284, 190, 190, middle_origin)
 		->addFrame(0, 0, 284, 284, middle_origin)
 		->addFrame(531, 140, 120, 124, middle_origin)
