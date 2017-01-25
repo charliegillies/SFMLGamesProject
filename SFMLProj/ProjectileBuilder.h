@@ -3,6 +3,8 @@
 #include <SFML/System/Vector2.hpp>
 #include "CollisionNode.h"
 
+typedef Delegate2<int, int, SceneNode*> objCreatorPtr;
+
 /*
 	Builder utility for building projectile scene node objects.
 */
@@ -16,6 +18,8 @@ public:
 	// Builds a projectile scene node.
 	SceneNode* build(sf::Vector2f position, sf::Vector2f direction, float rot);
 
+	void setCreatorPtr(objCreatorPtr creatorPtr);
+
 private:
 	string txr_fp;
 	float destroy_time;
@@ -24,4 +28,5 @@ private:
 	float dmg;
 	flag collision_flag;
 
+	objCreatorPtr _creatorPtr;
 };

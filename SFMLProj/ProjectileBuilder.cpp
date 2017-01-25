@@ -7,7 +7,7 @@
 
 ProjectileBuilder::ProjectileBuilder(string texture_path, flag col_flag, float lifeTime, float speed, float dmg, float radius)
 	: txr_fp(texture_path), destroy_time(lifeTime), speed(speed), 
-		radius(radius), dmg(dmg), collision_flag(col_flag) { }
+		radius(radius), dmg(dmg), collision_flag(col_flag), _creatorPtr(nullptr) { }
 
 ProjectileBuilder::~ProjectileBuilder() { }
 
@@ -27,7 +27,10 @@ SceneNode* ProjectileBuilder::build(sf::Vector2f position, sf::Vector2f directio
 
 	// destroy after 2.5 seconds
 	base_node->addChild(new DestroyAfterTimeNode(destroy_time));
-	base_node->addChild(new ProjectileNode(dmg));
+
+	auto proj_node = new ProjectileNode(dmg);
+	proj_node->onDeathCreateFunc = _creatorPtr;
+	base_node->addChild(proj_node);
 
 	// setup collider
 	CollisionNode* collider = new CollisionNode(radius);
@@ -38,4 +41,9 @@ SceneNode* ProjectileBuilder::build(sf::Vector2f position, sf::Vector2f directio
 	base_node->addChild(new VelocityNode(speed, direction));
 
 	return base_node;
+}
+
+void ProjectileBuilder::setCreatorPtr(objCreatorPtr creatorPtr)
+{
+	this->_creatorPtr = creatorPtr;
 }

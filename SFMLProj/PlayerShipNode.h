@@ -6,6 +6,7 @@
 #include "RaycastUtility.h"
 #include "ProjectileBuilder.h"
 #include "PowerUpNode.h"
+#include "NodeFactory.h"
 
 class PlayerShipNode : public SceneNode
 {
@@ -17,6 +18,8 @@ public:
 
 		secondary_proj_builder = new ProjectileBuilder("Sprites//projectiles//missile_1.png",
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.8f, 1000, 15, 8);
+
+		secondary_proj_builder->setCreatorPtr(NodeFactory::createPixelExplosion);
 	}
 
 	~PlayerShipNode() {}

@@ -13,10 +13,15 @@
 class ProjectileNode : public SceneNode
 {
 public:
-	explicit ProjectileNode(float damageOnHit) : dmg(damageOnHit) {}
+	explicit ProjectileNode(float damageOnHit) : dmg(damageOnHit), onDeathCreateFunc(nullptr) {}
 	~ProjectileNode() {}
 
 	void subscribeEvents() override;
+
+	// On the death/collision of this projectile,
+	// this method will be invoked and the returning object
+	// will be added to the scene hierarchy.
+	Delegate2<int, int, SceneNode*> onDeathCreateFunc;
 
 private:
 	float dmg;

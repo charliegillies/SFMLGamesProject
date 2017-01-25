@@ -20,6 +20,15 @@ void ProjectileNode::onCollide(BaseEvent* event)
 	collision->collider_b->invokeLocalEvent(EventTags::projectileCollision,
 		new ProjectileCollisionEvent(dmg));
 
+	if (onDeathCreateFunc != nullptr)
+	{
+		TransformNode* transform = static_cast<TransformNode*>(getParent()->getNode(NodeTag::transform_node));
+
+		// get transform
+		SceneNode* created = onDeathCreateFunc(transform->position.x, transform->position.y);
+		getGame()->addSceneNode(created);
+	}
+
 	// now delete self
 	getGame()->removeSceneNode(getParent());
 }
