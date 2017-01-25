@@ -55,7 +55,8 @@ void AnimatedSpriteNode::render()
 	getGame()->draw(sprite);
 }
 
-AnimatedSpriteNode* AnimatedSpriteNode::addFrame(int x, int y, int width, int height, sf::Vector2f origin_multiplier)
+AnimatedSpriteNode* AnimatedSpriteNode::addFrame(int x, int y, int width, 
+	int height, sf::Vector2f origin_multiplier)
 {
 	frameQueue.push(AnimationFrame(x, y, width, height, origin_multiplier));
 	return this;

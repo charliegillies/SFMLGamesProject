@@ -209,19 +209,47 @@ SceneNode* NodeFactory::createSonicExplosion(int x, int y)
 	// create animation
 	AnimatedSpriteNode* animation = new AnimatedSpriteNode(
 		"Sprites//animations//sonic_explosion.png", 0.04f, ANIM_REPEAT);
-	
-	sf::Vector2f middle_origin(0.5f, 0.5f);
-	
+
 	// add animation frames
-	animation->addFrame(284, 0, 152, 150, middle_origin)
-		->addFrame(192, 284, 190, 190, middle_origin)
-		->addFrame(0, 0, 284, 284, middle_origin)
-		->addFrame(531, 140, 120, 124, middle_origin)
-		->addFrame(525, 301, 133, 134, middle_origin)
-		->addFrame(436, 0, 138, 140, middle_origin)
-		->addFrame(382, 301, 143, 144, middle_origin)
-		->addFrame(382, 150, 149, 151, middle_origin);
+	animation
+		->addFrame(284, 0, 152, 150)
+		->addFrame(192, 284, 190, 190)
+		->addFrame(0, 0, 284, 284)
+		->addFrame(531, 140, 120, 124)
+		->addFrame(525, 301, 133, 134)
+		->addFrame(436, 0, 138, 140)
+		->addFrame(382, 301, 143, 144)
+		->addFrame(382, 150, 149, 151);
 	
+	base_node->addChild(animation);
+
+	return base_node;
+}
+
+SceneNode* NodeFactory::createPixelExplosion(int x, int y)
+{
+	SceneNode* base_node = new SceneNode();
+
+	TransformNode* transform_node = new TransformNode();
+	transform_node->position = sf::Vector2f(x, y);
+	transform_node->scale = sf::Vector2f(2, 2);
+	base_node->addChild(transform_node);
+
+	// create animation
+	AnimatedSpriteNode* animation = new AnimatedSpriteNode(
+		"Sprites//animations//pixel_explosion.png", 0.06f, ANIM_REPEAT);
+
+	// add animation frames
+	animation
+		->addFrame(96, 182, 96, 91)
+		->addFrame(96, 91, 96, 91)
+		->addFrame(96, 0, 96, 91)
+		->addFrame(96, 273, 96, 91)
+		->addFrame(0, 273, 96, 91)
+		->addFrame(0, 182, 96, 91)
+		->addFrame(0, 0, 96, 91)
+		->addFrame(0, 364, 96, 91);
+
 	base_node->addChild(animation);
 
 	return base_node;

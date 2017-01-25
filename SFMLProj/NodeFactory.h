@@ -20,6 +20,8 @@ public:
 
 	static SceneNode* createSonicExplosion(int x, int y);
 
+	static SceneNode* createPixelExplosion(int x, int y);
+
 	static SceneNode* createHealthPickup(int x, int y);
 
 	static SceneNode* createSpeedPickup(int x, int y);

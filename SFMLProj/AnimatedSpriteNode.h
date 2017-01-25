@@ -34,7 +34,9 @@ public:
 	void update() override;
 	void render() override;
 
-	AnimatedSpriteNode* addFrame(int x, int y, int width, int height, sf::Vector2f origin_multiplier);
+	// Adds a frame to the frame queue inside of the animated sprite.
+	AnimatedSpriteNode* addFrame(int x, int y, int width, int height, 
+		sf::Vector2f origin_multiplier = sf::Vector2f(0.5f, 0.5f));
 
 private:
 	void setupFrame();
