@@ -18,8 +18,8 @@ void BattleScene::onStart()
 	_game->addSceneNode(NodeFactory::createAsteroid(100, 100));
 	
 	//_game->addSceneNode(EnemyFactory::createEnemyUfo(800, 800));
-	//_game->addSceneNode(EnemyFactory::createEnemyBomber(800, 800));
-	_game->addSceneNode(EnemyFactory::createEnemyShooter(800, 800));
+	_game->addSceneNode(EnemyFactory::createEnemyBomber(800, 800));
+	//_game->addSceneNode(EnemyFactory::createEnemyShooter(800, 800));
 
 	// add the collision handler node
 	_game->addSceneNode(new CollisionHandler());

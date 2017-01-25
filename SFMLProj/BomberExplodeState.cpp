@@ -23,7 +23,7 @@ void BomberExplodeState::onEnter()
 	}
 
 	// create an explosion where we were standing, delete ourselves from the hierachy
-	stateMachine->createSceneNode(NodeFactory::createPixelExplosion(pos.x, pos.y));
+	stateMachine->createSceneNode(NodeFactory::createSonicExplosion(pos.x, pos.y));
 	stateMachine->removeSceneNode(stateMachine->getParent());
 }
 
