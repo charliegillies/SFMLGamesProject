@@ -186,7 +186,7 @@ sf::Vector2f PlayerShipNode::getMouseTarget()
 
 void PlayerShipNode::applyMovement()
 {
-	float speed = 240.0f;
+	float speed = 360.0f;
 
 	// check if the speed modifier applies
 	if (_speedPickupTime > 0)
