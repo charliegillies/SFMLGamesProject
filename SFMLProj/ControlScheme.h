@@ -15,7 +15,10 @@ public:
 	~ControlScheme() {}
 
 	// if the player has fired
-	bool fired();
+	bool primaryFired();
+
+	// if the secondary has fired
+	bool secondaryFired();
 
 	// if the player has moved forwards
 	bool forwards();

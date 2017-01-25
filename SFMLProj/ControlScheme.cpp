@@ -1,9 +1,14 @@
 #include "ControlScheme.h"
 #include <SFML/Window/Keyboard.hpp>
 
-bool ControlScheme::fired()
+bool ControlScheme::primaryFired()
 {
-	return _input->isKeyDown(sf::Keyboard::Space) || _input->leftClicked();
+	return _input->leftClicked();
+}
+
+bool ControlScheme::secondaryFired()
+{
+	return _input->rightClicked();
 }
 
 bool ControlScheme::forwards()

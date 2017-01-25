@@ -12,8 +12,11 @@ class PlayerShipNode : public SceneNode
 public:
 	PlayerShipNode() : SceneNode(), _remainingLives(max_lives), _shieldSprite()
 	{
-		proj_builder = new ProjectileBuilder("Sprites//laserBlue03.png", 
+		primary_proj_builder = new ProjectileBuilder("Sprites//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 2.5f, 400.0f, 15, 8);
+
+		secondary_proj_builder = new ProjectileBuilder("Sprites//missile_1.png",
+			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 2.5f, 600.0f, 15, 8);
 	}
 
 	~PlayerShipNode() {}
@@ -28,14 +31,16 @@ private:
 	void onProjectileCollide(BaseEvent* e);
 	void applyPowerup(PowerUpNode* power_up);
 	sf::Vector2f getMouseTarget();
-	void shoot(sf::Vector2f direction);
+	void shootPrimary(sf::Vector2f direction);
+	void shootSecondary(sf::Vector2f direction);
 	void applyMovement();
 	void applyRotation();
 
 	void onLifeChanged();
 
-	// projectile builder
-	ProjectileBuilder* proj_builder;
+	// projectile builders
+	ProjectileBuilder* primary_proj_builder;
+	ProjectileBuilder* secondary_proj_builder;
 
 	// mouse & rotation movement
 	sf::Vector2f _mouseTargetRotation;

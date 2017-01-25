@@ -55,7 +55,7 @@ public:
 	bool rightClickDown();
 
 	// checks if there has been a right click
-	bool rightClick();
+	bool rightClicked();
 
 	// get the screen X value
 	int getX();

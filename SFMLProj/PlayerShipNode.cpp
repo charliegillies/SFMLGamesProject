@@ -28,8 +28,10 @@ void PlayerShipNode::update()
 	applyMovement();
 
 	// create a projectile
-	if (_controlScheme->fired())
-		shoot(_mouseLerpRot);
+	if (_controlScheme->primaryFired())
+		shootPrimary(_mouseLerpRot);
+	else if (_controlScheme->secondaryFired())
+		shootSecondary(_mouseLerpRot);
 }
 
 void PlayerShipNode::subscribeEvents()
@@ -55,7 +57,7 @@ void PlayerShipNode::render()
 	}
 }
 
-void PlayerShipNode::shoot(sf::Vector2f dir)
+void PlayerShipNode::shootPrimary(sf::Vector2f dir)
 {
 	sf::Vector2f ship_pos = _transform->position;
 
@@ -65,8 +67,20 @@ void PlayerShipNode::shoot(sf::Vector2f dir)
 	sf::Vector2f gun1 = ship_pos + sf_transform.transformPoint(-20, 15);
 	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(20, 15);
 
-	getGame()->addSceneNode(proj_builder->build(gun1, dir, _transform->rotation));
-	getGame()->addSceneNode(proj_builder->build(gun2, dir, _transform->rotation));
+	getGame()->addSceneNode(primary_proj_builder->build(gun1, dir, _transform->rotation));
+	getGame()->addSceneNode(primary_proj_builder->build(gun2, dir, _transform->rotation));
+}
+
+void PlayerShipNode::shootSecondary(sf::Vector2f dir)
+{
+	sf::Vector2f ship_pos = _transform->position;
+
+	// transform the points by rotation, fire
+	sf::Transform sf_transform;
+	sf_transform.rotate(_transform->rotation);
+	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(0, 30);
+
+	getGame()->addSceneNode(secondary_proj_builder->build(gun2, dir, _transform->rotation));
 }
 
 void PlayerShipNode::start()

@@ -37,7 +37,7 @@ bool Input::rightClickDown()
 	return _mLastFrameState.rightClicked && _mFrameState.rightClicked;
 }
 
-bool Input::rightClick()
+bool Input::rightClicked()
 {
 	return !_mLastFrameState.rightClicked && _mFrameState.rightClicked;
 }
