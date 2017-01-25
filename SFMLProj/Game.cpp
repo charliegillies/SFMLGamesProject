@@ -14,10 +14,11 @@ Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 	this->_camera = new Camera(window);
 	this->_deltaTime = 0;
 
-	_debugText.setPosition(5, 5);
-	_debugText.setFillColor(sf::Color::Yellow);
-	_debugText.setOutlineColor(sf::Color::Black);
-	_debugText.setOutlineThickness(1);
+	_debugText.setPosition(5, 45);
+
+	auto txt_color = sf::Color::Yellow;
+	txt_color.a = 140;
+	_debugText.setFillColor(txt_color);
 	_debugText.setFont(getFont("Fonts//kenvector_future.ttf"));
 	_debugText.setCharacterSize(16);
 }
