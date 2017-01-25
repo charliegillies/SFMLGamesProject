@@ -19,6 +19,7 @@
 #include "ProjectileDataNode.h"
 #include "BomberIdleState.h"
 #include "BomberExplodeState.h"
+#include "AnimatedSpriteNode.h"
 
 SceneNode* NodeFactory::createPlayerNode()
 {
@@ -193,6 +194,36 @@ SceneNode* NodeFactory::createEnemyBomber(int x, int y)
 
 	// create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));
+
+	return base_node;
+}
+
+SceneNode* NodeFactory::createExplosion(int x, int y)
+{
+	SceneNode* base_node = new SceneNode();
+	
+	TransformNode* transform_node = new TransformNode();
+	transform_node->position = sf::Vector2f(x, y);
+	base_node->addChild(transform_node);
+
+	// create animation
+	AnimatedSpriteNode* animation = new AnimatedSpriteNode(
+		"Sprites//animations//sonic_explosion.png", 0.05f, ANIM_REPEAT);
+	
+	sf::Vector2f middle_origin(0.5f, 0.5f);
+	
+	// add animation frames
+	animation
+		->addFrame(284, 0, 152, 150, middle_origin)
+		->addFrame(192, 284, 190, 190, middle_origin)
+		->addFrame(0, 0, 284, 284, middle_origin)
+		->addFrame(531, 140, 120, 124, middle_origin)
+		->addFrame(525, 301, 133, 134, middle_origin)
+		->addFrame(436, 0, 138, 140, middle_origin)
+		->addFrame(382, 301, 143, 144, middle_origin)
+		->addFrame(382, 150, 149, 151, middle_origin);
+	
+	base_node->addChild(animation);
 
 	return base_node;
 }
