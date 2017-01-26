@@ -51,7 +51,11 @@ public:
 	// (HP / max HP) * 100
 	float getPercentageHP()
 	{
-		return (HP / maxHP) * 100;
+		// conv values to float for division
+		float f_hp = HP;
+		float m_hp = maxHP;
+
+		return (f_hp / m_hp) * 100.0f;
 	}
 
 	string getNodeTag() override
