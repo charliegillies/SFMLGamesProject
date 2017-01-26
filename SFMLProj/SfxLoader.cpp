@@ -1,5 +1,5 @@
 #include "SfxLoader.h"
-
+#include <SFML/Audio/SoundBuffer.hpp>
 
 SfxLoader::SfxLoader()
 {
@@ -19,20 +19,20 @@ bool SfxLoader::loaded(const std::string fp)
 	return iterator != fileMap.end();
 }
 
-sf::Sound& SfxLoader::loadAsset(const std::string fp)
+sf::SoundBuffer& SfxLoader::loadAsset(const std::string fp)
 {
-	sf::Sound txr;
-	//txr.loadFromFile("Content//" + fp);
+	sf::SoundBuffer txr;
+	txr.loadFromFile("Content//" + fp);
 	return put(fp, txr);
 }
 
-sf::Sound& SfxLoader::put(const std::string fp, sf::Sound value)
+sf::SoundBuffer& SfxLoader::put(const std::string fp, sf::SoundBuffer value)
 {
 	fileMap[fp] = value;
 	return fileMap[fp];
 }
 
-sf::Sound& SfxLoader::get(const std::string fp)
+sf::SoundBuffer& SfxLoader::get(const std::string fp)
 {
 	// check if we have this asset in the map using the filepath
 	// if we do, immediately return it

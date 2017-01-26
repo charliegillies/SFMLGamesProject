@@ -9,6 +9,7 @@ Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
 	// create asset loaders..
 	this->_textureLoader = new TextureLoader();
 	this->_fontLoader = new FontLoader();
+	this->_sfxLoader = new SfxLoader();
 	
 	this->_controlScheme = new ControlScheme(_input);
 	this->_camera = new Camera(window);
@@ -82,6 +83,13 @@ sf::Texture& Game::getTexture(const std::string fp)
 sf::Font& Game::getFont(const std::string fp)
 {
 	return _fontLoader->get(fp);
+}
+
+sf::Sound& Game::getSound(const std::string fp)
+{
+	sf::Sound sound;
+	sound.setBuffer(_sfxLoader->get(fp));
+	return sound;
 }
 
 void Game::addSceneNode(SceneNode* node)

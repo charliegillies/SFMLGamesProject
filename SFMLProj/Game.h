@@ -7,6 +7,11 @@
 #include "EventSystem.h"
 #include "Input.h"
 #include "FontLoader.h"
+#include "SfxLoader.h"
+
+namespace sf{
+	class Sound;
+}
 
 class SceneNode;
 class Scene;
@@ -45,6 +50,9 @@ public:
 
 	// loads a font with a given filepath with the prefix 'Content/'
 	sf::Font& getFont(const std::string fp);
+
+	// loads an sound effect from a given filepath with the prefix 'Content/'
+	sf::Sound& getSound(const std::string fp);
 
 	// adds a scene node to the current scene
 	void addSceneNode(SceneNode* node);
@@ -100,4 +108,5 @@ private:
 
 	FontLoader* _fontLoader;
 	TextureLoader* _textureLoader;
+	SfxLoader* _sfxLoader;
 };
