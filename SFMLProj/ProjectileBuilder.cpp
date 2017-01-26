@@ -26,7 +26,7 @@ SceneNode* ProjectileBuilder::build(sf::Vector2f position, sf::Vector2f directio
 	base_node->addChild(transform_node);
 
 	// destroy after 2.5 seconds
-	//base_node->addChild(new DestroyAfterTimeNode(destroy_time));
+	base_node->addChild(new DestroyAfterTimeNode(destroy_time));
 
 	auto proj_node = new ProjectileNode(dmg);
 	proj_node->onDeathCreateFunc = _creatorPtr;
@@ -38,7 +38,7 @@ SceneNode* ProjectileBuilder::build(sf::Vector2f position, sf::Vector2f directio
 	base_node->addChild(collider);
 
 	// movement node
-	//base_node->addChild(new VelocityNode(speed, direction));
+	base_node->addChild(new VelocityNode(speed, direction));
 
 	return base_node;
 }

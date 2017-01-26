@@ -9,10 +9,6 @@
 #include "FontLoader.h"
 #include "SfxLoader.h"
 
-namespace sf{
-	class Sound;
-}
-
 class SceneNode;
 class Scene;
 
