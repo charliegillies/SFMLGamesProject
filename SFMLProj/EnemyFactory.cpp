@@ -105,20 +105,25 @@ SceneNode* EnemyFactory::createEnemyBomber(int x, int y)
 		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK | CollisionNode::PROJECTILE_MASK);
 	base_node->addChild(collider);
 
+	// health & projectile handling 
+	base_node->addChild(new HealthNode(120));
+	base_node->addChild(new ProjectileCollisionListenerNode());
+
 	// ai settings for UFO
 	float chase_speed = 250.0f;
 	float charge_speed = chase_speed * 1.4f;
 
-	float sight_range = 400.0f;
-	float lose_sight_range = 450.0f;
+	float sight_range = 550.0f;
+	float lose_sight_range = sight_range + 50.0f;
 	float charge_range = 150.0f;
-	float bomb_range = 100.0f;
+	float bomb_hit_radius = 150.0f;
+	float bomb_start_range = 100.0f;
 
 	// create the ai state & transitions
 	AIState* idle_state = new BomberIdleState();
 	AIState* chase_state = new SteerTowardsPlayerState(chase_speed);
 	AIState* charge_state = new SteerTowardsPlayerState(charge_speed);
-	AIState* explode_state = new BomberExplodeState(bomb_range);
+	AIState* explode_state = new BomberExplodeState(bomb_hit_radius);
 	AIState* return_state = new ReturnToStartPositionState(chase_speed / 1.5f);
 	AIState* pre_explode_state = new PreExplosionState();
 
@@ -134,10 +139,10 @@ SceneNode* EnemyFactory::createEnemyBomber(int x, int y)
 	chase_state->addTransition(lost_sight_condition, return_state);
 
 	// a3, CHARGE -> (IN BOMB DISTANCE?) -> BEGIN TO EXPLODE
-	charge_state->addTransition(new PlayerInDistanceCondition(bomb_range + 5.0f), pre_explode_state);
+	charge_state->addTransition(new PlayerInDistanceCondition(bomb_start_range + 5.0f), pre_explode_state);
 
 	// a5, BEGIN TO EXPLODE -> (TIME PASSED?) -> EXPLODE
-	pre_explode_state->addTransition(new TimeCountCondition(0.5f), explode_state);
+	pre_explode_state->addTransition(new TimeCountCondition(1.0f), explode_state);
 
 	// create the state machine
 	base_node->addChild(new StateMachineNode(idle_state));

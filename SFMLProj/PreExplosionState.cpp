@@ -10,7 +10,7 @@ void PreExplosionState::onEnter()
 
 void PreExplosionState::execute()
 {
-	float scale_theta = stateMachine->getAppTime() / 0.15f;
+	float scale_theta = stateMachine->getAppTime() / 0.075f;
 	float scale_dst = sin(scale_theta);
 
 	stateMachine->nTransform->scale = _startScale + sf::Vector2f(0.075f, 0.075f) * scale_dst;
