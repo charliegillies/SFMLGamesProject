@@ -40,6 +40,9 @@ void PlayerShipNode::update()
 		shootPrimary(_mouseLerpRot);
 	else if (_controlScheme->secondaryFired())
 		shootSecondary(_mouseLerpRot);
+
+	// update children
+	SceneNode::update();
 }
 
 void PlayerShipNode::subscribeEvents()
@@ -67,6 +70,8 @@ void PlayerShipNode::render()
 
 void PlayerShipNode::shootPrimary(sf::Vector2f dir)
 {
+	if (primaryFire->onCooldown()) return;
+
 	sf::Vector2f ship_pos = _transform->position;
 
 	// transform the points by rotation, fire
@@ -75,12 +80,15 @@ void PlayerShipNode::shootPrimary(sf::Vector2f dir)
 	sf::Vector2f gun1 = ship_pos + sf_transform.transformPoint(-20, 15);
 	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(20, 15);
 
-	getGame()->addSceneNode(primary_proj_builder->build(gun1, dir, _transform->rotation));
-	getGame()->addSceneNode(primary_proj_builder->build(gun2, dir, _transform->rotation));
+	getGame()->addSceneNode(primaryFire->builder->build(gun1, dir, _transform->rotation));
+	getGame()->addSceneNode(primaryFire->builder->build(gun2, dir, _transform->rotation));
+	primaryFire->onShoot();
 }
 
 void PlayerShipNode::shootSecondary(sf::Vector2f dir)
 {
+	if (secondaryFire->onCooldown()) return;
+
 	sf::Vector2f ship_pos = _transform->position;
 
 	// transform the points by rotation, fire
@@ -88,7 +96,8 @@ void PlayerShipNode::shootSecondary(sf::Vector2f dir)
 	sf_transform.rotate(_transform->rotation);
 	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(0, 30);
 
-	getGame()->addSceneNode(secondary_proj_builder->build(gun2, dir, _transform->rotation));
+	getGame()->addSceneNode(secondaryFire->builder->build(gun2, dir, _transform->rotation));
+	secondaryFire->onShoot();
 }
 
 void PlayerShipNode::start()
@@ -121,6 +130,9 @@ void PlayerShipNode::start()
 	// set origin to .5 of the txr
 	auto size = shield_txr.getSize();
 	_shieldSprite.setOrigin(size.x / 2, size.y / 2);
+
+	addChild(primaryFire);
+	addChild(secondaryFire);
 }
 
 void PlayerShipNode::onCollide(BaseEvent* e)

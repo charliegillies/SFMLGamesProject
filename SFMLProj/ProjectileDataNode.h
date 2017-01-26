@@ -27,7 +27,13 @@ public:
 		timeTillNextShot -= getGame()->deltaTime();
 
 		if (timeTillNextShot < 0)
-			timeTillNextShot = 0;
+			timeTillNextShot = 0.0f;
+	}
+
+	// Checks if the cooldown timer is on or not.
+	bool onCooldown()
+	{
+		return timeTillNextShot > 0;
 	}
 
 	// Sets the time to next shot to be equal to the time between shots

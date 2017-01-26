@@ -8,19 +8,23 @@
 #include "PowerUpNode.h"
 #include "NodeFactory.h"
 #include "HealthNode.h"
+#include "ProjectileDataNode.h"
 
 class PlayerShipNode : public SceneNode
 {
 public:
 	PlayerShipNode() : SceneNode(), _shieldSprite(), _shieldUp(false)
 	{
-		primary_proj_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png", 
+		auto primary_proj_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png", 
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.6f, 800, 15, 8);
 		primary_proj_builder->setCreatorPtr(NodeFactory::createProjectileBlueFx);
 
-		secondary_proj_builder = new ProjectileBuilder("Sprites//projectiles//missile_1.png",
+		auto secondary_proj_builder = new ProjectileBuilder("Sprites//projectiles//missile_1.png",
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.8f, 1000, 15, 8);
 		secondary_proj_builder->setCreatorPtr(NodeFactory::createPixelExplosion);
+	
+		primaryFire = new ProjectileDataNode(0.25f, primary_proj_builder);
+		secondaryFire = new ProjectileDataNode(1.2f, secondary_proj_builder);
 	}
 
 	~PlayerShipNode() {}
@@ -52,8 +56,8 @@ private:
 	sf::Sprite _shieldSprite;
 
 	// projectile builders
-	ProjectileBuilder* primary_proj_builder;
-	ProjectileBuilder* secondary_proj_builder;
+	ProjectileDataNode* primaryFire;
+	ProjectileDataNode* secondaryFire;
 
 	// mouse & rotation movement
 	sf::Vector2f _mouseTargetRotation;
