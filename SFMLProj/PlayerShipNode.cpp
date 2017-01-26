@@ -97,7 +97,7 @@ void PlayerShipNode::start()
 	_shieldHpNode = new HealthNode(100);
 
 	// Send out 'player lost life' event
-	invokeGlobalEvent(EventTags::playerLostLife, new PlayerLostLifeEvent(_hpNode->maxHP));
+	broadcastStatusChange();
 
 	// start at mouse rot
 	_mouseTargetRotation = getMouseTarget();
@@ -154,7 +154,7 @@ void PlayerShipNode::onProjectileCollide(BaseEvent* e)
 	else
 		_hpNode->damage(proj_col_event->damageOnHit);
 
-	onLifeChanged();
+	broadcastStatusChange();
 }
 
 void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
@@ -177,7 +177,7 @@ void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 			{
 				_hpNode->heal(25);
 				// broadcast event
-				onLifeChanged();
+				broadcastStatusChange();
 				// destroy the power up
 				getGame()->removeSceneNode(power_up->getParent());
 			}
@@ -238,9 +238,9 @@ void PlayerShipNode::applyRotation()
 	_transform->rotation = angle;
 }
 
-void PlayerShipNode::onLifeChanged()
+void PlayerShipNode::broadcastStatusChange()
 {
-	PlayerLostLifeEvent lost_life_event(_hpNode->HP);
+	PlayerLostLifeEvent lost_life_event(_hpNode->getPercentageHP(), _shieldHpNode->getPercentageHP());
 	invokeGlobalEvent(EventTags::playerLostLife, &lost_life_event);
 }
 

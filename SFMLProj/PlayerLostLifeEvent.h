@@ -10,9 +10,11 @@
 class PlayerLostLifeEvent : public BaseEvent
 {
 public:
-	// the number of remaining lives that the player has
-	int remainingLives;
+	float hp_percentage;
+	float energy_percentage;
 
-	explicit PlayerLostLifeEvent(int lives) : remainingLives(lives) {};
+	explicit PlayerLostLifeEvent(float hp_perc, float energy_perc) 
+		: hp_percentage(hp_perc), energy_percentage(energy_perc)  {};
+	
 	~PlayerLostLifeEvent() {}
 };

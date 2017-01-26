@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneNode.h"
-#include "TextNode.h"
 #include "ImageNode.h"
+#include "StatusBar.h"
 
 /*
 	Scene node that is responsible for keeping the 
@@ -20,7 +20,10 @@ public:
 	void onPlayerLostLife(BaseEvent* e);
 
 private:
-	TextNode* _lifeCounterText;
-	ImageNode* _shipIcon;
+	ImageNode* _hpIcon;
+	StatusBar* _hpStatusBar;
+	
+	ImageNode* _energyIcon;
+	StatusBar* _energyStatusBar;
 };
 

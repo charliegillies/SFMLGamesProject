@@ -40,7 +40,7 @@ private:
 	void applyMovement();
 	void applyRotation();
 
-	void onLifeChanged();
+	void broadcastStatusChange();
 
 	bool isShieldUp();
 

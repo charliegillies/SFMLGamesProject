@@ -6,22 +6,27 @@
 
 PlayerLivesUINode::PlayerLivesUINode()
 {
-	// instantiating this here instead of start() means that we won't have
-	// issues with the execution order with events.
-	_lifeCounterText = new TextNode(65, 6, "Fonts//kenvector_future.ttf",
-		"0", sf::Color::White, 30);
+	_hpIcon = new ImageNode(8, 5, "Sprites//ui//playerLife1_blue.png");
+	_hpStatusBar = new StatusBar(
+		"Sprites//ui//barHorizontal_green_left.png", 
+		"Sprites//ui//barHorizontal_green_mid.png", 
+		"Sprites//ui//barHorizontal_green_right.png", 45, 5, 100);
 
-	_shipIcon = new ImageNode(8, 8, "Sprites//ui//playerLife1_blue.png");
-	_shipIcon->setScale(1.5, 1.5);
+	_energyIcon = new ImageNode(170, 5, "Sprites//ui//energy_icon.png");
+	_energyStatusBar = new StatusBar(
+		"Sprites//ui//barHorizontal_yellow_left.png",
+		"Sprites//ui//barHorizontal_yellow_mid.png",
+		"Sprites//ui//barHorizontal_yellow_right.png", 200, 5, 100);
 }
 
 PlayerLivesUINode::~PlayerLivesUINode() {}
 
 void PlayerLivesUINode::start()
 {
-	// add the text & ship icon
-	addChild(_lifeCounterText);
-	addChild(_shipIcon);
+	addChild(_hpStatusBar);
+	addChild(_hpIcon);
+	addChild(_energyStatusBar);
+	addChild(_energyIcon);
 
 	//initialise all child nodes
 	SceneNode::start();
@@ -43,5 +48,6 @@ void PlayerLivesUINode::onPlayerLostLife(BaseEvent* e)
 	PlayerLostLifeEvent* lost_life_event = static_cast<PlayerLostLifeEvent*>(e);
 	assert(lost_life_event != nullptr);
 
-	_lifeCounterText->setText(to_string(lost_life_event->remainingLives));
+	_hpStatusBar->setBarPerc(lost_life_event->hp_percentage);
+	_energyStatusBar->setBarPerc(lost_life_event->energy_percentage);
 }
