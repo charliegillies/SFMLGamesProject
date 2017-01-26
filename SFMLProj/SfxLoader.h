@@ -1,10 +1,7 @@
 #pragma once
 #include <string>
 #include <map>
-
-namespace sf{
-	typedef int Sound;
-}
+#include <SFML/Audio/Sound.hpp>
 
 /*
 	Sound effect loading pipeline.
