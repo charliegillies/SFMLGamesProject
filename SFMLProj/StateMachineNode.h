@@ -24,7 +24,7 @@ public:
 	void createSceneNode(SceneNode* node);
 
 	void removeSceneNode(SceneNode* node);
-
+	float getAppTime();
 	float getDt();
 
 	// The cached position of this node during the start() phase.

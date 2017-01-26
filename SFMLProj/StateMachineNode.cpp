@@ -68,6 +68,11 @@ void StateMachineNode::removeSceneNode(SceneNode* node)
 	getGame()->removeSceneNode(node);
 }
 
+float StateMachineNode::getAppTime()
+{
+	return getGame()->appTime();
+}
+
 float StateMachineNode::getDt()
 {
 	return getGame()->deltaTime();

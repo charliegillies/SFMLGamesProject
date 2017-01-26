@@ -17,9 +17,9 @@ void BattleScene::onStart()
 	// we're going to either load or generate our asteroids and enemies
 	_game->addSceneNode(NodeFactory::createAsteroid(100, 100));
 	
-	_game->addSceneNode(EnemyFactory::createEnemyUfo(600, 600));
-	_game->addSceneNode(EnemyFactory::createEnemyBomber(800, 800));
-	_game->addSceneNode(EnemyFactory::createEnemyShooter(700, 700));
+	//_game->addSceneNode(EnemyFactory::createEnemyUfo(600, 600));
+	_game->addSceneNode(EnemyFactory::createEnemyBomber(700, 700));
+	//_game->addSceneNode(EnemyFactory::createEnemyShooter(700, 700));
 
 	// add the collision handler node
 	_game->addSceneNode(new CollisionHandler());
