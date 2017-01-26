@@ -2,6 +2,8 @@
 #include "NodeFactory.h"
 #include "Utils.h"
 #include "RaycastUtility.h"
+#include "EventTags.h"
+#include "ProjectileCollisionEvent.h"
 
 BomberExplodeState::BomberExplodeState(float range) 
 	: range(range) { }
@@ -20,6 +22,8 @@ void BomberExplodeState::onEnter()
 	// check if we hit the player
 	if (raycast.hit && (raycast.collider->categoryBits & CollisionNode::PLAYER_MASK) != 0)
 	{
+		raycast.collider->invokeLocalEvent(EventTags::projectileCollision, 
+			new ProjectileCollisionEvent(40));
 	}
 
 	// create an explosion where we were standing, delete ourselves from the hierachy
