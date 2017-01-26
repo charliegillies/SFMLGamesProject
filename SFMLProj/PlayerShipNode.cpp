@@ -77,8 +77,8 @@ void PlayerShipNode::shootPrimary(sf::Vector2f dir)
 	// transform the points by rotation, fire
 	sf::Transform sf_transform; 
 	sf_transform.rotate(_transform->rotation);
-	sf::Vector2f gun1 = ship_pos + sf_transform.transformPoint(-20, 15);
-	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(20, 15);
+	sf::Vector2f gun1 = ship_pos + sf_transform.transformPoint(-20, -40);
+	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(20, -40);
 
 	getGame()->addSceneNode(primaryFire->builder->build(gun1, dir, _transform->rotation));
 	getGame()->addSceneNode(primaryFire->builder->build(gun2, dir, _transform->rotation));
@@ -94,9 +94,9 @@ void PlayerShipNode::shootSecondary(sf::Vector2f dir)
 	// transform the points by rotation, fire
 	sf::Transform sf_transform;
 	sf_transform.rotate(_transform->rotation);
-	sf::Vector2f gun2 = ship_pos + sf_transform.transformPoint(0, 30);
+	sf::Vector2f spawn_pos = ship_pos + sf_transform.transformPoint(0, -60);
 
-	getGame()->addSceneNode(secondaryFire->builder->build(gun2, dir, _transform->rotation));
+	getGame()->addSceneNode(secondaryFire->builder->build(spawn_pos, dir, _transform->rotation));
 	secondaryFire->onShoot();
 }
 

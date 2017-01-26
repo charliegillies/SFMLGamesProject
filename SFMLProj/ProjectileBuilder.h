@@ -11,7 +11,7 @@ typedef Delegate2<int, int, SceneNode*> objCreatorPtr;
 class ProjectileBuilder
 {
 public:
-	ProjectileBuilder(string texture_path, flag colFlag, float lifeTime, float speed, float dmg, float radius);
+	ProjectileBuilder(string texture_path, flag colFlag, float lifeTime, float speed, float dmg, float radius, sf::Vector2f origin);
 
 	~ProjectileBuilder();
 
@@ -26,6 +26,7 @@ private:
 	float speed;
 	float radius;
 	float dmg;
+	sf::Vector2f origin;
 	flag collision_flag;
 
 	objCreatorPtr _creatorPtr;

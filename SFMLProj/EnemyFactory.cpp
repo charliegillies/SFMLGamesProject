@@ -42,7 +42,7 @@ SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 
 	// projectile settings for the ufo
 	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserRed07.png",
-		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8, sf::Vector2f(8.5f, 18.5f));
 	projectile_builder->setCreatorPtr(createRedLaserFx2);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
@@ -169,7 +169,7 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 
 	// projectile settings for the shooter
 	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserRed03.png",
-		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8);
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8, sf::Vector2f(4.5f, 8.5f));
 	projectile_builder->setCreatorPtr(createRedLaserFx1);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));

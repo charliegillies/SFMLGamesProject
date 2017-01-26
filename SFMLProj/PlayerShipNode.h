@@ -13,14 +13,14 @@
 class PlayerShipNode : public SceneNode
 {
 public:
-	PlayerShipNode() : SceneNode(), _shieldSprite(), _shieldUp(false)
+	PlayerShipNode() : SceneNode(), _shieldUp(false), _shieldSprite()
 	{
 		auto primary_proj_builder = new ProjectileBuilder("Sprites//projectiles//laserBlue03.png", 
-			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.6f, 800, 15, 8);
+			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.6f, 800, 25, 8, sf::Vector2f(4.5f, 8.0f));
 		primary_proj_builder->setCreatorPtr(NodeFactory::createProjectileBlueFx);
 
 		auto secondary_proj_builder = new ProjectileBuilder("Sprites//projectiles//missile_1.png",
-			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.8f, 1000, 15, 8);
+			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.8f, 1000, 45, 8, sf::Vector2f(9.5f, 20.0f));
 		secondary_proj_builder->setCreatorPtr(NodeFactory::createPixelExplosion);
 	
 		primaryFire = new ProjectileDataNode(0.25f, primary_proj_builder);
