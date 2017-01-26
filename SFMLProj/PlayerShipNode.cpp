@@ -9,13 +9,18 @@
 #include "CollisionMap.h"
 #include "ProjectileCollisionEvent.h"
 #include "PowerUpNode.h"
-#include <iostream>
 
 void PlayerShipNode::update()
 {
-	getGame()->setDebugValue("shield", to_string(_shieldHpNode->HP));
-
-	isShieldUp();
+	if (isShieldUp())
+	{
+		// defines how much the shield will degrade per second it's held down
+		const float shield_degrade = 40;
+		// multiply by dt to ensure it degrades by time
+		_shieldHpNode->damage(shield_degrade * getGame()->deltaTime());
+		// shield status changed, tell everyone about it
+		broadcastStatusChange();
+	}
 
 	// if pickups are active, decrease time
 	if (_speedPickupTime > 0)

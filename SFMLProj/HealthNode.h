@@ -8,17 +8,17 @@
 class HealthNode : public SceneNode
 {
 public:
-	HealthNode(const int maxHP) : maxHP(maxHP), HP(maxHP) { }
+	HealthNode(const float maxHP) : maxHP(maxHP), HP(maxHP) { }
 	~HealthNode() { }
 
 	// The maximum hp of the scene node
-	const int maxHP;
+	const float maxHP;
 
 	// The current hp of the scene node
-	int HP;
+	float HP;
 
 	// Reduces HP, limits hp to 0.
-	void damage(int dmg)
+	void damage(float dmg)
 	{
 		HP -= dmg;
 
@@ -27,7 +27,7 @@ public:
 	}
 
 	// Increases HP, limits hp to 0.
-	void heal(int amount)
+	void heal(float amount)
 	{
 		HP += amount;
 
@@ -51,11 +51,7 @@ public:
 	// (HP / max HP) * 100
 	float getPercentageHP()
 	{
-		// conv values to float for division
-		float f_hp = HP;
-		float m_hp = maxHP;
-
-		return (f_hp / m_hp) * 100.0f;
+		return (HP / maxHP) * 100.0f;
 	}
 
 	string getNodeTag() override
