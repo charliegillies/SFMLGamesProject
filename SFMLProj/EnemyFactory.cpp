@@ -42,7 +42,7 @@ SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 
 	// projectile settings for the ufo
 	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserRed07.png",
-		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8, sf::Vector2f(8.5f, 18.5f));
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 0.5f, 700.0f, 15, 8, sf::Vector2f(8.5f, 18.5f));
 	projectile_builder->setCreatorPtr(createRedLaserFx2);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
@@ -52,9 +52,9 @@ SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 	base_node->addChild(new ProjectileCollisionListenerNode());
 
 	// ai settings for UFO
-	float sight_range = 100.0f;
-	float lose_sight_range = 150.0f;
-	float chase_speed = 120.0f;
+	float sight_range = 500.0f;
+	float lose_sight_range = sight_range + 50.0f;
+	float chase_speed = 200.0f;
 
 	// create the ai state & transitions
 	AIState* idle_state = new UfoIdleState();
@@ -109,13 +109,13 @@ SceneNode* EnemyFactory::createEnemyBomber(int x, int y)
 	base_node->addChild(new HealthNode(120));
 	base_node->addChild(new ProjectileCollisionListenerNode());
 
-	// ai settings for UFO
+	// ai settings for bomber
 	float chase_speed = 250.0f;
 	float charge_speed = chase_speed * 1.4f;
 
 	float sight_range = 550.0f;
 	float lose_sight_range = sight_range + 50.0f;
-	float charge_range = 150.0f;
+	float charge_range = 200.0f;
 	float bomb_hit_radius = 150.0f;
 	float bomb_start_range = 100.0f;
 
@@ -169,7 +169,7 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 
 	// projectile settings for the shooter
 	ProjectileBuilder* projectile_builder = new ProjectileBuilder("Sprites//projectiles//laserRed03.png",
-		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 1.0f, 200.0f, 15, 8, sf::Vector2f(4.5f, 8.5f));
+		CollisionNode::PLAYER_MASK | CollisionNode::OBSTACLE_MASK, 0.5f, 800.0f, 15, 8, sf::Vector2f(4.5f, 8.5f));
 	projectile_builder->setCreatorPtr(createRedLaserFx1);
 
 	base_node->addChild(new ProjectileDataNode(0.5f, projectile_builder));
@@ -179,9 +179,9 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 	base_node->addChild(new ProjectileCollisionListenerNode());
 
 	// ai settings for UFO
-	float sight_range = 100.0f;
-	float lose_sight_range = 150.0f;
-	float chase_speed = 120.0f;
+	float sight_range = 500.0f;
+	float lose_sight_range = sight_range + 50.0f;
+	float chase_speed = 200.0f;
 
 	// create the ai state & transitions
 	AIState* idle_state = new UfoIdleState();
