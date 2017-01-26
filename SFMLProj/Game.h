@@ -65,6 +65,9 @@ public:
 	// set deltaTime
 	void setDt(float dt);
 
+	// if we should draw the debug overlay
+	bool drawDebug();
+
 	// get deltaTime
 	float deltaTime();
 
@@ -90,6 +93,8 @@ public:
 	SceneNode* searchForNode(std::string name);
 
 private:
+	bool _drawDebug;
+
 	float _deltaTime;
 	float _appTime;
 

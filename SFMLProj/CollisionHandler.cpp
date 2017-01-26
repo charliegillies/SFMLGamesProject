@@ -53,7 +53,8 @@ void CollisionHandler::update()
 
 void CollisionHandler::render()
 {
-	_collisionMap.drawDebugGrid(getGame());
+	if (getGame()->drawDebug())
+		_collisionMap.drawDebugGrid(getGame());
 }
 
 void CollisionHandler::checkPotentialCollisions(CheckMap& check_map, vector<CollisionNode*>& cell_nodes)

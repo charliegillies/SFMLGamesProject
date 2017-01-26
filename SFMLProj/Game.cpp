@@ -1,7 +1,7 @@
 #include "Game.h"
 #include "Scene.h"
 
-Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window)
+Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window), _drawDebug(false)
 {
 	changeScene(scene);
 	this->_input = new Input();
@@ -34,6 +34,9 @@ void Game::onStart()
 
 void Game::onUpdate()
 {
+	if (_input->isKeyDown(sf::Keyboard::Key::F1))
+		_drawDebug = !_drawDebug;
+
 	// reset debug
 	_debugStr = "";
 
@@ -53,10 +56,13 @@ void Game::onRender()
 		_currentScene->onRender();
 
 	// render debug
-	_camera->switchToUIView();
-	_debugText.setString(_debugStr);
-	draw(_debugText);
-	_camera->switchToGameView();
+	if (_drawDebug)
+	{
+		_camera->switchToUIView();
+		_debugText.setString(_debugStr);
+		draw(_debugText);
+		_camera->switchToGameView();
+	}
 }
 
 void Game::changeScene(Scene* scene)
@@ -119,6 +125,11 @@ Camera* Game::getCamera()
 void Game::setDt(float dt)
 {
 	_deltaTime = dt;
+}
+
+bool Game::drawDebug()
+{
+	return _drawDebug;
 }
 
 float Game::deltaTime()

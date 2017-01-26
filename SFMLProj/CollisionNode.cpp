@@ -143,11 +143,14 @@ void CollisionNode::start()
 
 void CollisionNode::render()
 {
-	// draw debug circle
-	circle.setPosition(getX(), getY());
-	circle.setOrigin(transform->origin);
-	
-	getGame()->draw(circle);
+	if (getGame()->drawDebug())
+	{
+		// draw debug circle
+		circle.setPosition(getX(), getY());
+		circle.setOrigin(transform->origin);
+
+		getGame()->draw(circle);
+	}
 }
 
 void CollisionNode::onRemoved()
