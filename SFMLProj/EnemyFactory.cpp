@@ -22,11 +22,14 @@
 #include "ProjectileCollisionListenerNode.h"
 #include "DestroyAfterTimeNode.h"
 #include "NodeFactory.h"
+#include "RegisterEnemyNode.h"
 
 SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 {
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode("Sprites//enemies//ufo.png"));
+
+	base_node->addChild(new RegisterEnemyNode());
 
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;
@@ -92,6 +95,7 @@ SceneNode* EnemyFactory::createEnemyBomber(int x, int y)
 {
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode("Sprites//enemies//bomber.png"));
+	base_node->addChild(new RegisterEnemyNode());
 
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;
@@ -154,6 +158,7 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 {
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode("Sprites//enemies//twin_shooter.png"));
+	base_node->addChild(new RegisterEnemyNode());
 
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;

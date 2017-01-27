@@ -15,4 +15,8 @@ public:
 	static const string unregisterCollider;
 	static const string collided;
 	static const string projectileCollision;
+
+	static const string registerEnemy;
+	static const string unregisterEnemy;
+	static const string playerDeath;
 };

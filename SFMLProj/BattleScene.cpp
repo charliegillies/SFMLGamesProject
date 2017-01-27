@@ -5,12 +5,16 @@
 #include "PlayerLivesUINode.h"
 #include "CollisionHandler.h"
 #include "EnemyFactory.h"
+#include "GameStateListener.h"
 
 BattleScene::BattleScene() {}
 BattleScene::~BattleScene() {}
 
 void BattleScene::onStart()
 {
+	// game state listener waits to hear about changes in the world state
+	_game->addSceneNode(new GameStateListener());
+
 	// load standard game background
 	_game->addSceneNode(NodeFactory::createBackgroundNode("Sprites//backgrounds//purple.png"));
 	
