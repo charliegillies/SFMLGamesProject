@@ -181,7 +181,7 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 	// ai settings for UFO
 	float sight_range = 500.0f;
 	float lose_sight_range = sight_range + 50.0f;
-	float chase_speed = 200.0f;
+	float chase_speed = 250.0f;
 
 	// create the ai state & transitions
 	AIState* idle_state = new UfoIdleState();

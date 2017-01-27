@@ -10,6 +10,11 @@ void SteerTowardsPlayerState::onEnter() { }
 
 void SteerTowardsPlayerState::execute()
 {
+	// ensure the unit does not walk into the player
+	float dst = Utils::distance(stateMachine->playerTransform->position,
+		stateMachine->nTransform->position);
+	if (dst < 90) return;
+
 	sf::Vector2f dir = (stateMachine->playerTransform->position - stateMachine->nTransform->position);
 	dir = Utils::normalize(dir);
 
