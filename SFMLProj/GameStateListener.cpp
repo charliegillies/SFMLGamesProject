@@ -1,6 +1,7 @@
 ﻿#include "GameStateListener.h"
 #include "EventTags.h"
 #include "Game.h"
+#include <iostream>
 
 GameStateListener::GameStateListener() 
 	: _aliveEnemies(0), _playerDead(false) { }
@@ -47,9 +48,11 @@ void GameStateListener::onPlayerDeath(BaseEvent* e)
 void GameStateListener::onEnemyRegister(BaseEvent* e)
 {
 	_aliveEnemies++;
+	std::cout << "onEnemyRegister" << endl;
 }
 
 void GameStateListener::onEnemyUnregister(BaseEvent* e)
 {
 	_aliveEnemies--;
+	std::cout << "onEnemyUnregister" << endl;
 }

@@ -112,6 +112,8 @@ void Scene::removeSceneNode(SceneNode* node)
 {
 	// only the top hierarchy node can be removed, ensure it has no parent
 	assert(node->getParent() == nullptr);
+	// ensure this node hasn't been removed already
+	if (node->waitingRemoval()) return;
 
 	// inform the node that we're removing it from the hiearchy
 	node->remove();
