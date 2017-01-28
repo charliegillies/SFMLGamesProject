@@ -17,6 +17,11 @@ void ReturnToStartPositionState::execute()
 	dir *= stateMachine->getDt();
 
 	stateMachine->nTransform->position += dir;
+
+	// Rotate (sprite faces top, so add 90deg)
+	stateMachine->nTransform->rotation = 
+		Utils::calcAngle(stateMachine->startPosition,
+		stateMachine->nTransform->position) + 90.0f;
 }
 
 void ReturnToStartPositionState::onExit() { }
