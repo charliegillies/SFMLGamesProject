@@ -53,7 +53,7 @@ public:
 	// with another known collision node. 
 	void onCollide(CollisionNode* b);
 
-	virtual string getNodeTag() override;
+	string getNodeTag() override;
 
 	// tests if the two circles collide or not
 	bool collides(CollisionNode* test_node);
@@ -90,8 +90,12 @@ public:
 	// this allows us to filter out unwanted collision responses with ease.
 	void setFlags(flag category, flag maskFlag);
 
+	// raycasts from the start position, with a direction (normalised vector),
+	// and a range. the flag ensures that we test collision against certain
+	// categories, so we avoid hitting our friendlies and so forth.
 	Raycast raycast(sf::Vector2f start, sf::Vector2f dir, float range, flag searchCategory);
 
+	// draws the cast using debug
 	void drawCast(Raycast cast);
 
 private:
