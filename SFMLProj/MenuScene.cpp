@@ -4,6 +4,7 @@
 #include "BattleScene.h"
 #include "TextNode.h"
 #include "NodeFactory.h"
+#include "IntroScene.h"
 
 MenuScene::MenuScene() {}
 MenuScene::~MenuScene() {}
@@ -39,7 +40,7 @@ void MenuScene::onUpdate()
 {
 	if (_gameStartBtn->pressed())
 	{
-		_game->changeScene(new BattleScene());
+		_game->changeScene(new IntroScene());
 		return;
 	}
 

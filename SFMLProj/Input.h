@@ -1,13 +1,15 @@
 #pragma once
 #include <SFML/Window/Keyboard.hpp>
 
+#define KEY_ARR_SIZE 256
+
 /*
 	Simple struct that holds a 256 element bool array 
 	representing each pressable key.
 */
 struct KeyboardState
 {
-	bool keys[256];
+	bool keys[KEY_ARR_SIZE];
 };
 
 /*
@@ -63,6 +65,8 @@ public:
 	// get the screen Y value
 	int getY();
 
+	// checks if any key has been pressed
+	bool anyKeyDown();
 private:
 	// this frame & last frames keyboard state
 	KeyboardState _kbFrameState;

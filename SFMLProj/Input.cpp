@@ -51,3 +51,15 @@ int Input::getY()
 {
 	return _mFrameState.screenY;
 }
+
+bool Input::anyKeyDown()
+{
+	// Check for any key down in the current key frame state
+	for (int i = 0; i < KEY_ARR_SIZE; i++)
+	{
+		if (_kbFrameState.keys[i])
+			return true;
+	}
+
+	return false;
+}

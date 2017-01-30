@@ -20,10 +20,9 @@ public:
 	virtual ~SceneNode();
 
 	// if this scene node has or has not been removed
-	bool waitingRemoval()
-	{
-		return (getParent() != nullptr) ? getParent()->_removed : _removed;
-	}
+	bool waitingRemoval();
+
+	int getChildCount();
 
 	// adds a child to the internal list of child nodes
 	SceneNode* addChild(SceneNode* node);

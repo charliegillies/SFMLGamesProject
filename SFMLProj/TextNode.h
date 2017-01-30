@@ -15,9 +15,11 @@ public:
 
 	void positionToBounds(int x, int y, int width, int height);
 
+	void setPosition(int x, int y);
+
 	void setText(string txt);
 
-private:
+protected:
 	int size;
 	int x;
 	int y;

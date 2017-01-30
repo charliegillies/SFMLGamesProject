@@ -9,6 +9,16 @@ SceneNode::SceneNode() : _localEventSys(), _childNodes(), _removed(false)
 
 SceneNode::~SceneNode() {}
 
+bool SceneNode::waitingRemoval()
+{
+	return (getParent() != nullptr) ? getParent()->_removed : _removed;
+}
+
+int SceneNode::getChildCount()
+{
+	return _childNodes.size();
+}
+
 SceneNode* SceneNode::addChild(SceneNode* node)
 {
 	// add the child & set the parent
