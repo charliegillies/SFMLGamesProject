@@ -20,6 +20,8 @@ public:
 
 	void setCreatorPtr(objCreatorPtr creatorPtr);
 
+	// This is the string that points to an audio file
+	// which is loaded upon the projectile colliding.
 	string audio_fp;
 
 private:
