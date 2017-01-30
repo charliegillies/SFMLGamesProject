@@ -6,7 +6,7 @@
 #include "SpriteNode.h"
 
 ProjectileBuilder::ProjectileBuilder(string texture_path, flag col_flag, float lifeTime, float speed, float dmg, float radius, sf::Vector2f origin)
-	: txr_fp(texture_path), destroy_time(lifeTime), speed(speed), 
+	: txr_fp(texture_path), destroy_time(lifeTime), speed(speed), audio_fp(""),
 		radius(radius), dmg(dmg), collision_flag(col_flag), _creatorPtr(nullptr), origin(origin) { }
 
 ProjectileBuilder::~ProjectileBuilder() { }
@@ -30,6 +30,7 @@ SceneNode* ProjectileBuilder::build(sf::Vector2f position, sf::Vector2f directio
 
 	auto proj_node = new ProjectileNode(dmg);
 	proj_node->onDeathCreateFunc = _creatorPtr;
+	proj_node->audio_hit_fp = audio_fp;
 	base_node->addChild(proj_node);
 
 	// setup collider

@@ -23,7 +23,8 @@ public:
 		auto secondary_proj_builder = new ProjectileBuilder("Sprites//projectiles//missile_1.png",
 			CollisionNode::ENEMY_MASK | CollisionNode::OBSTACLE_MASK, 0.8f, 1000, 45, 8, sf::Vector2f(9.5f, 20.0f));
 		secondary_proj_builder->setCreatorPtr(NodeFactory::createPixelExplosion);
-	
+		secondary_proj_builder->audio_fp = "Sfx//missile_hit.wav";
+		
 		primaryFire = new ProjectileDataNode(0.25f, primary_proj_builder);
 		secondaryFire = new ProjectileDataNode(1.2f, secondary_proj_builder);
 

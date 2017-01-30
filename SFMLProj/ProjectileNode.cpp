@@ -3,6 +3,7 @@
 #include "CollisionEvent.h"
 #include "CollisionNode.h"
 #include "ProjectileCollisionEvent.h"
+#include "AudioNode.h"
 
 void ProjectileNode::subscribeEvents()
 {
@@ -28,6 +29,9 @@ void ProjectileNode::onCollide(BaseEvent* event)
 		SceneNode* created = onDeathCreateFunc(transform->position.x, transform->position.y);
 		getGame()->addSceneNode(created);
 	}
+
+	if (audio_hit_fp != "")
+		getGame()->addSceneNode(new AudioNode(AudioPlayMode::PLAY_ONCE_DESTROY_SELF, audio_hit_fp));
 
 	// now delete self
 	getGame()->removeSceneNode(getParent());

@@ -20,6 +20,8 @@ public:
 
 	void setCreatorPtr(objCreatorPtr creatorPtr);
 
+	string audio_fp;
+
 private:
 	string txr_fp;
 	float destroy_time;
