@@ -9,6 +9,7 @@
 #include "NodeFactory.h"
 #include "HealthNode.h"
 #include "ProjectileDataNode.h"
+#include "AudioNode.h"
 
 class PlayerShipNode : public SceneNode
 {
@@ -25,6 +26,8 @@ public:
 	
 		primaryFire = new ProjectileDataNode(0.25f, primary_proj_builder);
 		secondaryFire = new ProjectileDataNode(1.2f, secondary_proj_builder);
+
+		primaryAudioNode = new AudioNode(AudioPlayMode::PLAY_ONCE_WAIT, "Sfx//laser9w.wav");
 	}
 
 	~PlayerShipNode() {}
@@ -36,11 +39,16 @@ public:
 	
 private:
 	void onCollide(BaseEvent* e);
+
 	void onProjectileCollide(BaseEvent* e);
+
 	void applyPowerup(PowerUpNode* power_up);
+
 	sf::Vector2f getMouseTarget();
+
 	void shootPrimary(sf::Vector2f direction);
 	void shootSecondary(sf::Vector2f direction);
+	
 	void applyMovement();
 	void applyRotation();
 
@@ -58,6 +66,7 @@ private:
 	// projectile builders
 	ProjectileDataNode* primaryFire;
 	ProjectileDataNode* secondaryFire;
+	AudioNode* primaryAudioNode;
 
 	// mouse & rotation movement
 	sf::Vector2f _mouseTargetRotation;

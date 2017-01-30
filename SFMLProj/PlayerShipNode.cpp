@@ -83,6 +83,8 @@ void PlayerShipNode::shootPrimary(sf::Vector2f dir)
 	getGame()->addSceneNode(primaryFire->builder->build(gun1, dir, _transform->rotation));
 	getGame()->addSceneNode(primaryFire->builder->build(gun2, dir, _transform->rotation));
 	primaryFire->onShoot();
+
+	primaryAudioNode->trigger();
 }
 
 void PlayerShipNode::shootSecondary(sf::Vector2f dir)
@@ -133,6 +135,9 @@ void PlayerShipNode::start()
 
 	addChild(primaryFire);
 	addChild(secondaryFire);
+	addChild(primaryAudioNode);
+
+	SceneNode::start();
 }
 
 void PlayerShipNode::onCollide(BaseEvent* e)

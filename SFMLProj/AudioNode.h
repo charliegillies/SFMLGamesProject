@@ -8,6 +8,7 @@ enum class AudioPlayMode
 	PLAY_ONCE_WAIT = 1,
 	PLAY_ONCE_DESTROY_SELF = 2,
 	PLAY_REPEAT = 3,
+	PLAY_ON_TRIGGER = 4,
 };
 
 /*
@@ -21,7 +22,7 @@ public:
 
 	void start() override;
 	void update() override;
-
+	void trigger();
 private:
 	sf::Sound _sound;
 	AudioPlayMode _mode;

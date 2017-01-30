@@ -8,10 +8,15 @@ AudioNode::~AudioNode() { }
 
 void AudioNode::start()
 {
+	// Load the sound buffer, create the sound
 	sf::SoundBuffer& buffer = getGame()->getSound(_fp);
 	_sound.setBuffer(buffer);
-	_sound.play();
 
+	// If we're waiting for trigger, don't play.
+	if (_mode != AudioPlayMode::PLAY_ON_TRIGGER)
+		_sound.play();
+
+	// If we're playing on repeat, wait.
 	if (_mode == AudioPlayMode::PLAY_REPEAT)
 		_sound.setLoop(true);
 }
@@ -26,4 +31,9 @@ void AudioNode::update()
 			getGame()->removeSceneNode(parent != nullptr ? parent : this);
 		}
 	}
+}
+
+void AudioNode::trigger()
+{
+	_sound.play();
 }
