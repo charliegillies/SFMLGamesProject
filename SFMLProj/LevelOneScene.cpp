@@ -2,6 +2,9 @@
 #include "NodeFactory.h"
 #include "CollisionHandler.h"
 #include "GameStateListener.h"
+#include "PlayerLivesUINode.h"
+#include "CanvasNode.h"
+#include "EnemyFactory.h"
 
 LevelOneScene::LevelOneScene() { }
 LevelOneScene::~LevelOneScene() { }
@@ -27,10 +30,20 @@ void LevelOneScene::onStart()
 	_game->addSceneNode(NodeFactory::createAsteroid(200, 1000));
 	_game->addSceneNode(NodeFactory::createAsteroid(260, 900));
 
+	// load enemies
+	_game->addSceneNode(EnemyFactory::createEnemyUfo(100, 100));
+	_game->addSceneNode(EnemyFactory::createEnemyUfo(350, 100));
+	_game->addSceneNode(EnemyFactory::createEnemyBomber(1400, 620));
+	_game->addSceneNode(EnemyFactory::createEnemyShooter(1000, 1100));
+	_game->addSceneNode(EnemyFactory::createEnemyShooter(100, 850));
+
 	// create the player node
 	_game->addSceneNode(NodeFactory::createPlayerNode(800, 600));
 
-
+	/* PLAYER UI */
+	CanvasNode* canvas = new CanvasNode();
+	canvas->addChild(new PlayerLivesUINode());
+	_game->addSceneNode(canvas);
 
 	Scene::onStart();
 }
