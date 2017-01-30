@@ -17,6 +17,8 @@ PlayerLivesUINode::PlayerLivesUINode()
 		"Sprites//ui//barHorizontal_yellow_left.png",
 		"Sprites//ui//barHorizontal_yellow_mid.png",
 		"Sprites//ui//barHorizontal_yellow_right.png", 200, 5, 100);
+
+	_enemyText = new TextNode(330, 5, "Fonts//kenvector_future.ttf", "ENEMIES: 0", sf::Color::White, 20);
 }
 
 PlayerLivesUINode::~PlayerLivesUINode() {}
@@ -25,8 +27,11 @@ void PlayerLivesUINode::start()
 {
 	addChild(_hpStatusBar);
 	addChild(_hpIcon);
+
 	addChild(_energyStatusBar);
 	addChild(_energyIcon);
+
+	addChild(_enemyText);
 
 	//initialise all child nodes
 	SceneNode::start();
@@ -37,9 +42,16 @@ void PlayerLivesUINode::subscribeEvents()
 	// create a delegate, bind this object to the onPlayerLostLife method call
 	Delegate1<BaseEvent*> life_lost_event;
 	life_lost_event.Bind(this, &PlayerLivesUINode::onPlayerLostLife);
-
 	// subscribe to the global event
 	subGlobalEvent(EventTags::playerLostLife, life_lost_event);
+
+	Delegate1<BaseEvent*> eEnemyReg;
+	eEnemyReg.Bind(this, &PlayerLivesUINode::onEnemyRegister);
+	subGlobalEvent(EventTags::registerEnemy, eEnemyReg);
+
+	Delegate1<BaseEvent*> eEnemyUnreg;
+	eEnemyUnreg.Bind(this, &PlayerLivesUINode::onEnemyUnregister);
+	subGlobalEvent(EventTags::unregisterEnemy, eEnemyUnreg);
 }
 
 void PlayerLivesUINode::onPlayerLostLife(BaseEvent* e)
@@ -50,4 +62,18 @@ void PlayerLivesUINode::onPlayerLostLife(BaseEvent* e)
 
 	_hpStatusBar->setBarPerc(lost_life_event->hp_percentage);
 	_energyStatusBar->setBarPerc(lost_life_event->energy_percentage);
+}
+
+void PlayerLivesUINode::onEnemyRegister(BaseEvent* e)
+{
+	_aliveEnemies++;
+
+	_enemyText->setText("ENEMIES: " + to_string(_aliveEnemies));
+}
+
+void PlayerLivesUINode::onEnemyUnregister(BaseEvent* e)
+{
+	_aliveEnemies--;
+
+	_enemyText->setText("ENEMIES: " + to_string(_aliveEnemies));
 }

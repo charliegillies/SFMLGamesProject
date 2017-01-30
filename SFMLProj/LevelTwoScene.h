@@ -6,4 +6,6 @@ class LevelTwoScene : public Scene
 public:
 	LevelTwoScene();
 	~LevelTwoScene();
+
+	void onStart() override;
 };

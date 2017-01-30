@@ -12,8 +12,9 @@ LevelOneScene::~LevelOneScene() { }
 void LevelOneScene::onStart()
 {
 	/* This is where we will load all of our pre-defined level 1 actors.
-	 * Keep in mind the world is 8x6 cells (1600x1200)
+	 * Keep in mind the world is 8x6 cells (1600x1200).
 	 */
+
 	// game state listener waits to hear about changes in the world state
 	_game->addSceneNode(new GameStateListener());
 	// add the collision handler node

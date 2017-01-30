@@ -24,10 +24,7 @@ void CollisionMap::buildMap()
 
 		// the entity has gone out of collision bounds
 		if (min_x < 0 || min_y < 0 || min_x >= width || min_y >= height || max_x >= width || max_y >= height)
-		{
-			cout << "Entity has gone out of bounds. This must be handled!!" << endl;
 			continue;
-		}
 
 		for (int x = min_x; x <= max_x; x++)
 		{

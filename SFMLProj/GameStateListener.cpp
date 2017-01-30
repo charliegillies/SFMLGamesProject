@@ -48,11 +48,9 @@ void GameStateListener::onPlayerDeath(BaseEvent* e)
 void GameStateListener::onEnemyRegister(BaseEvent* e)
 {
 	_aliveEnemies++;
-	std::cout << "onEnemyRegister" << endl;
 }
 
 void GameStateListener::onEnemyUnregister(BaseEvent* e)
 {
 	_aliveEnemies--;
-	std::cout << "onEnemyUnregister" << endl;
 }

@@ -2,6 +2,7 @@
 #include "SceneNode.h"
 #include "ImageNode.h"
 #include "StatusBar.h"
+#include "TextNode.h"
 
 /*
 	Scene node that is responsible for keeping the 
@@ -18,12 +19,17 @@ public:
 
 	// function that is passed in for the player lost life event
 	void onPlayerLostLife(BaseEvent* e);
+	void onEnemyRegister(BaseEvent* e);
+	void onEnemyUnregister(BaseEvent* e);
 
 private:
+	int _aliveEnemies;
+
 	ImageNode* _hpIcon;
 	StatusBar* _hpStatusBar;
 	
 	ImageNode* _energyIcon;
 	StatusBar* _energyStatusBar;
-};
 
+	TextNode* _enemyText;
+};
