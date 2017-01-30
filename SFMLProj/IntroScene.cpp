@@ -40,7 +40,7 @@ void IntroScene::onStart()
 
 void IntroScene::onUpdate()
 {
-	const float wait_time = 5.0f;
+	const float wait_time = 20.0f;
 
 	_cTime += _game->deltaTime();
 
