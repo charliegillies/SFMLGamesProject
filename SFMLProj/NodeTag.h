@@ -17,4 +17,5 @@ public:
 	static const string collision_node;
 	static const string projectile_data_node;
 	static const string health_node;
+	static const string audio_node;
 };

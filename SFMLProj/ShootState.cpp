@@ -10,6 +10,10 @@ void ShootState::onEnter()
 	if (projectile_data_node == nullptr)
 		projectile_data_node = static_cast<ProjectileDataNode*>(
 			stateMachine->getParent()->getNode(NodeTag::projectile_data_node));
+
+	if (audio_node == nullptr)
+		audio_node = static_cast<AudioNode*>(stateMachine->
+			getParent()->getNode(NodeTag::audio_node));
 }
 
 void ShootState::execute()
@@ -20,6 +24,9 @@ void ShootState::execute()
 	dir = Utils::normalize(dir);
 
 	shoot(transform, dir);
+
+	if (audio_node != nullptr)
+		audio_node->trigger();
 
 	projectile_data_node->onShoot();
 }

@@ -20,6 +20,7 @@ public:
 	AudioNode(AudioPlayMode mode, string fp);
 	~AudioNode();
 
+	string getNodeTag() override;
 	void start() override;
 	void update() override;
 	void trigger();

@@ -20,9 +20,9 @@
 #include "TwinShootState.h"
 #include "HealthNode.h"
 #include "ProjectileCollisionListenerNode.h"
-#include "DestroyAfterTimeNode.h"
 #include "NodeFactory.h"
 #include "RegisterEnemyNode.h"
+#include "AudioNode.h"
 
 SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 {
@@ -30,6 +30,8 @@ SceneNode* EnemyFactory::createEnemyUfo(int x, int y)
 	base_node->addChild(new SpriteNode("Sprites//enemies//ufo.png"));
 
 	base_node->addChild(new RegisterEnemyNode());
+
+	base_node->addChild(new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//laser5w.wav"));
 
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;
@@ -97,6 +99,8 @@ SceneNode* EnemyFactory::createEnemyBomber(int x, int y)
 	base_node->addChild(new SpriteNode("Sprites//enemies//bomber.png"));
 	base_node->addChild(new RegisterEnemyNode());
 
+	base_node->addChild(new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//laser5w.wav"));
+
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;
 	transform->position = sf::Vector2f(x, y);
@@ -159,6 +163,8 @@ SceneNode* EnemyFactory::createEnemyShooter(int x, int y)
 	SceneNode* base_node = new SceneNode();
 	base_node->addChild(new SpriteNode("Sprites//enemies//twin_shooter.png"));
 	base_node->addChild(new RegisterEnemyNode());
+
+	base_node->addChild(new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//laser7w.wav"));
 
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;

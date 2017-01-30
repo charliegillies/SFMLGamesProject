@@ -1,6 +1,7 @@
 #pragma once
 #include "AIState.h"
 #include "ProjectileDataNode.h"
+#include "AudioNode.h"
 
 /*
 	State that involves shooting towards an enemy.
@@ -18,5 +19,6 @@ public:
 
 protected:
 	ProjectileDataNode* projectile_data_node;
+	AudioNode* audio_node;
 	sf::Transform sf_transform;
 };

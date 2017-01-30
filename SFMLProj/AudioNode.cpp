@@ -6,6 +6,11 @@ AudioNode::AudioNode(AudioPlayMode mode, string fp)
  
 AudioNode::~AudioNode() { }
 
+string AudioNode::getNodeTag()
+{
+	return NodeTag::audio_node;
+}
+
 void AudioNode::start()
 {
 	// Load the sound buffer, create the sound
