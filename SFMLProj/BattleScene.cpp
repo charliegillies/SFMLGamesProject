@@ -31,7 +31,7 @@ void BattleScene::onStart()
 	_game->addSceneNode(new CollisionHandler());
 
 	// create the player node
-	_game->addSceneNode(NodeFactory::createPlayerNode());
+	_game->addSceneNode(NodeFactory::createPlayerNode(250, 250));
 
 	_game->addSceneNode(NodeFactory::createHealthPickup(1000, 500));
 	_game->addSceneNode(NodeFactory::createShieldPickup(800, 500));

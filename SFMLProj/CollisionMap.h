@@ -18,7 +18,7 @@ public:
 	static const int world_bot_right_x = (width * cellSize);
 	static const int world_bot_right_y = (height * cellSize);
 
-	std::vector<CollisionNode*>& getCollidersInCell(int x, int y);
+	vector<CollisionNode*>& getCollidersInCell(int x, int y);
 	
 	CollisionMap(std::vector<CollisionNode*>* colliders) 
 		: _colliders(colliders), _drawGrid()

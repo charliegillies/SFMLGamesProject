@@ -10,7 +10,7 @@
 #include "AnimatedSpriteNode.h"
 #include "DestroyAfterTimeNode.h"
 
-SceneNode* NodeFactory::createPlayerNode()
+SceneNode* NodeFactory::createPlayerNode(float x, float y)
 {
 	string fp = "Sprites//player//ship.png";
 
@@ -19,7 +19,7 @@ SceneNode* NodeFactory::createPlayerNode()
 	base_node->addChild(new SpriteNode(fp));
 
 	TransformNode* transform_node = new TransformNode();
-	transform_node->position = sf::Vector2<float>(250, 100);
+	transform_node->position = sf::Vector2<float>(x, y);
 	transform_node->origin = sf::Vector2<float>(49.5f, 37.5f);
 	base_node->addChild(transform_node);
 

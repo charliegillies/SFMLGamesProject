@@ -1,7 +1,7 @@
 #include "IntroScene.h"
 #include "CanvasNode.h"
 #include "AnimatedTextNode.h"
-#include "BattleScene.h"
+#include "LevelOneScene.h"
 
 
 IntroScene::IntroScene() : _cTime(0.0f) { }
@@ -55,7 +55,7 @@ void IntroScene::onUpdate()
 	
 	if (_game->getInput()->anyKeyDown())
 	{
-		_game->changeScene(new BattleScene());
+		_game->changeScene(new LevelOneScene());
 		return;
 	}
 
