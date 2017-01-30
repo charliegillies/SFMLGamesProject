@@ -27,7 +27,8 @@ public:
 		primaryFire = new ProjectileDataNode(0.25f, primary_proj_builder);
 		secondaryFire = new ProjectileDataNode(1.2f, secondary_proj_builder);
 
-		primaryAudioNode = new AudioNode(AudioPlayMode::PLAY_ONCE_WAIT, "Sfx//laser9w.wav");
+		primaryAudioNode = new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//laser9w.wav");
+		//secondaryAudioNode = new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "");
 	}
 
 	~PlayerShipNode() {}
@@ -67,6 +68,7 @@ private:
 	ProjectileDataNode* primaryFire;
 	ProjectileDataNode* secondaryFire;
 	AudioNode* primaryAudioNode;
+	AudioNode* secondaryAudioNode;
 
 	// mouse & rotation movement
 	sf::Vector2f _mouseTargetRotation;

@@ -4,6 +4,7 @@
 #include "RaycastUtility.h"
 #include "EventTags.h"
 #include "ProjectileCollisionEvent.h"
+#include "AudioNode.h"
 
 BomberExplodeState::BomberExplodeState(float range) 
 	: range(range) { }
@@ -25,6 +26,11 @@ void BomberExplodeState::onEnter()
 		raycast.collider->invokeLocalEvent(EventTags::projectileCollision, 
 			new ProjectileCollisionEvent(40));
 	}
+
+	auto audio_node = static_cast<AudioNode*>(stateMachine->
+		getParent()->getNode(NodeTag::audio_node));
+	if (audio_node != nullptr)
+		audio_node->trigger();
 
 	// create an explosion where we were standing, delete ourselves from the hierachy
 	stateMachine->createSceneNode(NodeFactory::createSonicExplosion(pos.x, pos.y));

@@ -99,7 +99,7 @@ SceneNode* EnemyFactory::createEnemyBomber(int x, int y)
 	base_node->addChild(new SpriteNode("Sprites//enemies//bomber.png"));
 	base_node->addChild(new RegisterEnemyNode());
 
-	base_node->addChild(new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//laser5w.wav"));
+	base_node->addChild(new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//massive_exp.wav"));
 
 	// Create transform of ufo
 	TransformNode* transform = new TransformNode;
