@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Scene.h"
 
+
 Game::Game(Scene* scene, sf::RenderWindow& window) : _window(window), _drawDebug(false)
 {
 	changeScene(scene);

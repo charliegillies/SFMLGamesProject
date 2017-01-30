@@ -1,6 +1,7 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include "TextureLoader.h"
 #include "ControlScheme.h"
 #include "Camera.h"
@@ -8,7 +9,6 @@
 #include "Input.h"
 #include "FontLoader.h"
 #include "SfxLoader.h"
-
 class SceneNode;
 class Scene;
 
