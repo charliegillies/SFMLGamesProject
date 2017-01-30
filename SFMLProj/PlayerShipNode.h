@@ -28,7 +28,7 @@ public:
 		secondaryFire = new ProjectileDataNode(1.2f, secondary_proj_builder);
 
 		primaryAudioNode = new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//laser9w.wav");
-		//secondaryAudioNode = new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "");
+		secondaryAudioNode = new AudioNode(AudioPlayMode::PLAY_ON_TRIGGER, "Sfx//fireball.wav");
 	}
 
 	~PlayerShipNode() {}
