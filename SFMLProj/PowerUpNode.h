@@ -1,7 +1,7 @@
 #pragma once
 #include "SceneNode.h"
 
-enum PickupType
+enum class PickupType
 {
 	PICKUP_SHIELD = 0,
 	PICKUP_HEALTH = 1,
@@ -19,6 +19,8 @@ public:
 	~PowerUpNode();
 
 	string getNodeTag() override;
+
+	void onRemoved() override;
 
 	PickupType Pickup;
 };

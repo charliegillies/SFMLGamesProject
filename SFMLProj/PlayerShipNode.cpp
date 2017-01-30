@@ -180,7 +180,7 @@ void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 
 	switch (power_up->Pickup)
 	{
-		case PICKUP_SHIELD: 
+		case PickupType::PICKUP_SHIELD: 
 			if (!_shieldHpNode->atFullHP())
 			{
 				_shieldHpNode->heal(25);
@@ -189,7 +189,7 @@ void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 
 			break;
 		
-		case PICKUP_HEALTH: 
+		case PickupType::PICKUP_HEALTH: 
 			if (!_hpNode->atFullHP())
 			{
 				_hpNode->heal(25);
@@ -201,7 +201,7 @@ void PlayerShipNode::applyPowerup(PowerUpNode* power_up)
 
 			break;
 		
-		case PICKUP_SPEED: 
+		case PickupType::PICKUP_SPEED: 
 			_speedPickupTime = pickup_time;
 			getGame()->removeSceneNode(power_up->getParent());
 			break;

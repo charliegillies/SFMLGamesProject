@@ -139,7 +139,7 @@ SceneNode* NodeFactory::createHealthPickup(int x, int y)
 	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
 	base_node->addChild(collider);
 
-	base_node->addChild(new PowerUpNode(PICKUP_HEALTH));
+	base_node->addChild(new PowerUpNode(PickupType::PICKUP_HEALTH));
 
 	return base_node;
 }
@@ -159,7 +159,7 @@ SceneNode* NodeFactory::createSpeedPickup(int x, int y)
 	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
 	base_node->addChild(collider);
 
-	base_node->addChild(new PowerUpNode(PICKUP_SPEED));
+	base_node->addChild(new PowerUpNode(PickupType::PICKUP_SPEED));
 
 	return base_node;
 }
@@ -179,7 +179,7 @@ SceneNode* NodeFactory::createShieldPickup(int x, int y)
 	collider->setFlags(CollisionNode::PICKUP_MASK, CollisionNode::PLAYER_MASK);
 	base_node->addChild(collider);
 
-	base_node->addChild(new PowerUpNode(PICKUP_SHIELD));
+	base_node->addChild(new PowerUpNode(PickupType::PICKUP_SHIELD));
 
 	return base_node;
 }

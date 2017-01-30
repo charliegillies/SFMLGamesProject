@@ -30,9 +30,6 @@ void BattleScene::onStart()
 	// add the collision handler node
 	_game->addSceneNode(new CollisionHandler());
 
-	// sound testing
-	_game->addSceneNode(new AudioNode(AudioPlayMode::PLAY_REPEAT, "Sfx//powerup.wav"));
-
 	// create the player node
 	_game->addSceneNode(NodeFactory::createPlayerNode());
 
