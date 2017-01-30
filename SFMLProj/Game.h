@@ -48,7 +48,7 @@ public:
 	sf::Font& getFont(const std::string fp);
 
 	// loads an sound effect from a given filepath with the prefix 'Content/'
-	sf::Sound& getSound(const std::string fp);
+	sf::SoundBuffer& getSound(const std::string fp);
 
 	// adds a scene node to the current scene
 	void addSceneNode(SceneNode* node);
