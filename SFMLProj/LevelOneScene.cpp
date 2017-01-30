@@ -31,6 +31,10 @@ void LevelOneScene::onStart()
 	_game->addSceneNode(NodeFactory::createAsteroid(200, 1000));
 	_game->addSceneNode(NodeFactory::createAsteroid(260, 900));
 
+	// load pickups
+	_game->addSceneNode(NodeFactory::createHealthPickup(1200, 500));
+	_game->addSceneNode(NodeFactory::createSpeedPickup(450, 200));
+
 	// load enemies
 	_game->addSceneNode(EnemyFactory::createEnemyUfo(100, 100));
 	_game->addSceneNode(EnemyFactory::createEnemyUfo(350, 100));
